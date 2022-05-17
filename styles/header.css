@@ -1,0 +1,156 @@
+html {
+  scroll-behavior: smooth;
+}
+@font-face {
+  font-family: roboto-slab;
+  src: url(../assets/RobotoSlab-VariableFont_wght.ttf);
+}
+@font-face {
+  font-family: proxima-nova;
+  src: url(../assets/ProximaNovaFont.otf);
+}
+@font-face {
+  font-family: Playfair;
+  src: url(../assets/Playfair/PlayfairDisplay-VariableFont_wght.ttf);
+}
+body {
+  padding: 0;
+  margin: 0;
+  width: calc(100vw - 17px);
+}
+
+/* cabeçalho */
+nav,
+header {
+  color: white;
+  overflow: hidden;
+  font-family: proxima-nova, sans-serif;
+  font-size: 16;
+}
+#header-nav {
+  background-image: url(../assets/hhh.png);
+  background-size: cover;
+  width: 100%;
+  overflow: auto;
+  box-shadow: 0px 0px 12px black;
+}
+header {
+  height: 60px;
+}
+header > a{
+    position:relative;
+}
+form {
+  display: inline-block;
+
+  position: relative;
+  top: -19px;
+  margin-left: calc(50vw - 147px);
+  transform: translateX(-50%);
+
+  border-radius: 40px;
+  padding: -0px 7px 1px 15px;
+  background-color: rgb(255, 255, 255);
+}
+/*  */
+#barra-de-pesquisa {
+  padding: 7px 0 7px 2px;
+  width: 40vw;
+  border-radius: 0;
+  position: relative;
+  top: -3px;
+  border: none;
+  /* background: none; */
+  color: black;
+  line-height: 20px;
+  outline: none;
+  font-size: 17px;
+}
+form a {
+  position: relative;
+  top: 6px;
+  left: -5px;
+}
+
+/* header input[type="submit"]{
+    border:none;
+     position: relative;
+    top:12px;
+    width: 33px;
+    height: 33px;
+    background-image: url(../assets/lupa.png);
+    background-size:cover;
+}
+ */
+header input[type="submit"]:hover,
+form:hover,
+header input[type="submit"]:focus,
+#login-cadastro:hover {
+  outline: solid black 3px;
+}
+
+/*  */
+#logo {
+  height: 50px;
+  margin-left: 10px;
+  margin-top: 5px;
+}
+
+#login-cadastro {
+  display: inline-block;
+  position: relative;
+  top: -17px;
+  right: 20px;
+  padding: 5px 10px;
+}
+#login-cadastro-link {
+  color: white;
+}
+#login-cadastro-link div,
+#login-cadastro-link:visited div {
+  text-decoration: none;
+  color: white;
+}
+#login-cadastro-link div:active {
+  color: rgb(190, 188, 188);
+}
+a:visited{
+    color:inherit;
+}
+/* nav */
+nav {
+  height: 40px;
+  /* background-color: rgb(154, 6, 199);    */
+  display: flex;
+  justify-content: space-around;
+}
+nav > a {
+  position: relative;
+  margin-top: 10px;
+  text-decoration: none;
+  height: 18px;
+  padding: 2px 10px 18px 10px;
+}
+nav > a:visited {
+  text-decoration: none;
+  color: inherit;
+}
+nav > a:active {
+  color: rgb(190, 188, 188);
+}
+
+nav > a:hover {
+  outline: solid white 2px;
+}
+
+#promo {
+  width: 100%;
+  height: 30px;
+  background-color: red;
+  display: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+

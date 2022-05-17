@@ -1,0 +1,77 @@
+footer {
+  background-color: #180c24;
+  width: 100%;
+  height: 300px;
+  font-family: proxima-nova, sans-serif;
+  overflow: hidden;
+  display: flex;
+  column-gap: 10px;
+  justify-content: space-between;
+}
+
+footer a {
+  /* position: relative; */
+  margin-top: 10px;
+  text-decoration: none;
+  height: 18px;
+
+}
+footer a:visited {
+  text-decoration: none;
+  color: white;
+}
+footer a:active {
+  color: rgb(190, 188, 188);
+}
+
+
+
+#footer-logo{
+    height: 70px;
+    margin:20px;
+}
+
+
+footer p{
+    color: white;
+    font-weight:100;
+    margin-left: 30px;
+}
+footer section{
+    width: 250px;
+    height: 100%;
+}
+footer section:not(:first-child) a:first-child p, #redes-sociais > p{
+    margin-top:55px;
+    margin-bottom: 30px;
+    font-size: 20px;
+}
+footer section:not(:first-child) a:not(:first-child) p{
+    color:rgb(192, 192, 192);
+}
+#redes-sociais{
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+    justify-content: center;
+}
+
+.img-redes{
+    width: 30px;
+    height: 30px;
+    margin-left: 25px;
+    margin-top: -20px;
+}
+
+#redes-sociais strong{
+    color: white;
+    font-weight: 300;
+    position:relative;
+    top: -9px;
+    left: 5px;
+}
+#redes-sociais > p{
+    position:relative;
+    top:-15px;
+    margin-bottom: 5px;
+}

@@ -1,0 +1,135 @@
+@font-face {
+    font-family: lato;
+    src: url(../assets/Lato/Lato-Black.ttf);
+    }
+
+    body{
+        font-family: lato, sans-serif;
+        background-image: url(../assets/fundo.png);
+        background-size: cover;
+        margin:0;
+        padding: 0;
+        box-sizing: border-box;
+        width: 100vw;
+        height: 100vh;
+        max-width: 100vw;
+        max-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        --cor:rgb(209, 27, 255); /* rgb(209, 27, 255) */
+    }
+    #sections{
+        background-color: #180c24;
+        border-radius:30px;
+        width: 90vw;
+        height: 80vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    section{
+        background-color: #180c24;
+        width: 50%;
+        height: 100%;
+        max-width: 50%;
+        max-height: 100%;
+        display: flex;
+        margin:-2px;
+        overflow: hidden;
+        border-radius: 30px;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #login-area{
+        width: 70%;
+        height: 80%;
+        background-color: #301c3c;
+        border-radius: 20px;
+        max-height:450px;
+        min-height: 430px;
+        min-width: 400px;
+        max-width: 400px;
+    }
+    form{
+        /* background-color: rgba(127, 255, 212, 0.055); */
+        margin:30px;
+        height: calc(100% - 80px);
+    }
+    form > h2{
+        color:var(--cor);
+        text-shadow:0px 0px 10px var(--cor);
+        margin:0;
+        font-size: 40px;
+        text-align: center;
+        font-weight: 900;
+    }
+    label > h5{
+        color:rgb(211, 206, 206);
+        margin:0;
+        margin-bottom: 7px;
+        font-size: 16px;
+    }
+    input{
+        background-color: #58446c;
+        border:none;
+        border-radius:7px;
+        box-shadow: 0px 10px 10px 10px rgba(0, 0, 0, 0.199);
+        width: calc(100% - 10px);
+        height:35px;
+        padding: 5px;
+        margin-left: 50%;
+        transform:translateX(-50%);
+        color:white;
+        font-size: 16px;
+    }
+    input::placeholder{
+        color:rgba(243, 242, 242, 0.473);
+        padding-left: 5px;
+    }
+    
+    .user-box{
+        width: 90%;
+        margin-left: 50%;
+        transform: translateX(-50%);
+    }
+    .user-box:not(:last-child){
+        margin-bottom:40px;
+    }
+
+    #submit-btn{
+        color:#301c3c;
+        font-weight: 100;
+        font-size: 25px;
+        transition:.4s;
+        cursor: pointer;
+        width: 90%;
+        height: 50px;
+        background-color: var(--cor);
+        margin-top: 10px;
+    }
+    #submit-btn:hover{
+        box-shadow: 0px 1px 40px 15px rgba(209, 27, 255, 0.342);
+    }
+
+    section > img{
+        height: 80%;
+        min-height: 400px;
+        max-height: 60vh;
+    }
+
+    section > h3, h3 > a{
+        color: var(--cor);
+        font-size: 25px;
+    }
+    h3 > a{
+        text-decoration: none;
+    }
+    h3 > a:hover, h3 > a:visited{
+        text-decoration: underline;
+        color:inherit;
+    }
+    /* o tamanho dos elementos tem q aumentar pra ficar melhor em tela cheia*/

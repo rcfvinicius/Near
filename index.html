@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="./assets/near-logo.png" type="image/png">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="./styles/header.css" rel="stylesheet">
+    <link href="./styles/index.css" rel="stylesheet">
+    <link href="./styles/footer.css" rel="stylesheet">
+
+    <script src="./scripts/index.js" defer></script>
+    <title>Near</title>
+</head>
+<body onresize="headerScroll()" onload="headerScroll()">
+    
+<div id="header-nav">
+    <div id="promo"></div>
+    <header>
+        <a href="/"><img id="logo" src="./assets/near-logo2.png"><!-- <img id="logo" src="../assets/near-logo.png" alt="logo"><img src="./assets/logoteste.png" width="60px"> --></a>
+
+    <form method="GET">
+        <input id="barra-de-pesquisa" type="text" name="search_query" placeholder="Pesquise cursos, professores, aulas, etc...">
+        <a href="./pages/login.html" id="botao-pesquisar">
+            <img src="./assets/lupa.png" height="30px">
+        </a>
+        <!-- <input type="submit" value=""> -->
+    </form>
+<a id="login-cadastro-link" href="./pages/login.html">
+  <div id="login-cadastro">
+    Entrar
+  </div>
+</a>
+    </header>
+    <nav>
+       
+        <a href="#gradient1">Cursos</a>
+        <a>Atendimento</a>
+        <a>Quem somos?</a>
+        <a>Espaço do aluno</a>
+
+    </nav> 
+</div>
+    <main>
+        <div class="slider">
+            <div class="slides">
+                <!-- radio -->
+                <input type="radio" name="radio-btn" id="radio1">
+                <input type="radio" name="radio-btn" id="radio2">
+                <input type="radio" name="radio-btn" id="radio3">
+                <input type="radio" name="radio-btn" id="radio4">
+                <!-- Slide images -->
+                
+                <div class="slide primeira-imagem">
+                    <img src="./assets/imagens/imagem1.jpeg">
+                </div>
+                <div class="slide">
+                    <img src="./assets/imagens/imagem2.jpeg">
+                </div>
+                <div class="slide">
+                    <img src="./assets/imagens/imagem3.jpeg">
+                </div>
+                <div class="slide">
+                    <img src="./assets/imagens/imagem4.jpeg">
+                </div>
+                <!-- navigation -->
+                <div class="navigation-auto">
+                    <div class="auto-btn1"></div>
+                    <div class="auto-btn2"></div>
+                    <div class="auto-btn3"></div>
+                    <div class="auto-btn4"></div>
+                </div>
+            </div>
+            <div class="manual-navigation">
+                <label for="radio1" class="manual-btn"></label>
+                <label for="radio2" class="manual-btn"></label>
+                <label for="radio3" class="manual-btn"></label>
+                <label for="radio4" class="manual-btn"></label>
+            </div>
+
+    </div>
+
+
+    <!-- gradient -->
+    <div id="gradient1" class="gradient">
+        <div>
+            <h2>JavaScript (iniciante)</h2>
+            <div class="avaliacao-after"><h3>Avaliação:</h3></div>
+            <p>
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+            </p>
+        </div>
+        
+        <img src="./assets/imagens/cursos/js.jpg">
+    </div>
+
+
+    <div class="gradient">
+        <div>
+            <h2>Matemática básica</h2>
+            
+            <div class="avaliacao-after"><h3>Avaliação:</h3></div>
+            <p>
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+            </p>
+        </div>
+        
+        <img src="./assets/imagens/cursos/matematica-basica.jpg">
+    </div>
+
+        
+    <div class="gradient">
+        <div>
+            <h2>Geometria Espacial</h2>
+            
+            <div class="avaliacao-after"><h3>Avaliação:</h3></div>
+            <p>
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+            </p>
+        </div>
+        <img src="./assets/imagens/cursos/geometria-espacial.jpg">
+
+    </div>
+
+
+    <div class="gradient">
+        <div>
+            <h2>Geometria Espacial</h2>
+            
+            <div class="avaliacao-after"><h3>Avaliação:</h3></div>
+            <p>
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+            </p>
+        </div>
+        <img src="./assets/imagens/cursos/geometria-espacial.jpg">
+
+    </div>
+    
+
+    <div class="gradient">
+        <div>
+            <h2>Morfologia</h2>
+            
+            <div class="avaliacao-after"><h3>Avaliação:</h3></div>
+            <p>
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+            </p>
+        </div>
+        <img src="./assets/imagens/cursos/morfologia.png">
+
+    </div>
+
+<!-- 
+        <section id="cards-container">
+            <div class="card"></div>
+            <div class="card" id="card2"></div>
+            <div class="card" id="card3"></div>
+            <div class="card"></div>
+            <div class="card"></div>
+            <div class="card"></div>
+            <div class="card"></div>
+            <div class="card"></div>
+            <div class="card"></div>
+            <div class="card"></div>
+        </section> -->
+
+    </main>
+    
+    
+
+    <footer>
+        <section>
+        <a href="/"><img id="footer-logo" src="./assets/near-logo2.png" alt="logo"></a>
+        
+        <p>Fale conosco</p>
+        <address>
+            <a href="mailto:contato@near.com"><p>contato@near.com</p></a>
+            <p>Fone: 0800 2022 040</p>
+            <p>R. Imperial, 201 - Recife PE CEP: 51-222-100</p>
+        </address>
+    </section>
+        
+    <section id="redes-sociais">
+        <p>Redes Sociais</p>
+       <a href="/"><img class="img-redes" src="./assets/facebook.png">
+            <strong>Facebook</strong>
+        </a>
+       <a href="/"><img class="img-redes" src="./assets/insta.png">
+            <strong>Instagram</strong>
+        </a>
+       <a href="/"><img class="img-redes" src="./assets/twitter.png">
+            <strong>Twitter</strong>
+        </a>
+       <a href="/"><img class="img-redes" src="./assets/linkedin.png">
+            <strong>LinkedIn</strong>    
+        </a>
+
+    </section>
+
+
+    <section>
+        <a href="/" ><p>Quem somos?</p></a>
+        <a href="/" ><p>História</p></a>
+        <a href="/" ><p>Missão e valores</p></a>
+        <a href="/" ><p>Nossa equipe</p></a>
+    </section>
+
+    <section>
+        <a href="/" ><p>Termos e condições</p></a>
+        <a href="/" ><p>Politica de privacidade</p></a>
+        <a href="/" ><p>Condições de uso</p></a>
+        <a href="/" ><p>Politica de privacidade</p></a>
+        <a href="/" ><p>Cookies</p></a>
+    </section>
+
+    </footer>
+    
+</body>
+</html>
