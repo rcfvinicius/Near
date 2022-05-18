@@ -45,8 +45,9 @@ form {
 
   position: relative;
   top: -19px;
-  margin-left: calc(50vw - 147px);
-  transform: translateX(-50%);
+/*   margin-left: calc(50vw - 147px);
+  transform: translateX(-50%); */
+  margin-left: calc(calc(50% - 20vw) - 147px);
 
   border-radius: 40px;
   padding: -0px 7px 1px 15px;
@@ -84,11 +85,12 @@ form a {
  */
 header input[type="submit"]:hover,
 form:hover,
-header input[type="submit"]:focus,
-#login-cadastro:hover {
+header input[type="submit"]:focus {
   outline: solid black 3px;
 }
-
+#login-cadastro:hover{
+  outline: solid white 3px;
+}
 /*  */
 #logo {
   height: 50px;
@@ -96,12 +98,13 @@ header input[type="submit"]:focus,
   margin-top: 5px;
 }
 
-#login-cadastro {
+#login-cadastro{
   display: inline-block;
-  position: relative;
-  top: -17px;
-  right: 20px;
   padding: 5px 10px;
+  position: relative;
+  top: -21px;
+  left: 20vw;
+  right: auto;
 }
 #login-cadastro-link {
   color: white;
@@ -115,7 +118,7 @@ header input[type="submit"]:focus,
   color: rgb(190, 188, 188);
 }
 a:visited{
-    color:inherit;
+    color:white;
 }
 /* nav */
 nav {

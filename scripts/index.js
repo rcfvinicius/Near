@@ -26,9 +26,6 @@ setInterval(() => {
 }, 10000);
 
 
-
-//document.getElementsByTagName("aside")[1].innerHTML += '<img src="./assets/meia-estrela.png">'; 
-
 function addEstrela(count=0){
   const est = document.getElementsByClassName("avaliacao-after");
 
@@ -46,4 +43,6 @@ function addEstrela(count=0){
 }
 
 
-addEstrela(4)
+addEstrela(3);
+document.getElementsByClassName("avaliacao-after")[0].innerHTML += '<img src="./assets/meia-estrela.png">';
+document.getElementsByClassName("avaliacao-after")[1].innerHTML += '<img src="./assets/meia-estrela.png">';

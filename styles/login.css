@@ -5,7 +5,8 @@
 
     body{
         font-family: lato, sans-serif;
-        background-image: url(../assets/fundo.png);
+        /* background-image: url(../assets/fundo.png); */
+        background-color:rgb(71, 7, 87);
         background-size: cover;
         margin:0;
         padding: 0;
