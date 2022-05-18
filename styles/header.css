@@ -27,7 +27,7 @@ header {
   font-family: proxima-nova, sans-serif;
   font-size: 16;
 }
-#header-nav {
+#header-nav {/* container do nav e header */
   background-image: url(../assets/hhh.png);
   background-size: cover;
   width: 100%;
@@ -53,8 +53,8 @@ form {
   padding: -0px 7px 1px 15px;
   background-color: rgb(255, 255, 255);
 }
-/*  */
-#barra-de-pesquisa {
+
+#barra-de-pesquisa {/* input de pesquisa */
   padding: 7px 0 7px 2px;
   width: 40vw;
   border-radius: 0;
@@ -67,7 +67,7 @@ form {
   outline: none;
   font-size: 17px;
 }
-form a {
+form a {/* posicionamento da lupa */
   position: relative;
   top: 6px;
   left: -5px;
@@ -83,6 +83,9 @@ form a {
     background-size:cover;
 }
  */
+
+
+ /* imput[type="submit"] foi substituido */
 header input[type="submit"]:hover,
 form:hover,
 header input[type="submit"]:focus {

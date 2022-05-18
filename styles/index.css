@@ -118,7 +118,6 @@ display: none;
 }
 
 
-
 #radio1:checked ~ .navigation-auto .auto-btn1{
     background-color: black;
 }
@@ -132,6 +131,7 @@ display: none;
     background-color: black;
 }
 
+/* texto sobre cada slide */
 .texto-slider{
     position:absolute;
     font-family: roboto-slab, sans-serif;
@@ -157,7 +157,9 @@ display: none;
     background-color: rgb(209, 27, 255);
 }
 
-/* gradient */
+
+
+/* gradients*/
 .gradient{
     height: 350px;
     padding-top: 10px;
@@ -181,10 +183,9 @@ display: none;
     background:linear-gradient(270deg,rgb(171, 25, 207),white);
     
 }
-/* imagem */
+/* imagem do gradient*/
 .gradient img{
     height: 330px;
-    
 }
 
 .gradient > div{
@@ -217,13 +218,19 @@ h3{
 .gradient:not(:nth-of-type(2n)) h2{
     margin-left: 20px;
 }
-.gradient a, .gradient a:visited, .gradient a:active{
+
+.gradient a, .gradient a:visited, .gradient a:active{/* links */
     color:inherit
 }
 
-.avaliacao-after img{
+
+
+.avaliacao-after img{/* imagem de estrela(adicionada via js) */
     height:16px; position:relative; top:1px;
 }
+
+
+
 
 @media screen and (min-width:1500px) and (orientation:landscape){
     .slider{

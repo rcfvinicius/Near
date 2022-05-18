@@ -1,7 +1,12 @@
-/* section */
 *{
+    /* cor largura e cor tema */
     --largura: 800px;
     --cor:rgb(209, 27, 255); /* rgb(209, 27, 255) */
+}
+
+/* primeira section*/
+main section{
+    font-family: Playfair, serif;
 }
 main > section:first-child{
     height: 300px;
@@ -11,6 +16,9 @@ main > section:first-child{
     display: flex;
 }
 
+
+
+/* div central da primeira section */
 main > section:first-child > div{
     /* background-color: rgba(127, 255, 212, 0.24); */
     width: var(--largura);
@@ -25,11 +33,18 @@ main > section:first-child > div{
     min-width: 800px;
 }
 
-
-main section{
-    font-family: Playfair, serif;
+main > section:first-child > div h1{
+    font-size: 46px;
+    margin-top: 0;
+    margin-bottom: 0;
 }
-/*  div link */
+
+main > section:first-child > div h3{
+    font-family: proxima-nova, sans-serif;
+    font-weight: 100;
+}
+
+/*  link da categoria */
 main > section:first-child > div a{
     text-decoration: none;
 }
@@ -44,16 +59,9 @@ main > section:first-child > div b{
     font-family: proxima-nova, sans-serif;
     font-weight: 100;
 }
-main > section:first-child > div h1{
-    font-size: 46px;
-    margin-top: 0;
-    margin-bottom: 0;
-}
 
-main > section:first-child > div h3{
-    font-family: proxima-nova, sans-serif;
-    font-weight: 100;
-}
+
+
 
 /* section aside */
 main > section aside{
@@ -70,17 +78,16 @@ main > section aside{
     font-family: roboto-slab, sans-serif;
 }
 main > section aside img{
-    width: 100%;
+    width: 100%; /* tamanho da imagem aside */
 }
-main > section aside div{
+main > section aside div{ /* div container (abaixo da imagem) */
     background-color: inherit;
     width: 100%;
     height: 200px;
     padding-top:10px;
     padding-left: 20px;
 }
-main > section aside div h3{
-    
+main > section aside div h3{ /* h3(preço) */
     margin:0;
     font-size: 28px;
 }
@@ -95,12 +102,16 @@ main > section aside div button{
     font-size: 20px;
     cursor: pointer;
 }
-main > section aside #botao2{
+main > section aside div #botao2{
     background-color: var(--cor);
     color:white;
     outline: none;
     outline: 2px var(--cor) solid;
 }
+
+
+
+/* section 2 */
 #section2{
     width: var(--largura);
     margin-top:30px;
@@ -113,7 +124,7 @@ main > section aside #botao2{
     font-size: 28px;
 }
 
-#section2 #flex-container-uls{
+#section2 #flex-container-uls{/* container das listas(ul) */
     display: flex;
     column-gap: 30px;
     margin-top:-20px;
@@ -130,7 +141,7 @@ main > section aside #botao2{
     margin-bottom: 20px;
 }
 
-#section2 ul li::before{
+#section2 ul li::before{/* icones antes de cada list item */
     content:'';
     display: inline-block;
     width:40px;

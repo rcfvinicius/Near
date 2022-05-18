@@ -1,4 +1,4 @@
-footer {
+footer {/* estilo geral do footer */
   background-color: #180c24;
   width: 100%;
   height: 300px;
@@ -9,6 +9,7 @@ footer {
   justify-content: space-between;
 }
 
+/* links */
 footer a {
   /* position: relative; */
   margin-top: 10px;
@@ -37,18 +38,25 @@ footer p{
     font-weight:100;
     margin-left: 30px;
 }
-footer section{
+
+footer section{/* 4 sections separadas com espaço entre elas(justify-content:space-between) */
     width: 250px;
     height: 100%;
 }
+
+
+footer section:not(:first-child) a:not(:first-child) p{/* pega os primeiros ps de cada section, exeto a primeira */
+    color:rgb(192, 192, 192);
+}
+
 footer section:not(:first-child) a:first-child p, #redes-sociais > p{
     margin-top:55px;
     margin-bottom: 30px;
     font-size: 20px;
 }
-footer section:not(:first-child) a:not(:first-child) p{
-    color:rgb(192, 192, 192);
-}
+
+
+/* section 2 */
 #redes-sociais{
     display: flex;
     flex-direction: column;

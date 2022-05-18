@@ -1,9 +1,10 @@
+/* Descontinuado
 function headerScroll() {
-  /*     if(document.getElementsByTagName('body')[0].offsetHeight - 15 < (window.innerHeight)){
+      if(document.getElementsByTagName('body')[0].offsetHeight - 15 < (window.innerHeight)){
         document.getElementsByTagName('body')[0].style = 'width:100vw'
-    } */
-}
-headerScroll();
+    }
+} */
+
 
 function alerta() {
   alert(0.1 + 0.2);
@@ -44,5 +45,6 @@ function addEstrela(count=0){
 
 
 addEstrela(3);
+
 document.getElementsByClassName("avaliacao-after")[0].innerHTML += '<img src="./assets/meia-estrela.png">';
 document.getElementsByClassName("avaliacao-after")[1].innerHTML += '<img src="./assets/meia-estrela.png">';
