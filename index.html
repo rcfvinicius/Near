@@ -14,17 +14,20 @@
     <title>Near</title>
 </head>
 <body>
-    
+
 <div id="header-nav">
     <div id="promo"></div>
     <header>
-        <a href="/"><img id="logo" src="./assets/near-logo2.png"><!-- <img id="logo" src="../assets/near-logo.png" alt="logo"><img src="./assets/logoteste.png" width="60px"> --></a>
+        <a href="/"><!-- <img id="logo" src="./assets/near-logo2.png"> --><img id="logo" src="../assets/near-logo.png" alt="logo parte 1"><img src="./assets/logoteste.png" width="60px" alt="logo parte 2"></a>
 
     <form method="GET">
         <input id="barra-de-pesquisa" type="text" name="search_query" placeholder="Pesquise cursos, professores, aulas, etc...">
-        <a href="./pages/login.html" id="botao-pesquisar">
-            <img src="./assets/lupa.png" height="30px">
+        <a href="./pages/login.html" id="botao-pesquisar" tabindex="-1">
+            <img src="./assets/lupa.png" height="30px" alt="lupa de pesquisa">
         </a>
+        <label for="barra-de-pesquisa">
+        <img id="lupa-mob" src="./assets/lupa.png" height="30px" alt="lupa de pesquisa">
+        </label>
         <!-- <input type="submit" value=""> -->
     </form>
 <a id="login-cadastro-link" href="./pages/login.html">
@@ -34,12 +37,11 @@
 </a>
     </header>
     <nav>
-       
+        <h4>...</h4>
         <a href="#gradient1">Cursos populares</a>
         <a>Categorias</a>
         <a>Atendimento</a>
-        <a>Exercícios</a>
-        <a>Espaço do aluno</a>
+        <a href="./pages/area-do-aluno.html">Espaço do aluno</a>
 
     </nav> 
 </div>
@@ -60,21 +62,21 @@
                         <h2>
                             Por uma educação mais próxima e por mais
                             <br>
-                            <h2><mark>AUTONOMIA</mark> E <mark>LIBERDADE!</mark></h2>
+                            <h2><mark>autonomia</mark> E <mark>liberdade!</mark></h2>
                         </h2>
                     </div>
-                    <img src="./assets/imagens/imagem1.jpeg">
+                    <img src="./assets/imagens/imagem1.jpeg" alt="alunos estudando em uma sala">
                 </div>
                 <div class="slide">
                     <div class="texto-slider">
                         <h2>
                             Lorem Ipsum is simply dummy text 
                             <br>
-                            <h2><mark>LOREM</mark> AND <mark>IPSUM!</mark></h2>
+                            <h2><mark>lorem</mark> AND <mark>ipsum!</mark></h2>
                         </h2>
                     </div>
 
-                    <img src="./assets/imagens/imagem2.jpeg">
+                    <img src="./assets/imagens/imagem2.jpeg" alt="jovens sorrindo e olhando a mesma coisa">
                     
                 </div>
                 <div class="slide">
@@ -82,20 +84,20 @@
                         <h2>
                             Lorem Ipsum is simply dummy text 
                             <br>
-                            <h2><mark>LOREM</mark> AND <mark>IPSUM!</mark></h2>
+                            <h2><mark>lorem</mark> AND <mark>ipsum!</mark></h2>
                         </h2>
                     </div>
-                    <img src="./assets/imagens/imagem3.jpeg">
+                    <img src="./assets/imagens/imagem3.jpeg" alt="professor explicando algo para alunos em uma sala de aula">
                 </div>
                 <div class="slide">
                     <div class="texto-slider">
                         <h2>
                             Lorem Ipsum is simply dummy text 
                             <br>
-                            <h2><mark>LOREM</mark> AND <mark>IPSUM!</mark></h2>
+                            <h2><mark>lorem</mark> AND <mark>ipsum!</mark></h2>
                         </h2>
                     </div>
-                    <img src="./assets/imagens/imagem4.jpeg">
+                    <img src="./assets/imagens/imagem4.jpeg" alt="professora olhando para a câmera e sorrindo">
                 </div>
                 <!-- navigation -->
                 <div class="navigation-auto">
@@ -128,7 +130,7 @@
             </p>
         </div>
         
-        <a href="./pages/sobre.html?"><img src="./assets/imagens/cursos/js.jpg"></a>
+        <a href="./pages/sobre.html?" class="img-focus"><img src="./assets/imagens/cursos/js.jpg" alt="tela de computador preta com códigos"></a>
     </div>
 
 
@@ -142,7 +144,7 @@
             </p>
         </div>
         
-        <a href="/"><img src="./assets/imagens/cursos/matematica-basica.jpg"></a>  
+        <a href="/" class="img-focus"><img src="./assets/imagens/cursos/matematica-basica.jpg" alt="tela azul escrito matemática básica com simbolos de operações aritméticas acima da escrita"></a>  
     </div>
 
     <div class="gradient">
@@ -154,7 +156,7 @@
                 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
             </p>
         </div>
-        <a href="/"><img src="./assets/imagens/cursos/geometria-espacial.jpg"></a>
+        <a href="/" class="img-focus"><img src="./assets/imagens/cursos/geometria-espacial.jpg" alt="cubo com uma reta atravessando na diagonal"></a>
 
     </div>
     
@@ -168,7 +170,7 @@
                 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
             </p>
         </div>
-        <a href="/"><img src="./assets/imagens/cursos/morfologia.png"></a>
+        <a href="/" class="img-focus"><img src="./assets/imagens/cursos/morfologia.png" alt="tela escrito morfologia com uma explicaçao abaixo: parte da língua portuquesa que se dedica a analisar a estrutura, o formato e a classificação das palavras; Seguido de várias setas que apontam para: substantivo, adjetivo, advérbio, artigo, conjunção, interjeição, numeral, preposição, pronome e verbo"></a>
 
     </div>
 
@@ -195,11 +197,11 @@
     <!-- footer -->
     <footer>
         <section>
-        <a href="/"><img id="footer-logo" src="./assets/near-logo2.png" alt="logo"></a>
+        <a href="/"><img id="footer-logo" src="./assets/near-logo2.png" alt="logo do site"></a>
         
-        <p>Fale conosco</p>
+        <p id="fale-conosco">Fale conosco</p>
         <address>
-            <a href="mailto:near.suporte@near.com"><p>near.suporte@near.com</p></a>
+            <a href="mailto:near.suporte@near.com" id="contato-email"><p>near.suporte@near.com</p></a>
             <p>Fone: 0800 2022 040</p>
             <p>R. Imperial, 201 - Recife PE CEP: 51-222-100</p>
         </address>
@@ -207,16 +209,16 @@
         
     <section id="redes-sociais">
         <p>Redes Sociais</p>
-       <a href="/"><img class="img-redes" src="./assets/facebook.png">
+       <a href="/"><img class="img-redes" src="./assets/facebook.png" alt="logo do facebook">
             <strong>Facebook</strong>
         </a>
-       <a href="/"><img class="img-redes" src="./assets/insta.png">
+       <a href="/"><img class="img-redes" src="./assets/insta.png" alt="logo do instagram">
             <strong>Instagram</strong>
         </a>
-       <a href="/"><img class="img-redes" src="./assets/twitter.png">
+       <a href="/"><img class="img-redes" src="./assets/twitter.png" alt="logo do twitter">
             <strong>Twitter</strong>
         </a>
-       <a href="/"><img class="img-redes" src="./assets/linkedin.png">
+       <a href="/"><img class="img-redes" src="./assets/linkedin.png" alt="logo do linkedIn">
             <strong>LinkedIn</strong>    
         </a>
 

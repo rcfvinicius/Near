@@ -17,6 +17,7 @@ body {
   padding: 0;
   margin: 0;
   width: calc(100vw - 17px);
+  overflow-x: hidden;
 }
 
 /* cabeçalho */
@@ -34,24 +35,29 @@ header {
   overflow: auto;
   box-shadow: 0px 0px 12px black;
 }
+#header-nav a{
+  text-decoration:none;
+}
+
 header {
   height: 60px;
+  display: flex;
+  justify-content: space-between;
 }
 header > a{
     position:relative;
 }
-form {
-  display: inline-block;
-
+header form {
   position: relative;
-  top: -19px;
-/*   margin-left: calc(50vw - 147px);
-  transform: translateX(-50%); */
-  margin-left: calc(calc(50% - 20vw) - 147px);
-
+  overflow: hidden;
+  top:5px;
+  height: 42px;
   border-radius: 40px;
   padding: -0px 7px 1px 15px;
   background-color: rgb(255, 255, 255);
+  display: flex;
+  flex-direction: row;
+
 }
 
 #barra-de-pesquisa {/* input de pesquisa */
@@ -59,7 +65,7 @@ form {
   width: 40vw;
   border-radius: 0;
   position: relative;
-  top: -3px;
+  top: 0px;
   border: none;
   /* background: none; */
   color: black;
@@ -67,11 +73,12 @@ form {
   outline: none;
   font-size: 17px;
 }
-form a {/* posicionamento da lupa */
+header form a {/* posicionamento da lupa */
   position: relative;
-  top: 6px;
+  top: 5px;
   left: -5px;
 }
+
 
 /* header input[type="submit"]{
     border:none;
@@ -85,15 +92,11 @@ form a {/* posicionamento da lupa */
  */
 
 
- /* imput[type="submit"] foi substituido */
-header input[type="submit"]:hover,
-form:hover,
-header input[type="submit"]:focus {
+ /* header imput[type="submit"] foi substituido */
+header form:hover{
   outline: solid black 3px;
 }
-#login-cadastro:hover{
-  outline: solid white 3px;
-}
+
 /*  */
 #logo {
   height: 50px;
@@ -101,17 +104,27 @@ header input[type="submit"]:focus {
   margin-top: 5px;
 }
 
-#login-cadastro{
-  display: inline-block;
-  padding: 5px 10px;
-  position: relative;
-  top: -21px;
-  left: 20vw;
-  right: auto;
-}
+
+
 #login-cadastro-link {
+  display: flex;
   color: white;
+  align-items: center;
+  align-self: center;
+  margin-right: 50px;
+  height: 30px;
+  padding:5px;
 }
+/* outline */
+#login-cadastro-link:hover,
+#login-cadastro-link:focus,
+header > a:first-child:focus,
+nav a:focus
+{
+  outline: solid white 3px;
+}
+
+
 #login-cadastro-link div,
 #login-cadastro-link:visited div {
   text-decoration: none;
@@ -120,7 +133,7 @@ header input[type="submit"]:focus {
 #login-cadastro-link div:active {
   color: rgb(190, 188, 188);
 }
-a:visited{
+#header-nav a:visited{
     color:white;
 }
 /* nav */
@@ -160,3 +173,128 @@ nav > a:hover {
   box-sizing: border-box;
 }
 
+#lupa-mob{
+  display: none;
+}
+nav h4{
+  display: none;
+}
+
+/* smartphones */
+@media screen and (max-width:700px){
+  header > a img:last-child{
+    display: none;
+  }
+
+  header form {
+    position: relative;
+    overflow: hidden;
+    top:5px;
+    height: 42px;
+    border-radius: 40px;
+    padding: -0px 7px 1px 15px;
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    flex-direction: row-reverse;
+  
+  }
+
+
+  #barra-de-pesquisa {/* input de pesquisa */
+    padding: 7px 0 7px 2px;
+    width: 40px;
+    border-radius: 0;
+    position: relative;
+    top: 0px;
+    border: none;
+    /* background: none; */
+    color: black;
+    line-height: 20px;
+    outline: none;
+    font-size: 17px;
+    transition: .2s;
+  }
+
+  #botao-pesquisar{
+    display: hidden;
+  }
+
+  #lupa-mob{
+    position: absolute;
+    left: 9px;
+    top:5px;
+  }
+
+#barra-de-pesquisa:focus{
+    width: calc(100vw - 200px);
+  }
+
+  #barra-de-pesquisa:focus #botao-pesquisar{
+    display: inline-block;
+  }
+
+
+  #login-cadastro-link{
+    margin-right:10px;
+  }
+  nav{
+    flex-direction: column;
+    transition: .2s;
+  }
+  nav a{
+    display: none;
+  }
+  nav h4{
+    font-size: 50px;
+    position: relative;
+    top:-15px;
+    left:15px;
+    display: block;
+  }
+  nav:hover h4{
+    display: none;
+  }
+  nav:hover a{
+    display: inline-block;
+  }
+  nav:hover{
+  height: 200px;
+  }
+
+/* nav links */
+
+  nav > a:visited {
+    text-decoration: none;
+    color: inherit;
+  }
+  nav > a:active {
+    outline: none;
+  }
+  nav > a:hover{
+    outline: none;
+  }
+
+}
+
+
+/* tablets */
+@media screen and (min-width:701px) and (max-width:1100px) and (hover: none) and (pointer: coarse){
+  /* nav links */
+
+  nav > a:visited {
+    text-decoration: none;
+    color: inherit;
+  }
+  nav > a:active {
+    outline: none;
+  }
+  nav > a:hover{
+    outline: none;
+  }
+}
+
+@media (hover: none) and (pointer: coarse) {
+  body{
+      width: 100vw;
+  }
+}

@@ -8,6 +8,10 @@ footer {/* estilo geral do footer */
   column-gap: 10px;
   justify-content: space-between;
 }
+footer section{/* 4 sections separadas com espaço entre elas(justify-content:space-between) */
+    width: 250px;
+    height: 100%;
+}
 
 /* links */
 footer a {
@@ -26,12 +30,53 @@ footer a:active {
 }
 
 
-
+/* section 1 */
 #footer-logo{
-    height: 70px;
-    margin:20px;
+/*     height: 70px;
+    margin:20px; */
+    width: 160px;
+
+}
+/* logo link */
+footer > section:first-child > a:first-child{
+    
+    width: 50px;
+    position: relative;
+    top:15px;
+    left: 20px;
+}
+footer > section:first-child a:first-child:focus{
+    outline: white 3px solid;
 }
 
+
+#fale-conosco{
+    margin-bottom: -9px;
+    position: relative;
+    top: 20px;
+}
+
+
+#contato-email p{
+    margin-left: 9px;
+    margin-top: 0;
+}
+footer address{
+    height: 90px;
+    position: relative;
+    top:20px;
+    min-height: 96px;
+    display: flex;
+    flex-direction: column;
+}
+
+footer address p{
+    margin-top: 10px;
+    margin-bottom: 0;
+}
+footer address > a{
+    margin-bottom: 20px;
+}
 
 footer p{
     color: white;
@@ -39,10 +84,6 @@ footer p{
     margin-left: 30px;
 }
 
-footer section{/* 4 sections separadas com espaço entre elas(justify-content:space-between) */
-    width: 250px;
-    height: 100%;
-}
 
 
 footer section:not(:first-child) a:not(:first-child) p{/* pega os primeiros ps de cada section, exeto a primeira */
@@ -55,6 +96,15 @@ footer section:not(:first-child) a:first-child p, #redes-sociais > p{
     font-size: 20px;
 }
 
+footer address a:first-child{
+    margin-left: 20px;
+    position: relative;
+    top:15px
+}
+footer address a:first-child p{
+    margin-top:5px;
+    width: 200px;
+}
 
 /* section 2 */
 #redes-sociais{
@@ -82,4 +132,26 @@ footer section:not(:first-child) a:first-child p, #redes-sociais > p{
     position:relative;
     top:-15px;
     margin-bottom: 5px;
+}
+
+@media (max-width:700px) {
+    footer{
+        height: 100px;
+    }
+    #footer-logo{
+        height: 70px;
+        margin: 17px 20px 0 20px;
+    }
+    footer > section:first-child > a:first-child{
+        top:0px;
+        left: 0px;
+    }
+
+    footer section:not(:first-child), 
+    footer section:not(:first-child) a,
+    footer section p,
+    footer section address
+    {
+        display:none;
+    }
 }

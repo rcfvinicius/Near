@@ -12,41 +12,40 @@
     <link href="../styles/footer.css" rel="stylesheet">
 
     <script src="../scripts/sobre.js" defer></script>
+    <!-- <script src="../scripts/index.js" defer></script> -->
 </head>
-<body>
+<body onload="posAsideSection()">
     <div id="header-nav">
-    <div id="promo"></div>
-    <header>
-        <!-- logo -->
-        <a href="/"><img id="logo" src="../assets/near-logo2.png"><!-- <img id="logo" src="../assets/near-logo.png" alt="logo"><img src="./assets/logoteste.png" width="60px"> --></a>
-
-        <!-- input -->
-    <form method="GET">
-        <input id="barra-de-pesquisa" type="text" name="search_query" placeholder="Pesquise cursos, professores, aulas, etc...">
-        <a href="./pages/login.html" id="botao-pesquisar">
-            <img src="../assets/lupa.png" height="30px">
-        </a>
-        <!-- <input type="submit" value=""> -->
-    </form>
-<a id="login-cadastro-link" href="./login.html">
-  <div id="login-cadastro">
-    Entrar
-  </div>
-</a>
-    </header>
-    <!-- nav -->
-    <nav>
-       
-        <a href="../index.html#gradient1">Cursos populares</a>
-        <a>Categorias</a>
-        <a>Atendimento</a>
-        <a>Exercícios</a>
-        <a>Espaço do aluno</a>
-
-    </nav>
-
-</div>
-<!-- fim do cabeçalho -->
+        <div id="promo"></div>
+        <header>
+            <a href="/"><!-- <img id="logo" src="./assets/near-logo2.png"> --><img id="logo" src="../assets/near-logo.png" alt="logo parte 1"><img src="../assets/logoteste.png" width="60px" alt="logo parte 2"></a>
+    
+        <form method="GET">
+            <input id="barra-de-pesquisa" type="text" name="search_query" placeholder="Pesquise cursos, professores, aulas, etc...">
+            <a href="./login.html" id="botao-pesquisar" tabindex="-1">
+                <img src="../assets/lupa.png" height="30px" alt="lupa de pesquisa">
+            </a>
+            <label for="barra-de-pesquisa">
+            <img id="lupa-mob" src="../assets/lupa.png" height="30px" alt="lupa de pesquisa">
+            </label>
+            <!-- <input type="submit" value=""> -->
+        </form>
+    <a id="login-cadastro-link" href="./login.html">
+      <div id="login-cadastro">
+        Entrar
+      </div>
+    </a>
+        </header>
+        <nav>
+            <h4>...</h4>
+            <a href="../index.html#gradient1">Cursos populares</a>
+            <a>Categorias</a>
+            <a>Atendimento</a>
+            <a href="./area-do-aluno.html">Espaço do aluno</a>
+    
+        </nav> 
+    </div>
+    <!-- fim do cabeçalho -->
 
 <main>
     <!-- section 1 -->
@@ -54,12 +53,16 @@
         <div>
             <b><a href="">Tecnologia</a> > <a href="">Programação</a></b>      
             <h1>JavaScript(iniciante): Aprenda a programar do zero com javascript</h1>
+            <div class="avaliacao-after"><h3>Avaliação:</h3></div>
             <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent eu sollicitudin sapien. Morbi id feugiat leo. In malesuada, nisl eget venenatis congue, erat libero ullamcorper mi, eget venenatis arcu tellus vitae ante. Nulla eu pellentesque leo. Nullam eget odio aliquet, tincidunt arcu eget, posuere ex. </h3>
         </div>
 
         <aside>
-            <img src="../assets/imagens/cursos/js.jpg">
             <div>
+            <div id="fundo-adquirido"><div id="d1-maior"><div id="d2-menor"></div></div></div>
+            <img src="../assets/imagens/cursos/js.jpg" alt="tela de computador preta com códigos">
+            </div>
+            <div id="container-aside">
                 <h3>R$ 00,00</h3>
                 <button type="button">Adicionar ao carrinho</button>
                 <button type="button" id="botao2">Comprar</button>
@@ -93,7 +96,7 @@
     </section>
     <!-- section 3 -->
     <section id="section3">
-
+        
     </section>
 </main>
 
@@ -101,11 +104,11 @@
 <footer>
     <!-- section logo e contato -->
     <section>
-    <a href="/"><img id="footer-logo" src="../assets/near-logo2.png" alt="logo"></a>
+    <a href="/"><img id="footer-logo" src="../assets/near-logo2.png" alt="logo do site"></a>
     
-    <p>Fale conosco</p>
+    <p id="fale-conosco">Fale conosco</p>
     <address>
-        <a href="mailto:contato@near.com"><p>contato@near.com</p></a>
+        <a href="mailto:contato@near.com" id="contato-email"><p>contato@near.com</p></a>
         <p>Fone: 0800 2022 040</p>
         <p>R. Imperial, 201 - Recife PE CEP: 51-222-100</p>
     </address>
@@ -113,16 +116,16 @@
     <!-- redes sociais -->
 <section id="redes-sociais">
     <p>Redes Sociais</p>
-   <a href="/"><img class="img-redes" src="../assets/facebook.png">
+   <a href="/"><img class="img-redes" src="../assets/facebook.png" alt="logo do facebook">
         <strong>Facebook</strong>
     </a>
-   <a href="/"><img class="img-redes" src="../assets/insta.png">
+   <a href="/"><img class="img-redes" src="../assets/insta.png" alt="logo do instagram">
         <strong>Instagram</strong>
     </a>
-   <a href="/"><img class="img-redes" src="../assets/twitter.png">
+   <a href="/"><img class="img-redes" src="../assets/twitter.png" alt="logo do twitter">
         <strong>Twitter</strong>
     </a>
-   <a href="/"><img class="img-redes" src="../assets/linkedin.png">
+   <a href="/"><img class="img-redes" src="../assets/linkedin.png" alt="logo do linkedIn">
         <strong>LinkedIn</strong>    
     </a>
 

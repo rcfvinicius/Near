@@ -6,11 +6,6 @@ function headerScroll() {
 } */
 
 
-function alerta() {
-  alert(0.1 + 0.2);
-  console.warn(1);
-}
-
 let contador = 1;
 document.getElementById("radio1").checked = true;
 
@@ -38,13 +33,14 @@ function addEstrela(count=0){
 
   const arr = document.querySelectorAll(".avaliacao-after img");
 
+  /* estilo das estrelas */
   for(let i=0;i<arr.length;i++){
     arr[i].style = "height:16px; position:relative; top:1px;";
   }
 }
 
 
-addEstrela(3);
+addEstrela(4);
 
-document.getElementsByClassName("avaliacao-after")[0].innerHTML += '<img src="./assets/meia-estrela.png">';
-document.getElementsByClassName("avaliacao-after")[1].innerHTML += '<img src="./assets/meia-estrela.png">';
+//document.getElementsByClassName("avaliacao-after")[0].innerHTML += '<img src="./assets/meia-estrela.png">';
+//document.getElementsByClassName("avaliacao-after")[1].innerHTML += '<img src="./assets/meia-estrela.png">';

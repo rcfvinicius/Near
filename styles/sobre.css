@@ -30,11 +30,10 @@ main > section:first-child > div{
     font-family: Playfair;
     color:white;
     display:inline-block;
-    min-width: 800px;
 }
 
 main > section:first-child > div h1{
-    font-size: 46px;
+    font-size: 38px;
     margin-top: 0;
     margin-bottom: 0;
 }
@@ -62,6 +61,12 @@ main > section:first-child > div b{
 
 
 
+.avaliacao-after h3{
+    margin: 12px 0 12px 0;
+    font-size: 22px;
+}
+
+
 
 /* section aside */
 main > section aside{
@@ -80,7 +85,7 @@ main > section aside{
 main > section aside img{
     width: 100%; /* tamanho da imagem aside */
 }
-main > section aside div{ /* div container (abaixo da imagem) */
+main > section aside #container-aside{ /* div container (abaixo da imagem) */
     background-color: inherit;
     width: 100%;
     height: 200px;
@@ -109,6 +114,31 @@ main > section aside div #botao2{
     outline: 2px var(--cor) solid;
 }
 
+/* fundo adquirido */
+#fundo-adquirido{
+    background-color: rgba(114, 218, 209, 0.514);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    position:absolute;
+}
+
+#fundo-adquirido div{
+    background-color: rgb(114, 206, 183);
+    position:absolute;
+}
+#d1-maior{
+    width: 170px;
+    transform: rotate(-45deg);
+    margin-left: 40px;
+    display: flex;
+    flex-direction: column-reverse;
+    height: 35px;
+}
+#d2-menor{
+    width: 35px;
+    height: 100px;
+}
 
 
 /* section 2 */
@@ -163,5 +193,136 @@ main > section aside div #botao2{
 
     main > section aside{
         margin-left:900px;
+    }
+}
+
+
+
+
+/* tablets */
+@media screen and (min-width:832px) and (max-width:1260px){
+
+    /* section aside */
+main > section aside{
+    width: var(--largura);
+    max-width: var(--largura);
+    height: 750px;
+    position: absolute;
+    margin-top: 320px;
+    padding: 3px;
+    margin-left: 50%;
+    transform: translateX(-50%);
+
+}
+
+
+/* section 2 */
+#section2{
+    width: var(--largura);
+    margin-top:800px;
+    margin-bottom:30px;
+    margin-left: 50%;
+    transform: translateX(-50%);
+    height: 500px;
+    font-size: 28px;
+}
+
+}
+
+/* smartphones */
+@media screen and (max-width:830px){
+
+    main > section:first-child{
+        height: 300px;
+        width: 100%;
+        
+        background-color: #180c24;
+        display: flex;
+        min-width: none;
+    }
+/* div central da primeira section */
+main > section:first-child > div{
+    width: 100%;
+    height: 100%;
+    margin-left: 10px;
+    transform: translateX(0);
+    padding: 16px 10px 16px 0;
+    font-family: Playfair;
+    overflow: scroll;
+
+}
+    main > section:first-child > div h1{
+        font-size: 26px;
+        margin-top: 0;
+        margin-bottom: 0;
+        height: auto;
+    }
+    
+    main > section:first-child > div h3{
+        font-family: proxima-nova, sans-serif;
+        font-weight: 100;
+    }
+
+
+    main > section aside{
+        width: 95%;
+        max-width: var(--largura);
+        height:700px; /* 750 */
+        position: absolute;
+        margin-top: 320px;
+        padding: 3px;
+        margin-left: 50%;
+        transform: translateX(-50%);
+    
+    }
+
+
+    /* section 2 */
+#section2{
+    width: 95%;
+    margin-top:780px;
+    margin-bottom:30px;
+    margin-left: 50%;
+    transform: translateX(-50%);
+    height: auto;
+    font-size: 20px;
+    overflow-y: auto;
+    padding-left: 10px;
+}
+
+#section2 #flex-container-uls{/* container das listas(ul) */
+    display: flex;
+    column-gap: 10px;
+    margin-top:-30px;
+
+}
+#section2 ul{
+    padding: 0;
+    overflow: hidden;
+    width: 400px;
+    max-height:340px;
+}
+#section2 ul li{
+    list-style: none;
+    margin-bottom: 20px;
+    font-size: 17px;
+}
+
+#section2 ul li::before{/* icones antes de cada list item */
+    content:'';
+    display: inline-block;
+    width:30px;
+    height:15px;
+    background-image: url(../assets/v-section-li.png);
+    background-repeat:no-repeat;
+    background-position:center;
+    background-size:cover;
+}
+
+}
+
+@media (hover: none) and (pointer: coarse) {
+    body{
+        width: 100vw;
     }
 }
