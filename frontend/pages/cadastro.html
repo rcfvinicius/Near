@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="icon" href="../assets/near-logo.png" type="image/png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="../styles/cadastro.css" rel="stylesheet">
+    <title>Cadastro</title>
+</head>
+<body>
+    <section>
+        <form>
+            <h2>CADASTRO</h2><!-- text transform uppercase -->
+            <div class="user-box">
+                <label for="nome"><h5>Nome*</h5></label>
+                <input id="nome" type="text" name="nome" placeholder="Nome" required>
+            </div>
+            <div class="user-box">
+                <label for="sobrenome"><h5>Sobrenome</h5></label>
+                <input id="sobrenome" type="text" name="sobrenome" placeholder="Sobrenome">
+            </div>
+            <div class="user-box">
+                <label for="email"><h5>Email*</h5></label>
+                <input id="email" type="email" name="email" placeholder="Email" required>
+            </div>
+            <div class="user-box">
+                <label for="senha"><h5>Senha*</h5></label>
+                <input id="senha" type="password" name="senha" placeholder="Senha" required>
+            </div>
+            <input type="checkbox" value="professor">Sou professor
+            <input id="submit-btn" value="CRIAR CONTA" type="submit">
+        </form>
+    </section>
+</body>
+</html>

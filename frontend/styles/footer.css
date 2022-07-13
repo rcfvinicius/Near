@@ -7,6 +7,7 @@ footer {/* estilo geral do footer */
   display: flex;
   column-gap: 10px;
   justify-content: space-between;
+  position: relative;
 }
 footer section{/* 4 sections separadas com espaço entre elas(justify-content:space-between) */
     width: 250px;
@@ -134,9 +135,36 @@ footer address a:first-child p{
     margin-bottom: 5px;
 }
 
+#mostrar-mais{
+    display: none;
+    position:absolute;
+    width: 40%;
+    height: 50px;
+    right:0;
+    top:26px;
+    margin-right:20px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color:white;
+    background:none;
+    border: 2px solid rgb(209, 27, 255);
+    border-radius:5px;
+    font-size: 1rem;
+}
+#mostrar-mais:active{
+    box-shadow: 0px 0px 5px 5px rgba(209, 27, 255,1);
+}
+#mostrar-mais img{
+    width: 20px;
+    position: relative;
+    top:-2px;
+}
+
+
 @media (max-width:700px) {
     footer{
-        height: 100px;
+        height:100px;
+       /*  flex-direction: column; */
     }
     #footer-logo{
         height: 70px;
@@ -154,4 +182,12 @@ footer address a:first-child p{
     {
         display:none;
     }
+    #mostrar-mais{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        column-gap: 10px;
+    }
+
+
 }
