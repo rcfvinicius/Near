@@ -52,10 +52,10 @@ try{
         return;
     }
     const updatedCurso = {
-        tituloLongo:req.body.tituloLongo??undefined,
-        descricao:req.body.descricao??undefined,
-        categoria:req.body.categoria??undefined,
-        preco:req.body.preco??undefined
+        tituloLongo:req.body.tituloLongo,
+        descricao:req.body.descricao,
+        categoria:req.body.categoria,
+        preco:req.body.preco       
     }
     await Curso.updateOne({titulo:req.params.curso},updatedCurso);
 

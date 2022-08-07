@@ -12,8 +12,12 @@ exports.criar = function(jwtData){//passar o objeto    await jwt.criar(jwtData)
         });
     })
 }
-
-
+/* 
+const token = jwt.sign(user, SECRET, {
+    // definindo tempo de expiração do token para 24 horas
+    expiresIn: 86400
+  });
+ */
 
 let verificar = function(token){//passar o token    await jwt.verificar(token)
     return new Promise((resolve,reject)=>{
