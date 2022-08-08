@@ -30,6 +30,7 @@ function App() {
         </div>
     }/>
       <Route path='*' element={<h1>404</h1>}/>
+      
       </Switch>
     </TemaProvider>
     </BrowserRouter>
