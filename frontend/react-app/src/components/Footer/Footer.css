@@ -1,0 +1,193 @@
+#Footer {/* estilo geral do footer */
+    background-color: #180c24;
+    width: 100%;
+    height: 300px;
+    font-family: proxima-nova, sans-serif;
+    overflow: hidden;
+    display: flex;
+    column-gap: 10px;
+    justify-content: space-between;
+    position: relative;
+  }
+
+  #Footer section{/* 4 sections separadas com espaço entre elas(justify-content:space-between) */
+      width: 250px;
+      height: 100%;
+  }
+  
+  /* links */
+  #Footer a {
+    /* position: relative; */
+    margin-top: 10px;
+    text-decoration: none;
+    height: 18px;
+  
+  }
+  #Footer a:visited {
+    text-decoration: none;
+    color: white;
+  }
+  #Footer a:active {
+    color: rgb(190, 188, 188);
+  }
+  
+  
+  /* section 1 */
+  #Footer #footer-logo{
+  /*     height: 70px;
+      margin:20px; */
+      width: 160px;
+  
+  }
+  /* logo link */
+  #Footer > section:first-child > a:first-child{
+      
+      width: 50px;
+      position: relative;
+      top:15px;
+      left: 20px;
+  }
+  #Footer > section:first-child a:first-child:focus{
+      outline: white 3px solid;
+  }
+  
+  
+  #Footer #fale-conosco{
+      margin-bottom: -9px;
+      position: relative;
+      top: 20px;
+  }
+  
+  
+  #Footer #contato-email p{
+      margin-left: 9px;
+      margin-top: 0;
+  }
+  #Footer address{
+      height: 90px;
+      position: relative;
+      top:20px;
+      min-height: 96px;
+      display: flex;
+      flex-direction: column;
+  }
+  
+  #Footer address p{
+      margin-top: 10px;
+      margin-bottom: 0;
+  }
+  #Footer address > a{
+      margin-bottom: 20px;
+  }
+  
+  #Footer p{
+      color: white;
+      font-weight:100;
+      margin-left: 30px;
+  }
+  
+  
+  
+  #Footer section:not(:first-child) a:not(:first-child) p{/* pega os primeiros ps de cada section, exeto a primeira */
+      color:rgb(192, 192, 192);
+  }
+  
+  #Footer section:not(:first-child) a:first-child p, #redes-sociais > p{
+      margin-top:55px;
+      margin-bottom: 30px;
+      font-size: 20px;
+  }
+  
+  #Footer address a:first-child{
+      margin-left: 20px;
+      position: relative;
+      top:15px
+  }
+  #Footer address a:first-child p{
+      margin-top:5px;
+      width: 200px;
+  }
+  
+  /* section 2 */
+  #Footer #redes-sociais{
+      display: flex;
+      flex-direction: column;
+      row-gap: 20px;
+      justify-content: center;
+  }
+  
+  #Footer .img-redes{
+      width: 30px;
+      height: 30px;
+      margin-left: 25px;
+      margin-top: -20px;
+  }
+  
+  #Footer #redes-sociais strong{
+      color: white;
+      font-weight: 300;
+      position:relative;
+      top: -9px;
+      left: 5px;
+  }
+  #Footer #redes-sociais > p{
+      position:relative;
+      top:-15px;
+      margin-bottom: 5px;
+  }
+  
+  #Footer #mostrar-mais{
+      display: none;
+      position:absolute;
+      width: 40%;
+      height: 50px;
+      right:0;
+      top:26px;
+      margin-right:20px;
+      font-weight: 700;
+      text-transform: uppercase;
+      color:white;
+      background:none;
+      border: 2px solid rgb(209, 27, 255);
+      border-radius:5px;
+      font-size: 1rem;
+  }
+  #Footer #mostrar-mais:active{
+      box-shadow: 0px 0px 5px 5px rgba(209, 27, 255,1);
+  }
+  #Footer #mostrar-mais img{
+      width: 20px;
+      position: relative;
+      top:-2px;
+  }
+  
+  
+  @media (max-width:700px) {
+    #Footer{
+          height:100px;
+         /*  flex-direction: column; */
+      }
+      #Footer #footer-logo{
+          height: 70px;
+          margin: 17px 20px 0 20px;
+      }
+      #Footer > section:first-child > a:first-child{
+          top:0px;
+          left: 0px;
+      }
+  
+      #Footer section:not(:first-child), 
+      #Footer section:not(:first-child) a,
+      #Footer section p,
+      #Footer section address
+      {
+          display:none;
+      }
+      #Footer #mostrar-mais{
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          column-gap: 10px;
+      }
+  }
+  

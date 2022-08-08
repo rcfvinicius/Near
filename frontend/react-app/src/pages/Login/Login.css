@@ -1,0 +1,289 @@
+
+    #Login{
+        font-family: lato, sans-serif;
+        /* background-image: url(../assets/fundo.png); */
+        background-color:rgb(71, 7, 87);
+        margin:0;
+        padding: 0;
+        box-sizing: border-box;
+        width: 100vw;
+        height: 100vh;
+        max-width: 100vw;
+        max-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        --cor:rgb(209, 27, 255); /* rgb(209, 27, 255) */ /* cor tema */
+    }
+
+
+    
+
+    #Login #sections{/* div id=sections(container das sections)*/
+        background-color: #180c24;
+        border-radius:30px;
+        width: 90vw;
+        height: 80vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    #Login section{
+        background-color: #180c24;
+        width: 50%;
+        height: 100%;
+        max-width: 50%;
+        max-height: 100%;
+        display: flex;
+        margin:-2px;
+        overflow: hidden;
+        border-radius: 30px;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+
+
+
+/* container do login */
+#Login #login-area{
+        width: 70%;
+        height: 80%;
+        background-color: #301c3c;
+        border-radius: 20px;
+        max-height:450px;
+        min-height: 430px;
+        min-width: 400px;
+        max-width: 400px;
+    }
+    #Login form{
+        /* background-color: rgba(127, 255, 212, 0.055); */
+        margin:30px;
+        height: calc(100% - 80px);
+    }
+    #Login form > h2{
+        color:var(--cor);
+        text-shadow:0px 0px 10px var(--cor);
+        margin:0;
+        font-size: 40px;
+        text-align: center;
+        font-weight: 900;
+        text-transform: uppercase;
+    }
+    #Login label > h5{
+        color:rgb(211, 206, 206);
+        margin:0;
+        margin-bottom: 7px;
+        font-size: 16px;
+    }
+    #Login input{
+        background-color: #58446c;
+        border:none;
+        border-radius:7px;
+        box-shadow: 0px 10px 10px 10px rgba(0, 0, 0, 0.199);
+        width: calc(100% - 10px);
+        height:35px;
+        padding: 12px;
+        margin-left: 50%;
+        transform:translateX(-50%);
+        color:white;
+        font-size: 16px;
+    }
+    #Login input::placeholder{
+        color:rgba(243, 242, 242, 0.473);
+        padding-left: 5px;
+    }
+    
+    #Login .user-box{
+        width: 90%;
+        margin-left: 50%;
+        transform: translateX(-50%);
+    }
+    #Login .user-box:not(:last-child){
+        margin-bottom:40px;
+    }
+
+    #Login #submit-btn{
+        color:#301c3c;
+        font-weight: 100;
+        font-size: 25px;
+        transition:.4s;
+        cursor: pointer;
+        width: 90%;
+        height: 50px;
+        background-color: var(--cor);
+        margin-top: 10px;
+    }
+    #Login #submit-btn:hover{
+        box-shadow: 0px 1px 40px 15px rgba(209, 27, 255, 0.342);
+    }
+
+    
+
+    /* section da direita */
+    #Login section > img{
+        height: 80%;
+        min-height: 400px;
+        max-height: 60vh;
+    }
+
+    #Login section > h3, h3 > a{
+        color: var(--cor);
+        font-size: 25px;
+    }
+    #Login h3 > a{
+        text-decoration: none;
+    }
+    #Login h3 > a:hover, h3 > a:visited{
+        text-decoration: underline;
+        color:inherit;
+    }
+    
+
+
+
+
+/* tablets */
+@media screen and (min-width:801px) and (max-width:1200px){
+#Login{
+    width: 100vw;
+    height:auto;
+    max-width: 100vw;
+    max-height: none;
+    overflow-y: scroll;
+}
+
+#Login #sections{/* div id=sections(container das sections)*/
+    background-color: #180c24;
+    border-radius:30px;
+    width: 85vw;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+    margin-top:50px;
+    margin-bottom:50px;
+    padding: 10px 0;
+    }
+
+    #Login section{
+        background-color: #180c24;
+        width: 90%;
+        height: 400px;
+        max-width: none;
+        max-height: 100%;
+        margin:-2px;
+        overflow: hidden;
+        border-radius: 30px;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 450px;
+        margin-bottom: 20px;
+    }
+        
+/* container do login */
+#Login #login-area{
+    width: 100%;
+    height: 80%;
+    background-color: #301c3c;
+    border-radius: 20px;
+    max-height:450px;
+    min-height: 430px;
+    min-width: 200px;
+    max-width: 400px;
+}
+
+
+/* section de baixo */
+#Login section > img{
+        height: auto;
+        width: 100%;
+        min-height: 200px;
+        max-height: 60vh;
+        max-width: 440px;
+    }
+
+    #Login section > h3, h3 > a{
+        color: var(--cor);
+        font-size: 25px;
+    }
+    #Login h3 > a{
+        text-decoration: underline;
+    }
+
+
+}
+
+
+    /* smartphones */
+    @media screen and (max-width:800px){
+    #Login{
+        width: 100vw;
+        height:auto;
+        max-width: 100vw;
+        max-height: none;
+        overflow-y: scroll;
+    }
+
+    #Login #sections{/* div id=sections(container das sections)*/
+        background-color: #180c24;
+        border-radius:0px;
+        width: 100vw;
+        height: auto;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        flex-direction: column;
+
+        padding: 10px 0;
+    }
+    #Login section{
+        background-color: #180c24;
+        width: 90%;
+        height: 400px;
+        max-width: none;
+        max-height: 100%;
+        margin:-2px;
+        overflow: hidden;
+        border-radius: 30px;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 450px;
+        margin-bottom: 20px;
+    }
+        
+/* container do login */
+#Login #login-area{
+    width: 100%;
+    height: 80%;
+    background-color: #301c3c;
+    border-radius: 20px;
+    max-height:450px;
+    min-height: 430px;
+    min-width: 200px;
+    max-width: 400px;
+}
+
+
+/* section de baixo */
+#Login section > img{
+        height: auto;
+        width: 100%;
+        min-height: 200px;
+        max-height: 60vh;
+        max-width: 440px;
+    }
+
+    #Login section > h3, h3 > a{
+        color: var(--cor);
+        font-size: 25px;
+    }
+    #Login h3 > a{
+        text-decoration: underline;
+    }
+    }

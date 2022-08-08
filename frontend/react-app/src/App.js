@@ -1,36 +1,21 @@
-import {BrowserRouter, Navigate, Route, Routes as Switch} from 'react-router-dom'
-import {TemaProvider} from './providers/tema'
+import './App.css';
+import {BrowserRouter, Navigate, Route, Routes as Switch} from 'react-router-dom';
+import {TemaProvider} from './providers/tema';
+import Home from './pages/Home/Home.jsx';
+import Login from './pages/Login/Login.jsx';
+import Sobre from './pages/Sobre/Sobre.jsx';
 import Teste from './components/teste';
 
-import logo from './logo.svg';
-import './App.css';
 
 function App() {
   return (
     <BrowserRouter>
-    <TemaProvider>
+      <TemaProvider>
         <Switch>
-        <Route path='/' exact element={
-          <div className="App">
-          <Teste></Teste>
-          <header className="App-header">
-            <img src={logo} className="App-logo" alt="logo" />
-            <p>
-              Edit <code>src/App.js</code>
-            </p>
-            <a
-              className="App-link"
-              href="https://reactjs.org"
-              target="_blank"
-              rel="noopener noreferrer"
-              >
-              Learn React
-            </a>
-          </header>
-        </div>
-    }/>
-      <Route path='*' element={<h1>404</h1>}/>
-      
+        <Route path='/' exact element={<Home/>}/>
+        <Route path='/login' exact element={<Login/>}/>
+        <Route path='/sobre' exact element={<Sobre/>}/>
+        <Route path='*' element={<h1>404</h1>}/>
       </Switch>
     </TemaProvider>
     </BrowserRouter>
