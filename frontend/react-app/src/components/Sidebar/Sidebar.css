@@ -165,7 +165,7 @@
     }
     
     .side-menu-item h4{
-        display: inline;
+        display: inline !important;
         margin-left: 10px;
         color:white;
         position: relative;

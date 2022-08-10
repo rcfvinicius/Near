@@ -7,9 +7,12 @@ import imagemCurso from '../../assets/imagens/cursos/js.jpg'
 //arrumar o css do #section2
 export default function Sobre(){
     useEffect(()=>{
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+        
         const curso = window.location.href.split('?')[1] ?? 'err';
 
-const div = document.querySelectorAll('main > section:first-child > div')[0];
+        const div = document.querySelectorAll('main > section:first-child > div')[0];
 /* 
 div.innerHTML = `
 <h1>${curso}</h1>
@@ -34,6 +37,7 @@ window.addEventListener('scroll', () => {
 
 
     /* posicionamento do aside e #section2 */
+
 const posAsideSection = function(){
     
     if(window.innerWidth < 1261){

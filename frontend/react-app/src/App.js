@@ -27,5 +27,3 @@ function App() {
 }
 
 export default App;
-fazer a sibebar pra celular 
-terminar de importar ass imagens para area doo aluno e sidebar

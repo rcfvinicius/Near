@@ -16,6 +16,9 @@ import morfologia from '../../assets/imagens/cursos/morfologia.png';
 //../../assets/estrela.png
 export default function Home(){
     useEffect(()=>{
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+        
         let contador = 1;
         document.getElementById("radio1").checked = true;
         
