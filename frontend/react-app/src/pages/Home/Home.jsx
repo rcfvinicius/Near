@@ -1,6 +1,6 @@
 import './Home.css';
 import Header from '../../components/Header/Header.jsx';
-import Footer from '../../components/Footer/Footer.jsx'
+import Footer from '../../components/Footer/Footer.jsx';
 import { useEffect } from 'react';
 import { Link } from "react-router-dom";
 

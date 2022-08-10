@@ -336,7 +336,7 @@ display: none;
 }
 
 #Home-container .manual-navigation{
-    margin-top:120px;
+    margin-top:-180px;
 }
 #Home-container .navigation-auto{
     position: absolute;

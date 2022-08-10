@@ -1,0 +1,235 @@
+#Area-do-aluno{
+    display: flex;
+    width: 100vw;
+    min-height:100vh;
+} 
+
+
+#Area-do-aluno {
+    font-family: Playfair, serif;
+  }
+  #Area-do-aluno #conteudo {
+    display: flex;
+    flex-direction: column;
+  }
+  #Area-do-aluno #conteudo section {
+    border: 3px solid rgba(128, 128, 128, 0.808);
+    padding: 20px;
+    margin: 20px;
+  }
+  
+  
+  
+  #Area-do-aluno #textos-sobre{
+    display: block;
+  }
+  #Area-do-aluno #textos-sobre h1 {
+    margin-top: 0;
+  }
+  #Area-do-aluno #textos-sobre h1::first-letter {
+    font-size: 40px;
+    color: rgb(209, 27, 255);
+  }
+  
+  #Area-do-aluno p{
+    font-family:proxima-nova, sans-serif;
+    font-size:1.1rem;
+  }
+  
+  /* exercicios */
+  #Area-do-aluno .container-exercicios{
+    display: block;
+  }
+  #Area-do-aluno .container-exercicios:last-child{
+    margin-bottom: 20px;
+  }
+  #Area-do-aluno .container-exercicios section h2 {
+    margin-top: 0;
+  }
+  
+  
+  
+  /*  link da categoria */
+  #Area-do-aluno .container-exercicios section b a {
+    text-decoration: underline;
+  }
+  #Area-do-aluno .container-exercicios section b a:hover {
+    text-decoration: underline;
+  }
+  #Area-do-aluno .container-exercicios section b a:visited,
+  #Area-do-aluno .container-exercicios section b a:active {
+    color: inherit;
+  }
+  
+  /* categoria */
+  #Area-do-aluno .container-exercicios section b {
+    font-family: proxima-nova, sans-serif;
+    font-weight: 100;
+  }
+  /* imagem do exercicio */
+  #Area-do-aluno .container-exercicios section img{
+    max-width: 100%;
+    margin-bottom:10px;
+  }
+  
+  
+  
+  /* label */
+  #Area-do-aluno .container-checkbox {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+  
+  /* input */
+  #Area-do-aluno .container-checkbox input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  }
+  
+  /* span */
+  #Area-do-aluno .check {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: none;
+    border-radius: 50%;
+    outline: 3px solid rgb(71, 70, 70);
+  }
+  
+  /* hover */
+  #Area-do-aluno .container-checkbox:hover input ~ .check {
+    background-color: #ccc;
+  }
+  
+  /* checked */
+  #Area-do-aluno .container-checkbox input:checked ~ .check {
+    background-color: rgb(209, 27, 255);
+  }
+  
+  /* indicador */
+  #Area-do-aluno .check:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+  
+  /* mostrar indicador */
+  #Area-do-aluno .container-checkbox input:checked ~ .check:after {
+    display: block;
+  }
+  
+  /* estilo do indicador */
+  #Area-do-aluno .container-checkbox .check:after {
+    top: 9px;
+    left: 9px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: white;
+  }
+  
+  #Area-do-aluno .container-checkbox h5{
+      margin:0;
+      font-family: proxima-nova, sans-serif;
+      display: inline;
+      position: relative;
+      font-size: 1.3rem;
+      top: -5px;
+  }
+  
+  
+  
+  /* botões do fim da pagina */
+  #Area-do-aluno #btn-fim-pagina-container{
+    display:flex;
+    align-items: center;
+    margin-bottom: 15px;
+    flex-direction: column;
+    row-gap: 15px;
+  }
+  #Area-do-aluno .btn-fim-pagina{
+    appearance: none;
+    width: 200px;
+    height: 60px;
+    background-color: rgb(209, 27, 255);
+    color:white;
+    border-radius:5px;
+    font-family: roboto-slab;
+    font-size:20px;
+    border: none;
+    transition: 100ms ease-out;
+  }
+  #Area-do-aluno #btn-fim-pagina-container input:last-child{
+    background:none;
+    border:3px solid rgb(209, 27, 255);
+    color:rgb(209, 27, 255);
+  }
+  #Area-do-aluno #btn-fim-pagina-container input:last-child:active{
+    color:white;
+    background-color: rgb(209, 27, 255);;
+  }
+  #Area-do-aluno .btn-fim-pagina:active{
+    outline:3px solid rgb(209, 27, 255);
+  }
+  
+  /* PC */
+  @media screen and (min-width: 900px) {
+    #Area-do-aluno #conteudo {
+      width: calc(100% - 60px);
+    }
+    #Area-do-aluno .container-exercicios {
+      display: flex;
+      flex-direction: row;
+      column-gap: 20px;
+    }
+  
+    /* colunas */
+    #Area-do-aluno .colunas{
+      width: calc(50% - 30px);
+      margin:0;
+    }
+  
+    #Area-do-aluno .container-exercicios section {
+      height: auto;
+      display: inline-block;
+     /*  width: calc(50% - 40px); */
+     width: 100%;
+  
+    }
+  
+    /*  link da categoria */
+    #Area-do-aluno .container-exercicios section b a {
+      text-decoration: none;
+    }
+  
+    /* botao fim da pagina */
+  
+    #Area-do-aluno #btn-fim-pagina-container{
+      justify-content: center;
+      margin-bottom: 15px;
+      flex-direction: row;
+      column-gap: 15px;
+    }
+  
+    #Area-do-aluno #btn-fim-pagina-container input:last-child:hover{
+      color:white;
+      background-color: rgb(209, 27, 255);;
+    }
+    #Area-do-aluno .btn-fim-pagina:hover{
+      outline:3px solid rgb(209, 27, 255);
+    }
+  }
+  

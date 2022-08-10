@@ -152,6 +152,7 @@
     border: 3px solid rgba(128, 128, 128, 0.808);
     padding-left: 30px;
     font-size: 28px;
+    overflow-y: auto;
 }
 
 #Sobre-container #section2 #flex-container-uls{/* container das listas(ul) */
@@ -162,7 +163,7 @@
 }
 #Sobre-container #section2 ul{
     padding: 0;
-    overflow: hidden;
+    /* overflow: hidden; */
     width: 400px;
     max-height:340px;
 }
@@ -187,8 +188,8 @@
         --largura:800px;
     }
     #Sobre-container > section:first-child > div, #section2{
-        margin-left: 40px;
-        transform: translateX(0);
+        margin-left: 40px !important;
+        transform: translateX(0) !important;
     }
 
     #Sobre-container > section aside{
@@ -221,8 +222,8 @@
     width: var(--largura);
     margin-top:800px;
     margin-bottom:30px;
-    margin-left: 50%;
-    transform: translateX(-50%);
+    margin-left: 50% !important;
+    transform: translateX(-50%) !important  ;
     height: 500px;
     font-size: 28px;
 }
@@ -282,8 +283,8 @@
     width: 95%;
     margin-top:780px;
     margin-bottom:30px;
-    margin-left: 50%;
-    transform: translateX(-50%);
+    margin-left: 50% !important;
+    transform: translateX(-50%) !important;
     height: auto;
     font-size: 20px;
     overflow-y: auto;

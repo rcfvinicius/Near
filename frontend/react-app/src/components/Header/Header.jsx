@@ -5,6 +5,7 @@ import logoteste from '../../assets/logoteste.png';
 import lupa from '../../assets/lupa.png';
 
 export default function Header(props){
+  
     return(
     <div id="header-nav">
     <div id="promo"></div>
@@ -13,9 +14,9 @@ export default function Header(props){
 
     <form method="GET">
         <input id="barra-de-pesquisa" type="text" name="search_query" placeholder="Pesquise cursos, professores, aulas, etc..."/>
-        <a href="./pages/login.html" id="botao-pesquisar" tabindex="-1">
+        <Link to="/" id="botao-pesquisar" tabindex="-1">
             <img src={lupa} height="30px" alt="lupa de pesquisa"/>
-        </a>
+        </Link>
         <label for="barra-de-pesquisa">
         <img id="lupa-mob" src={lupa} height="30px" alt="lupa de pesquisa"/>
         </label>
@@ -28,10 +29,10 @@ export default function Header(props){
     </header>
     <nav>
         <h4>...</h4>
-        <a href="#gradient1">Cursos populares</a>
+        <a href="/#gradient1">Cursos populares</a>
         <a>Categorias</a>
         <a>Atendimento</a>
-        <a href="./pages/area-do-aluno.html">Espaço do aluno</a>
+        <Link to="/area-do-aluno">Espaço do aluno</Link>
 
     </nav> 
 </div>

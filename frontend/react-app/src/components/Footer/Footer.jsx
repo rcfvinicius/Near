@@ -1,4 +1,5 @@
 import './Footer.css';
+import { Link } from "react-router-dom";
 import nearLogo2 from '../../assets/near-logo2.png';
 import face from '../../assets/facebook.png';
 import insta from '../../assets/insta.png';
@@ -9,7 +10,7 @@ export default function Footer(){
     return(
         <footer id="Footer">
         <section>
-        <a href="/"><img id="footer-logo" src={nearLogo2} alt="logo do site"/></a>
+        <Link to="/"><img id="footer-logo" src={nearLogo2} alt="logo do site"/></Link>
         
         <p id="fale-conosco">Fale conosco</p>
         <address>

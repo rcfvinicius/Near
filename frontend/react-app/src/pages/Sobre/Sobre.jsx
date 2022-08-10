@@ -1,9 +1,10 @@
 import { useEffect } from 'react';
 import './Sobre.css';
+import Header from '../../components/Header/Header.jsx'
+import Footer from '../../components/Footer/Footer.jsx';
 import imagemCurso from '../../assets/imagens/cursos/js.jpg'
 //importar as imagens
 //arrumar o css do #section2
-
 export default function Sobre(){
     useEffect(()=>{
         const curso = window.location.href.split('?')[1] ?? 'err';
@@ -69,11 +70,12 @@ const posAsideSection = function(){
 }
 
 window.addEventListener('resize', posAsideSection);
-
-posAsideSection();
+window.addEventListener('load', posAsideSection);
     },[])
 
     return(
+        <>
+        <Header/>
         <main id="Sobre-container">
     <section>
         <div>
@@ -108,8 +110,6 @@ posAsideSection();
             <li>Estrutura e algorítmos</li>
             <li>Boas práticas e como esta liguagem é utilizada no mercado</li>
             <li>Lorem ipsum dolor sit amet</li>
-
-
         </ul>
         <ul>
             <li>Lorem ipsum dolor sit amet</li>
@@ -117,11 +117,14 @@ posAsideSection();
             <li>Lorem ipsum dolor sit amet</li>
 
         </ul>
+
         </div>
     </section>
     <section id="section3">
         
     </section>
 </main>
+<Footer/>
+        </>
     )
 }
