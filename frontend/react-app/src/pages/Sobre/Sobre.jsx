@@ -7,9 +7,8 @@ import imagemCurso from '../../assets/imagens/cursos/js.jpg'
 //arrumar o css do #section2
 export default function Sobre(){
     useEffect(()=>{
-        document.body.scrollTop = 0;
-        document.documentElement.scrollTop = 0;
-        
+        window.scrollTo(0, 0);
+
         const curso = window.location.href.split('?')[1] ?? 'err';
 
         const div = document.querySelectorAll('main > section:first-child > div')[0];
@@ -41,19 +40,19 @@ window.addEventListener('scroll', () => {
 const posAsideSection = function(){
     
     if(window.innerWidth < 1261){
-        const altura = document.querySelector('main > section aside img').offsetHeight + 328;
-        document.querySelector('main > section aside').style = `height:${altura}px`;
+        const altura = document.querySelector('#Sobre-container > section aside img').offsetHeight + 328;
+        document.querySelector('#Sobre-container > section aside').style = `height:${altura}px`;
         document.querySelector('#section2').style = `margin-top:${altura+30}px;`;
         }
         else{
-            document.querySelector('main > section aside').style = '';
+            document.querySelector('#Sobre-container > section aside').style = '';
             document.querySelector('#section2').style = '';
         }
 
         /* tamanho do aside */
-        const alturaImg = document.querySelector('main > section aside img').offsetHeight;
-        const alturaDiv = document.querySelector('main section aside #container-aside').offsetHeight
-        const aside = document.querySelector('main section aside');
+        const alturaImg = document.querySelector('#Sobre-container > section aside img').offsetHeight;
+        const alturaDiv = document.querySelector('#Sobre-container section aside #container-aside').offsetHeight
+        const aside = document.querySelector('#Sobre-container section aside');
 
         aside.style = `height: ${alturaDiv+alturaImg+110}px`
 
@@ -75,6 +74,7 @@ const posAsideSection = function(){
 
 window.addEventListener('resize', posAsideSection);
 window.addEventListener('load', posAsideSection);
+posAsideSection();
     },[])
 
     return(
@@ -85,7 +85,7 @@ window.addEventListener('load', posAsideSection);
         <div>
             <b><a href="">Tecnologia</a> {">"} <a href="">Programação</a></b>
             <h1>JavaScript(iniciante): Aprenda a programar do zero com javascript</h1>
-            <div class="avaliacao-after"><h3>Avaliação:</h3></div>
+            <div className="avaliacao-after"><h3>Avaliação:</h3></div>
             <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent eu sollicitudin sapien. Morbi id feugiat leo. In malesuada, nisl eget venenatis congue, erat libero ullamcorper mi, eget venenatis arcu tellus vitae ante. Nulla eu pellentesque leo. Nullam eget odio aliquet, tincidunt arcu eget, posuere ex. </h3>
         </div>
 

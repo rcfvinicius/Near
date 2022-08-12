@@ -11,14 +11,14 @@ export default function Login(){
                 <h2>login</h2>
                 <br/>
 
-                <div class="user-box">
-                <label for="user"><h5>Email</h5></label>
+                <div className="user-box">
+                <label htmlFor="user"><h5>Email</h5></label>
                 <input id="user" type="email" name="email" placeholder="Email" required/>
                 </div>
 
-                <div class="user-box">
-                <label for="pass"><h5>Senha</h5></label>
-                <input id="pass" type="password" name="senha" placeholder="Senha" minlength="1" required/>
+                <div className="user-box">
+                <label htmlFor="pass"><h5>Senha</h5></label>
+                <input id="pass" type="password" name="senha" placeholder="Senha" minLength="1" required/>
                 </div>
                 
                 <input id="submit-btn" value="ENTRAR" type="submit"/>

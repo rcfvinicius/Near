@@ -16,8 +16,11 @@ import morfologia from '../../assets/imagens/cursos/morfologia.png';
 //../../assets/estrela.png
 export default function Home(){
     useEffect(()=>{
-        document.body.scrollTop = 0;
-        document.documentElement.scrollTop = 0;
+/*         document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0; */
+        window.scrollTo(0, 0)
+        if(window.location.pathname == '/'){
+
         
         let contador = 1;
         document.getElementById("radio1").checked = true;
@@ -53,6 +56,7 @@ export default function Home(){
         }
         
         addEstrela(2);
+    }
     },[]);
 
 
@@ -60,16 +64,16 @@ export default function Home(){
         <>
         <Header/>
         <main id="Home-container">
-        <div class="slider">
-            <div class="slides">
+        <div className="slider">
+            <div className="slides">
      
                 <input type="radio" name="radio-btn" id="radio1"/>
                 <input type="radio" name="radio-btn" id="radio2"/>
                 <input type="radio" name="radio-btn" id="radio3"/>
                 <input type="radio" name="radio-btn" id="radio4"/>
                 
-                <div class="slide primeira-imagem">
-                    <div class="texto-slider">
+                <div className="slide primeira-imagem">
+                    <div className="texto-slider">
                         <h2>
                             Por uma educação mais próxima e por mais
                             <br/>
@@ -78,8 +82,8 @@ export default function Home(){
                     </div>
                     <img src={imagem1} alt="alunos estudando em uma sala"/>
                 </div>
-                <div class="slide">
-                    <div class="texto-slider">
+                <div className="slide">
+                    <div className="texto-slider">
                         <h2>
                             Lorem Ipsum is simply dummy text 
                             <br/>
@@ -90,8 +94,8 @@ export default function Home(){
                     <img src={imagem2} alt="jovens sorrindo e olhando a mesma coisa"/>
                     
                 </div>
-                <div class="slide">
-                    <div class="texto-slider">
+                <div className="slide">
+                    <div className="texto-slider">
                         <h2>
                             Lorem Ipsum is simply dummy text 
                             <br/>
@@ -100,8 +104,8 @@ export default function Home(){
                     </div>
                     <img src={imagem3} alt="professor explicando algo para alunos em uma sala de aula"/>
                 </div>
-                <div class="slide">
-                    <div class="texto-slider">
+                <div className="slide">
+                    <div className="texto-slider">
                         <h2>
                             Lorem Ipsum is simply dummy text 
                             <br/>
@@ -111,73 +115,73 @@ export default function Home(){
                     <img src={imagem4} alt="professora olhando para a câmera e sorrindo"/>
                 </div>
              
-                <div class="navigation-auto">
-                    <div class="auto-btn1"></div>
-                    <div class="auto-btn2"></div>
-                    <div class="auto-btn3"></div>
-                    <div class="auto-btn4"></div>
+                <div className="navigation-auto">
+                    <div className="auto-btn1"></div>
+                    <div className="auto-btn2"></div>
+                    <div className="auto-btn3"></div>
+                    <div className="auto-btn4"></div>
                 </div>
             </div>
-            <div class="manual-navigation">
-                <label for="radio1" class="manual-btn"></label>
-                <label for="radio2" class="manual-btn"></label>
-                <label for="radio3" class="manual-btn"></label>
-                <label for="radio4" class="manual-btn"></label>
+            <div className="manual-navigation">
+                <label htmlFor="radio1" className="manual-btn"></label>
+                <label htmlFor="radio2" className="manual-btn"></label>
+                <label htmlFor="radio3" className="manual-btn"></label>
+                <label htmlFor="radio4" className="manual-btn"></label>
             </div>
 
     </div>
 
 
-    <div id="gradient1" class="gradient">
+    <div id="gradient1" className="gradient">
         <div>
             <Link to="/sobre"><h2>JavaScript (iniciante)</h2></Link>
-            <div class="avaliacao-after"><h3>Avaliação:</h3></div>
+            <div className="avaliacao-after"><h3>Avaliação:</h3></div>
             <p>
                 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
             </p>
         </div>
         
-        <Link to="/sobre" class="img-focus"><img src={cursoJs} alt="tela de computador preta com códigos"/></Link>
+        <Link to="/sobre" className="img-focus"><img src={cursoJs} alt="tela de computador preta com códigos"/></Link>
     </div>
 
 
-    <div class="gradient">
+    <div className="gradient">
         <div>
             <a href="/"><h2>Matemática básica</h2></a>
             
-            <div class="avaliacao-after"><h3>Avaliação:</h3></div>
+            <div className="avaliacao-after"><h3>Avaliação:</h3></div>
             <p>
                 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
             </p>
         </div>
         
-        <a href="/" class="img-focus"><img src={mat} alt="tela azul escrito matemática básica com simbolos de operações aritméticas acima da escrita"/></a>  
+        <a href="/" className="img-focus"><img src={mat} alt="tela azul escrito matemática básica com simbolos de operações aritméticas acima da escrita"/></a>  
     </div>
 
-    <div class="gradient">
+    <div className="gradient">
         <div>
             <a href="/"><h2>Geometria Espacial</h2></a>
             
-            <div class="avaliacao-after"><h3>Avaliação:</h3></div>
+            <div className="avaliacao-after"><h3>Avaliação:</h3></div>
             <p>
                 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
             </p>
         </div>
-        <a href="/" class="img-focus"><img src={geo} alt="cubo com uma reta atravessando na diagonal"/></a>
+        <a href="/" className="img-focus"><img src={geo} alt="cubo com uma reta atravessando na diagonal"/></a>
 
     </div>
     
 
-    <div class="gradient">
+    <div className="gradient">
         <div>
             <a href="/"><h2>Morfologia</h2></a>
             
-            <div class="avaliacao-after"><h3>Avaliação:</h3></div>
+            <div className="avaliacao-after"><h3>Avaliação:</h3></div>
             <p>
                 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
             </p>
         </div>
-        <a href="/" class="img-focus"><img src={morfologia} alt="tela escrito morfologia com uma explicaçao abaixo: parte da língua portuquesa que se dedica a analisar a estrutura, o formato e a classificação das palavras; Seguido de várias setas que apontam para: substantivo, adjetivo, advérbio, artigo, conjunção, interjeição, numeral, preposição, pronome e verbo"/></a>
+        <a href="/" className="img-focus"><img src={morfologia} alt="tela escrito morfologia com uma explicaçao abaixo: parte da língua portuquesa que se dedica a analisar a estrutura, o formato e a classificação das palavras; Seguido de várias setas que apontam para: substantivo, adjetivo, advérbio, artigo, conjunção, interjeição, numeral, preposição, pronome e verbo"/></a>
 
     </div>
 

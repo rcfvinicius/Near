@@ -1,5 +1,5 @@
 import './App.css';
-import {BrowserRouter, Navigate, Route, Routes as Switch} from 'react-router-dom';
+import {BrowserRouter, HashRouter, Navigate, Route, Routes as Switch} from 'react-router-dom';
 import {TemaProvider} from './providers/tema';
 
 import Home from './pages/Home/Home.jsx';

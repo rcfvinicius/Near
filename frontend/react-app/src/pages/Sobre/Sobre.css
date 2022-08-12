@@ -24,7 +24,7 @@
     width: var(--largura);
     height: 100%;
     /* margin-left: calc(50% - 400px); */
-    margin-left: 50%;
+    margin-left: 50%; 
     transform: translateX(-50%);
     padding: 16px 0;
     font-family: Playfair;
@@ -183,7 +183,7 @@
     background-size:cover;
 }
 
-@media screen and (max-width:1560px){
+@media screen and (min-width:1000px) and (max-width:1560px){
     #Sobre-container{
         --largura:800px;
     }

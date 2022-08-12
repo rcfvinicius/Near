@@ -27,8 +27,8 @@ export default function Area_do_aluno(){
 </section>
 
 <form>
-<div class="container-exercicios">
-    <div class="colunas">
+<div className="container-exercicios">
+    <div className="colunas">
         <section>
             <b><a href="">Tecnologia</a> {'>'} <a href="">Programação</a></b>
             <h2>Exercicio</h2>
@@ -38,24 +38,24 @@ export default function Area_do_aluno(){
             <img src={quimica} alt="imagem de um exercício de química"/>
 
 
-            <label class="container-checkbox"><h5>a) Lorem Ipsum is simply dummy text of the printing and typesetting industry</h5>
+            <label className="container-checkbox"><h5>a) Lorem Ipsum is simply dummy text of the printing and typesetting industry</h5>
                 <input type="radio" name="exercicio1" value="a"/><br/>
-                <span class="check"></span>
+                <span className="check"></span>
             </label>
 
-            <label class="container-checkbox"><h5>b) Lorem Ipsum is simply dummy text of the printing and typesetting industry</h5>
+            <label className="container-checkbox"><h5>b) Lorem Ipsum is simply dummy text of the printing and typesetting industry</h5>
                 <input type="radio" name="exercicio1" value="b"/><br/>
-                <span class="check"></span>
+                <span className="check"></span>
             </label>
             
-            <label class="container-checkbox"><h5>c) Lorem Ipsum is simply dummy text of the printing and typesetting industry</h5>
+            <label className="container-checkbox"><h5>c) Lorem Ipsum is simply dummy text of the printing and typesetting industry</h5>
                 <input type="radio" name="exercicio1" value="c"/><br/>
-                <span class="check"></span>
+                <span className="check"></span>
             </label>
     
-            <label class="container-checkbox"><h5>d) Lorem Ipsum is simply dummy text of the printing and typesetting industry</h5>
+            <label className="container-checkbox"><h5>d) Lorem Ipsum is simply dummy text of the printing and typesetting industry</h5>
                 <input type="radio" name="exercicio1" value="d"/><br/>
-                <span class="check"></span>
+                <span className="check"></span>
             </label>
             
 
@@ -71,7 +71,7 @@ export default function Area_do_aluno(){
     </div>
 
     
-    <div class="colunas">
+    <div className="colunas">
         <section>
             <b><a href="">Tecnologia</a> {'>'} <a href="">Programação</a></b>
             <h2>Exercicio</h2>
@@ -81,24 +81,24 @@ export default function Area_do_aluno(){
             <img src={funcoes} alt="imagem de um exercício de funções"/>
 
 
-            <label class="container-checkbox"><h5>a) Lorem Ipsum is simply dummy text of the printing and typesetting industry</h5>
+            <label className="container-checkbox"><h5>a) Lorem Ipsum is simply dummy text of the printing and typesetting industry</h5>
                 <input type="radio" name="exercicio2" value="a"/><br/>
-                <span class="check"></span>
+                <span className="check"></span>
             </label>
 
-            <label class="container-checkbox"><h5>b) Lorem Ipsum is simply dummy text of the printing and typesetting industry</h5>
+            <label className="container-checkbox"><h5>b) Lorem Ipsum is simply dummy text of the printing and typesetting industry</h5>
                 <input type="radio" name="exercicio2" value="b"/><br/>
-                <span class="check"></span>
+                <span className="check"></span>
             </label>
             
-            <label class="container-checkbox"><h5>c) Lorem Ipsum is simply dummy text of the printing and typesetting industry</h5>
+            <label className="container-checkbox"><h5>c) Lorem Ipsum is simply dummy text of the printing and typesetting industry</h5>
                 <input type="radio" name="exercicio2" value="c"/><br/>
-                <span class="check"></span>
+                <span className="check"></span>
             </label>
     
-            <label class="container-checkbox"><h5>d) Lorem Ipsum is simply dummy text of the printing and typesetting industry</h5>
+            <label className="container-checkbox"><h5>d) Lorem Ipsum is simply dummy text of the printing and typesetting industry</h5>
                 <input type="radio" name="exercicio2" value="d"/><br/>
-                <span class="check"></span>
+                <span className="check"></span>
             </label>
         </section>
 
@@ -107,8 +107,8 @@ export default function Area_do_aluno(){
     </div>{/* <!-- fim do primeiro container de exercicios --> */}
 
 
-    <div class="container-exercicios">
-        <div class="colunas">
+    <div className="container-exercicios">
+        <div className="colunas">
             <section>
                 <b><a href="">Tecnologia</a> {'>'} <a href="">Programação</a></b>
                 <h2>Exercicio</h2>
@@ -118,30 +118,30 @@ export default function Area_do_aluno(){
                 <img src={funcoes} alt="imagem de um exercício de funções"/>
     
     
-                <label class="container-checkbox"><h5>a) Lorem Ipsum is simply dummy text of the printing and typesetting industry</h5>
+                <label className="container-checkbox"><h5>a) Lorem Ipsum is simply dummy text of the printing and typesetting industry</h5>
                     <input type="radio" name="exercicio2" value="a"/><br/>
-                    <span class="check"></span>
+                    <span className="check"></span>
                 </label>
     
-                <label class="container-checkbox"><h5>b) Lorem Ipsum is simply dummy text of the printing and typesetting industry</h5>
+                <label className="container-checkbox"><h5>b) Lorem Ipsum is simply dummy text of the printing and typesetting industry</h5>
                     <input type="radio" name="exercicio2" value="b"/><br/>
-                    <span class="check"></span>
+                    <span className="check"></span>
                 </label>
                 
-                <label class="container-checkbox"><h5>c) Lorem Ipsum is simply dummy text of the printing and typesetting industry</h5>
+                <label className="container-checkbox"><h5>c) Lorem Ipsum is simply dummy text of the printing and typesetting industry</h5>
                     <input type="radio" name="exercicio2" value="c"/><br/>
-                    <span class="check"></span>
+                    <span className="check"></span>
                 </label>
         
-                <label class="container-checkbox"><h5>d) Lorem Ipsum is simply dummy text of the printing and typesetting industry</h5>
+                <label className="container-checkbox"><h5>d) Lorem Ipsum is simply dummy text of the printing and typesetting industry</h5>
                     <input type="radio" name="exercicio2" value="d"/><br/>
-                    <span class="check"></span>
+                    <span className="check"></span>
                 </label>
             </section>
     
         </div>
  
-        <div class="colunas">
+        <div className="colunas">
             <section>
                 <b><a href="">Tecnologia</a> {'>'} <a href="">Programação</a></b>
                 <h2>Exercicio</h2>
@@ -151,24 +151,24 @@ export default function Area_do_aluno(){
                 <img src={quimica} alt="imagem de um exercício de química"/>
     
     
-                <label class="container-checkbox"><h5>a) Lorem Ipsum is simply dummy text of the printing and typesetting industry</h5>
+                <label className="container-checkbox"><h5>a) Lorem Ipsum is simply dummy text of the printing and typesetting industry</h5>
                     <input type="radio" name="exercicio1" value="a"/><br/>
-                    <span class="check"></span>
+                    <span className="check"></span>
                 </label>
     
-                <label class="container-checkbox"><h5>b) Lorem Ipsum is simply dummy text of the printing and typesetting industry</h5>
+                <label className="container-checkbox"><h5>b) Lorem Ipsum is simply dummy text of the printing and typesetting industry</h5>
                     <input type="radio" name="exercicio1" value="b"/><br/>
-                    <span class="check"></span>
+                    <span className="check"></span>
                 </label>
                 
-                <label class="container-checkbox"><h5>c) Lorem Ipsum is simply dummy text of the printing and typesetting industry</h5>
+                <label className="container-checkbox"><h5>c) Lorem Ipsum is simply dummy text of the printing and typesetting industry</h5>
                     <input type="radio" name="exercicio1" value="c"/><br/>
-                    <span class="check"></span>
+                    <span className="check"></span>
                 </label>
         
-                <label class="container-checkbox"><h5>d) Lorem Ipsum is simply dummy text of the printing and typesetting industry</h5>
+                <label className="container-checkbox"><h5>d) Lorem Ipsum is simply dummy text of the printing and typesetting industry</h5>
                     <input type="radio" name="exercicio1" value="d"/><br/>
-                    <span class="check"></span>
+                    <span className="check"></span>
                 </label>
                 
     
@@ -186,8 +186,8 @@ export default function Area_do_aluno(){
 
     </div>
     <div id="btn-fim-pagina-container">
-        <button type="button" class="btn-fim-pagina">Carregar mais</button>
-        <input type="submit" class="btn-fim-pagina" value="Enviar respostas"/>
+        <button type="button" className="btn-fim-pagina">Carregar mais</button>
+        <input type="submit" className="btn-fim-pagina" value="Enviar respostas"/>
     </div>
 
 

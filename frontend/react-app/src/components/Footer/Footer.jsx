@@ -22,16 +22,16 @@ export default function Footer(){
         
     <section id="redes-sociais">
         <p>Redes Sociais</p>
-       <a href="/"><img class="img-redes" src={face} alt="logo do facebook"/>
+       <a href="/"><img className="img-redes" src={face} alt="logo do facebook"/>
             <strong>Facebook</strong>
         </a>
-       <a href="/"><img class="img-redes" src={insta} alt="logo do instagram"/>
+       <a href="/"><img className="img-redes" src={insta} alt="logo do instagram"/>
             <strong>Instagram</strong>
         </a>
-       <a href="/"><img class="img-redes" src={twitter} alt="logo do twitter"/>
+       <a href="/"><img className="img-redes" src={twitter} alt="logo do twitter"/>
             <strong>Twitter</strong>
         </a>
-       <a href="/"><img class="img-redes" src={linkedin} alt="logo do linkedIn"/>
+       <a href="/"><img className="img-redes" src={linkedin} alt="logo do linkedIn"/>
             <strong>LinkedIn</strong>    
         </a>
 

@@ -14,10 +14,10 @@ export default function Header(props){
 
     <form method="GET">
         <input id="barra-de-pesquisa" type="text" name="search_query" placeholder="Pesquise cursos, professores, aulas, etc..."/>
-        <Link to="/" id="botao-pesquisar" tabindex="-1">
+        <Link to="/" id="botao-pesquisar" tabIndex="-1">
             <img src={lupa} height="30px" alt="lupa de pesquisa"/>
         </Link>
-        <label for="barra-de-pesquisa">
+        <label htmlFor="barra-de-pesquisa">
         <img id="lupa-mob" src={lupa} height="30px" alt="lupa de pesquisa"/>
         </label>
     </form>
