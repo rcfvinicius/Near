@@ -4,8 +4,10 @@ import {TemaProvider} from './providers/tema';
 
 import Home from './pages/Home/Home.jsx';
 import Login from './pages/Login/Login.jsx';
+import Cadastro from './pages/Cadastro/Cadastro.jsx'
 import Sobre from './pages/Sobre/Sobre.jsx';
 import Area from './pages/Area-do-aluno/Area-do-aluno.jsx'
+
 
 import Teste from './components/teste.jsx'
 
@@ -16,6 +18,7 @@ function App() {
         <Switch>
         <Route path='/' exact element={<Home/>}/>
         <Route path='/login' exact element={<Login/>}/>
+        <Route path='/cadastro' exact element={<Cadastro/>}/>
         <Route path='/sobre' exact element={<Sobre/>}/>
         <Route path='/area-do-aluno' exact element={<Area/>}/>
         <Route path='/teste' exact element={<Teste/>}/>

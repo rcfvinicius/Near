@@ -1,4 +1,5 @@
 import './Login.css';
+import { Link } from "react-router-dom";
 import gif from '../../assets/imagens/Mathematics.gif';
 
 export default function Login(){
@@ -29,7 +30,7 @@ export default function Login(){
 
 
     <section>
-        <h3>Não tem uma conta? <a href="./cadastro.html">Cadastre-se agora!</a></h3>
+        <h3>Não tem uma conta? <Link to="/cadastro">Cadastre-se agora!</Link></h3>
         <img src={gif} alt="professor com um caderno na mão e em dúvida olhando para professora que está escrevendo em um quadro negro várias expressões matemáticas e gráficos"/>
     </section>
 </div>
