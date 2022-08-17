@@ -4,9 +4,8 @@
     margin:0;
     padding: 0;
     width: 100vw;
-    height: 100vh;
+    min-height: 100vh;
     max-width: 100vw;
-    max-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -18,7 +17,7 @@
 #Cadastro > section{
     border-radius: 0px;
     width: 100vw;
-    height: 100vh;
+    min-height: 100vh;
     padding: 20px;
     display:flex;
     flex-direction:row-reverse;
@@ -95,7 +94,7 @@
     font-size: 16px;
 }
 
-#Cadastro [type="checkbox"]{
+#Cadastro [type="radio"]{
     appearance: none;
     border-radius: 30px;
     width: 20px;
@@ -103,8 +102,24 @@
     background-color: white;
     padding: 10px;
 }
-#Cadastro [type="checkbox"]:checked{
+#Cadastro [type="radio"]:checked{
     background-color: var(--cor);
+}
+
+#Cadastro #radio-buttons{
+    display: flex;
+    align-self: flex-start;
+    flex-direction: column;
+}
+#Cadastro #radio-buttons > div{
+    display: flex;
+    align-items: center;
+    column-gap: 5px;
+    margin-bottom: 10px;
+    margin-left: 45px;
+}
+#Cadastro #radio-buttons label{
+    margin-top: 3px;
 }
 
 #Cadastro #parte2{
@@ -123,18 +138,48 @@
     }
     #Cadastro > section{
         flex-direction:column;
+        justify-content: flex-start;
     }
     #Cadastro #parte2 img{
         height: auto;
         width: 600px;
+        
     }
 
     #Cadastro form{
-        margin-top: 550px;
+        margin-top: 0px;
         min-width: 500px;
+    }
+    #Cadastro #radio-buttons > div{
+        margin-left: 34px;
     }
 }
 
+
+
 @media screen and (max-width:571px){
-    /* terminar a parte pra celular */
+    #Cadastro{
+        overflow-y: auto;
+    }
+    #Cadastro > section{
+        flex-direction:column;
+        justify-content: flex-start;
+        padding: 0;
+    }
+    #Cadastro #parte2 img{
+        height: auto;
+        width: 350px;
+        min-width: 350px;
+    }
+
+    #Cadastro form{
+        margin-top: 0px;
+        min-width: 500px;
+        border-radius: 0;
+        width: 100%;
+        min-width: 300px;
+    }
+    #Cadastro #radio-buttons > div{
+        margin-left: 34px;
+    }
 }

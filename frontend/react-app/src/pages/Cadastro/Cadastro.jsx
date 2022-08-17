@@ -1,5 +1,5 @@
 import './Cadastro.css';
-import imagem from '../../assets/imagens/Students-pana.png'
+import imagem from '../../assets/imagens/Students-pana.png';//https://storyset.com/illustration/students/pana
 
 export default function Cadastro(){
 
@@ -25,7 +25,11 @@ export default function Cadastro(){
                 <label htmlFor="senha-confirm"><h5>Confirme a senha</h5></label>
                 <input id="senha-confirm" type="password" name="senha-confirm" placeholder="Confirme a senha" required/>
             </div>
-            <input type="checkbox" value="professor"/>Sou professor
+            <div id="radio-buttons">
+            <div><input type="radio" name="role" id='r-aluno' value="aluno" defaultChecked/><label htmlFor='r-aluno'>Sou aluno</label></div>
+            <div><input type="radio" name="role" id='r-professor' value="professor"/><label htmlFor='r-professor'>Sou professor</label></div>
+            </div>
+
             <input id="submit-btn" value="CRIAR CONTA" type="submit"/>
         </form>
         <div id="parte2">
