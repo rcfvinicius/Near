@@ -16,6 +16,7 @@
   }
   #header-nav a{
     text-decoration:none;
+    appearance: none;
   }
   
   #header-nav header {

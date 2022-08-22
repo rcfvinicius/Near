@@ -6,11 +6,12 @@
    
 } */
 #side-menu-container{
-    position: relative;
+    position: sticky;
     top:0;
-    width: 100%;
-    height: 50px;
+    width: 50px;
+    height: 100vh;
     z-index: 100;
+
 }
 #side-menu-container a, #side-menu-container a:visited{
     text-decoration: inherit;
@@ -21,10 +22,10 @@
 
 #side-menu{
     position: absolute;
-    width: 100%;
-    height: 50px;
+    width: 50px;
+    height: 100vh;
     background-color: #180c24; /* #432461 */
-    transition: 50ms;
+    transition: 100ms;
     overflow: hidden;
     display: flex;
     flex-direction: row;
@@ -37,8 +38,7 @@
 
 
 #side-menu:hover{
-    height: 100vh;
-    width: 60%;
+    width: 200px;
     box-shadow: 5px -10px 6px 1px rgba(0, 0, 0, 0.2);
     flex-direction: column;
     flex-wrap: nowrap;
@@ -63,8 +63,12 @@
     margin-top: 5px;
     top:0;
 }
+.side-menu-item{
+    width: 200px;
+    background-color: rgba(212, 0, 255, 0);
+}
 
-#side-menu:hover h4{
+#side-menu:hover .side-menu-item h4{
     display: inline;
     margin-left: 10px;
     color:white;
@@ -77,19 +81,12 @@
 
 #side-menu-container .side-menu-item h4{
     display: none;
-/*     margin-left: 10px;
-    color:white;
-    position: relative;
-    bottom: 15px;
-    font-family: proxima-nova,sans-serif;
-    font-weight: 400;
-    font-size: 20px; */
 }
 
 
 
-/* PC */
-@media (hover: hover) and (pointer: fine) and (min-width:900px){
+/* celular */
+@media (hover: hover) and (pointer: fine) and (min-width:90000px){
     
     #Area-do-aluno{
         display: flex;
