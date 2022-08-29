@@ -2,11 +2,16 @@ import './Cadastro.css';
 import imagem from '../../assets/imagens/Students-pana.png';//https://storyset.com/illustration/students/pana
 
 export default function Cadastro(){
+    function cadastrar(event){
+        event.preventDefault();
+        console.log(event);
+        window.location.href = "http://localhost:3000/";
+    }
 
     return(
         <div id="Cadastro">
         <section>
-        <form>
+        <form onSubmit={cadastrar}>
             <h2>cadastro</h2>
             <div className="user-box">
                 <label htmlFor="nome"><h5>Nome</h5></label>
