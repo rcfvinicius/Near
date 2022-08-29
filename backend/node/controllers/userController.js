@@ -196,6 +196,13 @@ exports.token = async function(req,res){
 //
 exports.redirect = async function(req,res){
 
+    console.log(req.body)
+
+
+    res.send('n')
+    
+    
+    /*
     const user = await User.findOne({email:req.query.email});
     if(!user){
         res.status(301).redirect('http://localhost:3000/')
@@ -206,4 +213,5 @@ exports.redirect = async function(req,res){
         return res.status(301).send(user.nome)
     }
     res.status(301).redirect('http://localhost:3000/')
+    */
 }
