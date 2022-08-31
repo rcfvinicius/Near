@@ -6,17 +6,16 @@ export default function Cadastro(){
     const [nome, setNome] = useState('');
     const [email, setEmail] = useState('');
     const [senha1, setSenha1] = useState('');
-    const [senha2, setSenha2] = useState('');
 
     function cadastrar(event){
         event.preventDefault();
-        console.log(event);
+        //console.log(event);
         //window.location.href = "http://localhost:3000/";
 
         const controller = new AbortController();
         setTimeout(() => {controller.abort()},9000)
 
-        fetch('http://localhost:8000/user/redirect',{
+        fetch('http://127.0.0.1:5000/cadastro',{
             signal: controller.signal,
             method: 'POST',
             headers:{
@@ -25,16 +24,21 @@ export default function Cadastro(){
             body: JSON.stringify({
                 nome: nome,
                 email: email,
-                senha: senha1
+                senha: senha1,
+                role: document.querySelector('#radio-buttons input:checked').value
             })
         }).then(r=>r.text())
         .then(res => {
             console.log(res);
-            if(res == 'ok'){
+            if(res === 'ok'){
                 window.location.href = "http://localhost:3000/";
             }
         })
     }
+/* 
+
+*/
+
 
     return(
         <div id="Cadastro">

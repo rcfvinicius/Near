@@ -1,6 +1,8 @@
-from flask import Flask, render_template, request, flash
+from flask import Flask, render_template, request, flash, Response
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
+from flask_cors import CORS
+
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:0000@localhost/flask'
@@ -8,7 +10,7 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 db = SQLAlchemy(app)
 
-
+CORS(app, resources={r"*": {"origins": "*"}})
 ###
 class Usuario(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -27,20 +29,20 @@ class Usuario(db.Model):
 def login():
     try:
         user = Usuario.query.filter_by(email=request.form['email']).first()
-        
+        print(check_password_hash(user.senha, request.form['senha']))
         if check_password_hash(user.senha, request.form['senha']):
-            return 'Usuário ou senha incorretos'
-        return 'ok'
+            return f'logado em {user.email}'
+        return 'Usuário ou senha incorretos'
     except:
         return 'Usuário ou senha incorretos'
 
 
 @app.route('/cadastro', methods=['POST'])
 def cadastro():
-    nome = request.form["nome"]
-    email = request.form["email"]
-    senha = request.form["senha"]
-    role = request.form["role"]
+    nome = request.get_json()['nome']
+    email = request.get_json()["email"]
+    senha = request.get_json()["senha"]
+    role = request.get_json()["role"]
 
     hash_senha = generate_password_hash(senha, method='sha256')
 
@@ -50,7 +52,7 @@ def cadastro():
         db.session.commit()
         return 'ok'
     except:
-        return 'erro'
+        return 'err'
 
 
 @app.route('/delete', methods=['DELETE'])
@@ -58,7 +60,7 @@ def delete():
     try:
         email = request.form["email"]
         user = Usuario.query.filter_by(email=email).first()
-        #entry = Usuario('vinicius', 'verde', 'vinicius', 'vinicius')
+
         db.session.delete(user)
         db.session.commit()
         return 'deletado'
@@ -66,13 +68,13 @@ def delete():
         return 'Usuário não encontrado'
 
 
-@app.route('/update', methods=['PATCH'])
+@app.route('/update', methods=['PUT'])
 def update():
     try:
         user = Usuario.query.filter_by(email=request.form["email"]).first()
 
         user.nome = request.form["nome"]
-        user.senha = request.form["senha"]##
+        user.senha = generate_password_hash(request.form["senha"], method='sha256')
         user.role = request.form["role"]
 
         db.session.commit()
