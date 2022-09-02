@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, flash, Response
+from flask import Flask, render_template, request, flash, Response, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_cors import CORS
@@ -16,7 +16,7 @@ class Usuario(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     nome = db.Column(db.String(80), nullable=False)
     email = db.Column(db.String(80), nullable=False, unique=True)
-    senha = db.Column(db.String(100), nullable=False)
+    senha = db.Column(db.String(400), nullable=False)
     role = db.Column(db.String(10), nullable=False)
 
     def __init__(self, nome, email, senha, role):
@@ -29,12 +29,12 @@ class Usuario(db.Model):
 def login():
     try:
         user = Usuario.query.filter_by(email=request.form['email']).first()
-        print(check_password_hash(user.senha, request.form['senha']))
+        #print(check_password_hash(user.senha, request.form['senha']))
         if check_password_hash(user.senha, request.form['senha']):
-            return f'logado em {user.email}'
-        return 'Usuário ou senha incorretos'
+            return jsonify(f'logado em {user.email}'),200
+        return jsonify('Usuário ou senha incorretos'),401
     except:
-        return 'Usuário ou senha incorretos'
+        return jsonify('Usuário ou senha incorretos'),401
 
 
 @app.route('/cadastro', methods=['POST'])
@@ -47,12 +47,12 @@ def cadastro():
     hash_senha = generate_password_hash(senha, method='sha256')
 
     entry = Usuario(nome, email, hash_senha, role)
-    try:
+    try:##
         db.session.add(entry)
         db.session.commit()
-        return 'ok'
+        return jsonify('Criado!'),200
     except:
-        return 'err'
+        return jsonify('Usuário ou senha incorretos'),401
 
 
 @app.route('/delete', methods=['DELETE'])
@@ -63,9 +63,9 @@ def delete():
 
         db.session.delete(user)
         db.session.commit()
-        return 'deletado'
+        return jsonify('Usuário deletado'),200
     except:
-        return 'Usuário não encontrado'
+        return jsonify('Usuário não encontrado'),404
 
 
 @app.route('/update', methods=['PUT'])
@@ -78,10 +78,9 @@ def update():
         user.role = request.form["role"]
 
         db.session.commit()
-        return 'alterado'
+        return jsonify('Usuário alterado!'),200
     except:
-        return 'Usuário não encontrado'
-
+        return jsonify('Usuário não encontrado'),404
 
 
 

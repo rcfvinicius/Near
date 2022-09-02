@@ -9,11 +9,9 @@ export default function Cadastro(){
 
     function cadastrar(event){
         event.preventDefault();
-        //console.log(event);
-        //window.location.href = "http://localhost:3000/";
 
         const controller = new AbortController();
-        setTimeout(() => {controller.abort()},9000)
+        setTimeout(() => {controller.abort()},9000);
 
         fetch('http://127.0.0.1:5000/cadastro',{
             signal: controller.signal,
