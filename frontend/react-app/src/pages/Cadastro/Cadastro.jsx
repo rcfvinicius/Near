@@ -13,7 +13,7 @@ export default function Cadastro(){
         const controller = new AbortController();
         setTimeout(() => {controller.abort()},9000);
 
-        fetch('http://127.0.0.1:5000/cadastro',{
+        fetch(`${process.env.REACT_APP_API_HOSTNAME}/user/cadastro`,{
             signal: controller.signal,
             method: 'POST',
             headers:{
@@ -36,7 +36,7 @@ export default function Cadastro(){
 /* 
 
 */
-
+console.log()
 
     return(
         <div id="Cadastro">

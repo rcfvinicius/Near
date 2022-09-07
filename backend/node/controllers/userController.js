@@ -1,27 +1,27 @@
 require('dotenv').config();
-const User = require('../models/userModel.js');
+//const User = require('../models/userModel.js');
+const sql = require('../connection.js');
 const bc = require('bcrypt');
 const jwt = require('../utils/jwt.js');
 const errorHandler = require('../utils/errorHandler.js');
 
 exports.login = async function(req,res){
 try{
-    const user = await User.findOne({email:req.body.email});
-    if(!user){ //caso nao encontre um email
+    const user = await sql.query(`SELECT id,nome,email,senha,role FROM usuario WHERE email = $1;`,[req.body.email]);
+    if(user.rows.length == 0){ //caso nao encontre um email
         throw new Error('USER_DONT_MATCH');
     }
     if(!req.body.senha){//caso a não passe a senha
         throw new Error('PASSWORD_IS_UNDEFINED');
     }
-    const passMatch = await bc.compare(req.body.senha, user.senha);
+    const passMatch = await bc.compare(req.body.senha, user.rows[0].senha);
 
     if(passMatch){
         const jwtData ={
-            sub:user._id,
-            nome:user.nome,
-            sobrenome:user.sobrenome,
-            email:user.email,
-            role:user.role,
+            sub:user.rows[0].id,
+            nome:user.rows[0].nome,
+            email:user.rows[0].email,
+            role:user.rows[0].role,
             exp:Math.floor(Date.now() / 1000) + 300
         };
         let token = await jwt.criar(jwtData);
@@ -56,15 +56,11 @@ try{
         throw new Error('PASSWORD_IS_UNDEFINED');
     }
     req.body.senha = bc.hashSync(req.body.senha, 10);
-    const user = new User({
-        nome: req.body.nome,
-        sobrenome:req.body.sobrenome,
-        email:req.body.email,
-        senha:req.body.senha,
-        role:req.body.role
-    });
-    const doc = await user.save();
-    res.status(201).send(doc);
+
+    const resposta = await sql.query(`INSERT INTO usuario (nome, email, senha, role) VALUES ($1, $2, $3, $4);`,[req.body.nome, req.body.email, req.body.senha, req.body.role]);
+    
+    //const doc = await user.save();
+    res.status(201).send('ok');
     
 }catch(err){
 /*     console.log(err);
@@ -97,13 +93,14 @@ try{
 //DELETE
 exports.delete = async function(req,res){
 try{
-    const user = await User.findOne({email:req.params.userEmail});
-    if(!user){
+    const user = await sql.query(`SELECT id FROM usuario WHERE email = $1`,[req.params.userEmail]);
+    if(user.rows.length == 0){
         throw new Error('USER_NOT_FOUND');
     }
+
     let userId = await jwt.verificar(req.headers['x-access-token']);
-    if(userId.sub == user._id){
-        await User.deleteOne({email:req.params.userEmail});
+    if(userId.sub == user.rows[0].id){
+        await sql.query(`DELETE FROM usuario WHERE id = $1`,[user.rows[0].id]);
         res.status(200).send('Usuário deletado: '+user);
         return;
     }
@@ -127,20 +124,22 @@ try{
 
 exports.update = async function(req,res){
 try{
-    const user = await User.findOne({email:req.params.userEmail});
-    if(!user){
+    const user = await sql.query(`SELECT id,nome,email,senha,role FROM usuario WHERE email = $1;`,[req.body.email]);
+    if(user.rows.length == 0){
         throw new Error('USER_NOT_FOUND');
     }
     let userId = await jwt.verificar(req.headers['x-access-token']);
-    if(userId.sub == user._id){
+    if(userId.sub == user.rows[0].id){
+        req.body.senha = bc.hashSync(req.body.senha??user.rows[0].senha, 10);
         const updatedUser = {
-            nome:req.body.nome??user.nome,
-            sobrenome:req.body.sobrenome??user.sobrenome,
-            email:req.body.email??user.email,
-            senha:req.body.senha??user.senha,//
-            role:req.body.role??user.role
+            nome:req.body.nome??user.rows[0].nome,
+            email:req.body.email??user.rows[0].email,
+            senha:req.body.senha??user.rows[0].senha,//
+            role:req.body.role??user.rows[0].role
         }
-        await User.updateOne({email:req.params.userEmail}, updatedUser);
+        const resposta = await sql.query(`UPDATE usuario SET nome = $1, email = $2, senha = $3, role = $4 WHERE id = $5`,[updatedUser.nome, updatedUser.email, updatedUser.senha, updatedUser.role, user.rows[0].id])
+        console.log(resposta)
+/*         
         let newUser = await User.findOne({email:req.body.email??req.params.userEmail})
         const jwtData = {
             sub:newUser._id,
@@ -152,6 +151,8 @@ try{
         }
         let token = await jwt.criar(jwtData);
         res.send(newUser+'Novo token: '+token);
+ */
+        res.status(200).send('Usuario atualizado!')
         return;
     }
     res.status(401).send('Token para o usuário errado');
@@ -170,8 +171,8 @@ try{
 //get all
 exports.all = async function(req,res){
 try{
-    let docs = await User.find({});
-    res.status(200).send(docs);
+/*     let docs = await User.find({});
+    res.status(200).send(docs); */
 }catch(err){
     errorHandler(err,req,res);
 }
