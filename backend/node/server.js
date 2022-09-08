@@ -5,8 +5,7 @@ const cors = require('cors');
 const userRoutes = require('./routes/userRoutes.js');
 const cursoRoutes = require('./routes/cursoRoutes.js');
 
-//const sql = require('./connection.js');
-//sql.query('SELECT * FROM test_connection;')
+//const sql = require('./connection.js');sql.query('SELECT * FROM test_connection;')
 
 //const mongoose = require('mongoose');
 //mongoose.connect('mongodb://localhost:27017/near');

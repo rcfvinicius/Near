@@ -6,6 +6,7 @@ router.post('/login', userController.login);
 router.post('/cadastro', userController.cadastro);
 router.delete('/delete', userController.delete);
 router.patch('/update', userController.update);
+
 router.get('/all', userController.all);
 router.get('/token', userController.token);
 router.post('/redirect', userController.redirect);
