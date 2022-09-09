@@ -19,10 +19,11 @@ try{
     //colocar um switch pra verificar o tamanho(length) das strings
     const dataAtual = Date.now();
     //23505     curso ja existe
+    await sql.query('BEGIN;');
     await sql.query(`INSERT INTO curso values (default, $1, $2, $3, $4, $5, $6);`,[req.body.titulo, req.body.tituloLongo, req.body.descricao, parseInt(req.body.preco * 100), req.body.categoria, dataAtual]);
     const resposta = await sql.query(`SELECT * from curso where titulo = $1 and data_criacao = $2`,[req.body.titulo, dataAtual]);
     await sql.query(`INSERT INTO cria_curso values ($1, $2);`,[user.rows[0].id, resposta.rows[0].id]);
-    
+    await sql.query('COMMIT;');
 /*     const curso = new Curso({
         criador:user._id,
         titulo: req.body.titulo,
@@ -37,6 +38,7 @@ try{
  */
     res.status(201).send(JSON.stringify(resposta.rows[0]));
 }catch(err){
+    await sql.query('ROLLBACK;');
     errorHandler(err,req,res);
 }
 }
@@ -77,7 +79,7 @@ try{
     errorHandler(err,req,res);
 }
 }
-terminar o resto
+//terminar o resto
 //delete
 exports.delete = async function(req,res){
 try{

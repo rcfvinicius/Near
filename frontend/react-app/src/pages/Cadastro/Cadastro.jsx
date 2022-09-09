@@ -3,9 +3,7 @@ import imagem from '../../assets/imagens/Students-pana.png';//https://storyset.c
 import { useState } from 'react';
 
 export default function Cadastro(){
-    const [nome, setNome] = useState('');
-    const [email, setEmail] = useState('');
-    const [senha1, setSenha1] = useState('');
+    const [mensagemErro, setMensagemErro] = useState('cadastro');
 
     function cadastrar(event){
         event.preventDefault();
@@ -20,16 +18,19 @@ export default function Cadastro(){
                 'Content-Type': 'application/json;charset=UTF-8'
             },
             body: JSON.stringify({
-                nome: nome,
-                email: email,
-                senha: senha1,
+                nome: document.querySelector('#Cadastro #nome').value,
+                email: document.querySelector('#Cadastro #email').value,
+                senha: document.querySelector('#Cadastro #senha').value,
                 role: document.querySelector('#radio-buttons input:checked').value
             })
         }).then(r=>r.text())
         .then(res => {
             console.log(res);
-            if(res === 'ok'){
+            if(res === 'criado'){
                 window.location.href = "http://localhost:3000/";
+            }else{
+                setMensagemErro('Este usuário já está cadastrado!');
+                document.querySelector('#Cadastro form h2').style = 'color:red;text-shadow:none;'
             }
         })
     }
@@ -42,19 +43,19 @@ console.log()
         <div id="Cadastro">
         <section>
         <form onSubmit={cadastrar}>
-            <h2>cadastro</h2>
+            <h2>{mensagemErro}</h2>
             <div className="user-box">
                 <label htmlFor="nome"><h5>Nome</h5></label>
-                <input onChange={(e) => setNome(e.target.value)} id="nome" type="text" name="nome" placeholder="Nome" required/>
+                <input id="nome" type="text" name="nome" placeholder="Nome" required/>
             </div>
             <div className="user-box">
                 <label htmlFor="email"><h5>Email</h5></label>
-                <input onChange={(e) => setEmail(e.target.value)} id="email" type="email" name="email" placeholder="Email" required/>
+                <input id="email" type="email" name="email" placeholder="Email" required/>
             </div>
 
             <div className="user-box">
                 <label htmlFor="senha"><h5>Senha</h5></label>
-                <input onChange={(e) => setSenha1(e.target.value)} id="senha" type="password" name="senha" placeholder="Senha" required/>
+                <input id="senha" type="password" name="senha" placeholder="Senha" required/>
             </div>
             <div className="user-box">
                 <label htmlFor="senha-confirm"><h5>Confirme a senha</h5></label>

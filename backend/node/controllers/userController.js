@@ -59,8 +59,12 @@ try{
 
     const resposta = await sql.query(`INSERT INTO usuario (nome, email, senha, role) VALUES ($1, $2, $3, $4);`,[req.body.nome, req.body.email, req.body.senha, req.body.role]);
     
+    if(resposta.code == '23505'){
+        res.status(400).send('email ja existe');
+        return;
+    }
     //const doc = await user.save();
-    res.status(201).send('ok');
+    res.status(201).send('criado');
     
 }catch(err){
 /*     console.log(err);

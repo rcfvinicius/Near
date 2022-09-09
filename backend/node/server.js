@@ -5,7 +5,7 @@ const cors = require('cors');
 const userRoutes = require('./routes/userRoutes.js');
 const cursoRoutes = require('./routes/cursoRoutes.js');
 
-//const sql = require('./connection.js');sql.query('SELECT * FROM test_connection;')
+
 
 //const mongoose = require('mongoose');
 //mongoose.connect('mongodb://localhost:27017/near');
@@ -21,4 +21,8 @@ app.use(express.urlencoded({extended:true}));
 app.use('/user',userRoutes);
 app.use('/curso',cursoRoutes)
 
-app.listen(8000,()=>{console.log('server:ok, port:8000')});
+app.listen(8000,()=>{
+    console.log('server:ok, port:8000');
+    //const sql = require('./connection.js');
+    //sql.query('SELECT * FROM test_connection;');
+});

@@ -13,7 +13,7 @@ export default function Header(props){
         <a href="/"><img id="logo" src={nearLogo} alt="logo parte 1"/><img src={logoteste} width="60px" alt="logo parte 2"/></a>
 
     <form method="GET">
-        <input id="barra-de-pesquisa" type="text" name="search_query" placeholder="Pesquise cursos, professores, aulas, etc..."/>
+        <input id="barra-de-pesquisa" type="text" name="search_query" placeholder="Pesquise cursos, pessoas, aulas, etc..."/>
         <Link to="/" id="botao-pesquisar" tabIndex="-1">
             <img src={lupa} height="30px" alt="lupa de pesquisa"/>
         </Link>
