@@ -32,7 +32,7 @@ export default function Header(props){
         <a href="/#gradient1">Cursos populares</a>
         <a>Categorias</a>
         <a>Atendimento</a>
-        <Link to="/area-do-aluno">Espaço do aluno</Link>
+        <Link to="/painel">Painel do usuário</Link>
 
     </nav> 
 </div>

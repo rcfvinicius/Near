@@ -1,6 +1,6 @@
 import React from 'react';
 import { useEffect } from 'react';
-import { useTema } from '../providers/tema.jsx';
+import { useTema } from '../utils/tema.jsx';
 import './Teste.css'
 
 export default function Teste(){

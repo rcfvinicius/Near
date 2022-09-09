@@ -1,0 +1,59 @@
+#Painel{
+    width: 100%;
+    min-height: 300px;
+
+    font-family: Playfair,serif;
+
+}
+#Painel h2{
+    margin:0 0 20px 10px;
+    padding-top:10px;
+    font-size: 30px;
+}
+
+#Painel #cursos-container,#exercicios-container,#cursos-criados-container{
+    width: 100%;
+    min-height: 100px;
+}
+
+#Painel #exercicios-container{
+    background-color: red;
+}
+
+
+#Painel #cursos{
+    width: 100%;
+    /*background-color: rgb(164, 50, 240);*/
+    min-height: 200px;
+    display: flex;
+    column-gap: 20px;
+    row-gap: 20px;
+    flex-wrap: wrap;
+    padding: 10px;
+    justify-content: center;
+}
+
+#Painel #exercicios{
+    width: 200px;
+    background-color: wheat;
+    min-height: 200px;
+    display: flex;
+}
+#Painel #cursos-criados{
+    width: 100%;
+    /*background-color: rgb(164, 50, 240);*/
+    min-height: 200px;
+    display: flex;
+    column-gap: 20px;
+    row-gap: 20px;
+    flex-wrap: wrap;
+    padding: 10px;
+    justify-content: center;
+}
+adicionar card dos cursos criados
+
+#Painel .card-curso{
+    background-color: pink;
+    width: 300px;
+    height: 300px;
+}

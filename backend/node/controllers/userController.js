@@ -177,6 +177,11 @@ exports.all = async function(req,res){
 try{
 /*     let docs = await User.find({});
     res.status(200).send(docs); */
+    
+    setTimeout(()=>{
+        console.log('r')
+        res.send('ok')
+    },5000)
 }catch(err){
     errorHandler(err,req,res);
 }
