@@ -1,19 +1,24 @@
-import './Login.css';
 import { Link } from "react-router-dom";
+import { useEffect, useState } from 'react';
+import {useNavigate} from 'react-router-dom';
+import { useAuth } from '../../utils/Authentication.jsx';
+import './Login.css';
+
 import gif from '../../assets/imagens/Mathematics.gif';
-import { useState } from 'react';
 
 
 export default function Login(){
     const [mensagemErro, setMensagemErro] = useState('login');
+    const [logado,setLogado,returnTo,setReturnTo,tokenData,setTokenData] = useAuth();
+    const navigate = useNavigate();
 
     function logar(event){
         event.preventDefault();
 
         const controller = new AbortController();
-        setTimeout(() => {controller.abort()},9000);
+        setTimeout(() => {controller.abort()},5000);
 
-        fetch(`${process.env.REACT_APP_API_HOSTNAME}/user/all`,{
+        fetch(`${process.env.REACT_APP_API_HOSTNAME}/user/login`,{
             signal: controller.signal,
             method: 'POST',
             headers:{
@@ -26,16 +31,20 @@ export default function Login(){
         }).then(r=>r.text())
         .then(res => {
             console.log(res);
-            if(res === 'ok'){
-                window.location.href = "http://localhost:3000/";
-            }else{
-                setMensagemErro('Dados incorretos!');
-                document.querySelector('#Login form h2').style = 'color:red;text-shadow:none;font-size:30px;'
+            if(res.split('.').length < 3){
+                throw new Error('TOKEN_INVALIDO');
             }
+            setLogado(true);
+
+            localStorage.setItem("token", res);
+            navigate(returnTo);
+            //window.location.href = "http://localhost:3000/";
         }).catch((err)=>{
             //colocar aqui a remoçao do load
-            console.log(err)
-            setMensagemErro('timeout')
+            setMensagemErro('Dados incorretos!');
+            document.querySelector('#Login form h2').style = 'color:red;text-shadow:none;font-size:30px;'
+            console.log(err);
+            setLogado(false);
         })
     }
 

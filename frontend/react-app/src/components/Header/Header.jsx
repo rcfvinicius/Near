@@ -1,11 +1,27 @@
 import './Header.css';
 import { Link } from "react-router-dom";
+import { useEffect } from 'react';
+import { useState } from 'react';
+import { useAuth } from '../../utils/Authentication.jsx';
+
 import nearLogo from '../../assets/near-logo.png';
 import logoteste from '../../assets/logoteste.png';
 import lupa from '../../assets/lupa.png';
 
 export default function Header(props){
-  
+    const [to,setTo] = useState('/login');
+    const [usuario,setUsuario] = useState('Entrar');
+    
+    const logado = useAuth()[0];
+    const tokenData = useAuth()[4];
+
+    useEffect(()=>{
+        if(logado && tokenData.nome !== undefined){
+            setUsuario(`Olá, ${tokenData.nome}`);
+            setTo('/painel');
+        }
+    },[tokenData])
+
     return(
     <div id="header-nav">
     <div id="promo"></div>
@@ -21,9 +37,9 @@ export default function Header(props){
         <img id="lupa-mob" src={lupa} height="30px" alt="lupa de pesquisa"/>
         </label>
     </form>
-<Link id="login-cadastro-link" to="/login">
+<Link id="login-cadastro-link" to={to}>
   <div id="login-cadastro">
-    Entrar
+    {usuario}
   </div>
 </Link>
     </header>

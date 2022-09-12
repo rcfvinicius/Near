@@ -7,6 +7,8 @@ import Login from './pages/Login/Login.jsx';
 import Cadastro from './pages/Cadastro/Cadastro.jsx'
 import Sobre from './pages/Sobre/Sobre.jsx';
 import Painel from './pages/Painel/Painel.jsx'
+import Authentication from './utils/Authentication';
+
 import PrivateRoute from './utils/PrivateRoute';
 
 import Teste from './components/teste.jsx'
@@ -14,6 +16,7 @@ import Teste from './components/teste.jsx'
 function App() {
   return (
     <BrowserRouter>
+      <Authentication>
       <TemaProvider>
         <Switch>
         <Route path='/' exact element={<Home/>}/>
@@ -21,13 +24,15 @@ function App() {
         <Route path='/cadastro' exact element={<Cadastro/>}/>
         <Route path='/sobre' exact element={<Sobre/>}/>
         <Route path='/painel' exact element={
-          <PrivateRoute>
-            <Painel/>
-          </PrivateRoute>}/>
+        <PrivateRoute>
+          <Painel/>
+        </PrivateRoute>
+        }/>
         <Route path='/teste' exact element={<Teste/>}/>
         <Route path='*' element={<h1>404</h1>}/>
       </Switch>
     </TemaProvider>
+    </Authentication>
     </BrowserRouter>
   );
 }

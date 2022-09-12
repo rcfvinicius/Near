@@ -1,4 +1,7 @@
 import { useEffect } from 'react';
+import {useNavigate} from 'react-router-dom';
+import { useAuth } from '../../utils/Authentication.jsx';
+
 import './Painel.css';
 import Sidebar from '../../components/Sidebar/Sidebar';
 import Header from '../../components/Header/Header.jsx';
@@ -8,10 +11,15 @@ import quimica from "../../assets/exercicio-quimica.png";
 import funcoes from '../../assets/exercicio-funcoes.png';
 
 export default function Painel(){
-    //usar o useNavigate pra verificar o token e redirecionar caso não encontre
+    const navigate = useNavigate();
+    const [logado,setLogado,returnTo,setReturnTo] = useAuth();
     useEffect(()=>{
         document.body.scrollTop = 0;
         document.documentElement.scrollTop = 0;
+/*         if(!logado){
+            setReturnTo(window.location.pathname);
+            navigate('/login');
+        } */
     },[])
     return(
     <>
@@ -20,16 +28,16 @@ export default function Painel(){
             <div id="cursos-container">
                 <h2>Cursos adquiridos</h2>
                 <div id="cursos">
-                    <div class="card-curso">
+                    <div className="card-curso">
 
                     </div>
-                    <div class="card-curso">
+                    <div className="card-curso">
 
                     </div>
-                    <div class="card-curso"></div>
-                    <div class="card-curso"></div>
-                    <div class="card-curso"></div>
-                    <div class="card-curso"></div>
+                    <div className="card-curso"></div>
+                    <div className="card-curso"></div>
+                    <div className="card-curso"></div>
+                    <div className="card-curso"></div>
 
                 </div>
             </div>

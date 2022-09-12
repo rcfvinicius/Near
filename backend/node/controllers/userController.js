@@ -26,6 +26,7 @@ try{
         };
         let token = await jwt.criar(jwtData);
         res.status(200).send(token);
+        //res.status(200).send('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjIsIm5vbWUiOiJ2aW5pY2l1cyIsImVtYWlsIjoidmluaWNpdXN2dnYyQGdtYWlsLmNvbSIsInJvbGUiOiJwcm9mZXNzb3IiLCJleHAiOjE2NjI5MTk2NTMsImlhdCI6MTY2MjkxOTM1M30.fRzUzncx8VteVQ3W1Qq-xGvIqlzWT9iA0euI3xUuFvk');
         return;
     }
     res.status(401).send('Senha incorreta');
@@ -168,19 +169,36 @@ try{
         return;
     }
     res.status(500).send('Internal Server Error'); */
+   
+}
+}
+
+//verificar token e devolver o objeto
+exports.token = async function(req,res){
+try{
+    console.log('/token')
+    const token = await jwt.verificar(req.headers['x-access-token']);
+    res.status(200).json(token);
+
+    //setTimeout(()=>{},4000)
+}catch(err){
     errorHandler(err,req,res);
 }
 }
+
+
+
+
 
 //get all
 exports.all = async function(req,res){
 try{
 /*     let docs = await User.find({});
     res.status(200).send(docs); */
+    res.send('ok')
     
     setTimeout(()=>{
         console.log('r')
-        res.send('ok')
     },5000)
 }catch(err){
     errorHandler(err,req,res);
@@ -189,12 +207,12 @@ try{
 
 
 //token válido
-exports.token = async function(req,res){
+exports.tokenValido = async function(req,res){
     const jwtData ={
         sub: '62cb17b0ffe618798d497548',
-        nome:'nome',
+        nome:'nome artificial',
         email:'exemplo@gmail.com',
-        role:'professor',
+        role:'admin',
         tokenInfo:'token artificial',
         exp:Math.floor(Date.now() / 1000) + 900
     } 
