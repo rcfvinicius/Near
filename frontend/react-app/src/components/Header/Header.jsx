@@ -10,12 +10,23 @@ import lupa from '../../assets/lupa.png';
 
 export default function Header(props){
     const [to,setTo] = useState('/login');
-    const [usuario,setUsuario] = useState('Entrar');
+    const [usuario,setUsuario] = useState('Ola, vinicius');
     
     const logado = useAuth()[0];
     const tokenData = useAuth()[4];
 
     useEffect(()=>{
+        document.querySelector('#header-nav #barra-de-pesquisa').addEventListener('focus',()=>{
+            if(window.innerWidth < 701){
+                document.querySelector('#header-nav header > a').style = 'display:none';
+                document.querySelector('#header-nav #login-cadastro-link').style = 'display:none';
+            }
+        });
+        document.querySelector('#header-nav #barra-de-pesquisa').addEventListener('focusout',()=>{
+            document.querySelector('#header-nav header > a').style = 'display:inline-block';
+            document.querySelector('#header-nav #login-cadastro-link').style = 'display:flex';
+        });
+
         if(logado && tokenData.nome !== undefined){
             setUsuario(`Olá, ${tokenData.nome}`);
             setTo('/painel');

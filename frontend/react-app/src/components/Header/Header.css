@@ -165,7 +165,10 @@
     }
   
     #header-nav header form {
-      position: relative;
+      position: absolute;
+      margin-left: 50%;
+      transform: translateX(-50%);
+
       overflow: hidden;
       top:5px;
       height: 42px;
@@ -192,7 +195,11 @@
       font-size: 17px;
       transition: .2s;
     }
-  
+    
+    #header-nav #barra-de-pesquisa:focus{
+      width: calc(100vw - 80px);
+    }
+
     #header-nav #botao-pesquisar{
       display: hidden;
     }
@@ -202,11 +209,8 @@
       left: 9px;
       top:5px;
     }
-  
-    #header-nav #barra-de-pesquisa:focus{
-      width: calc(100vw - 200px);
-    }
-  
+
+    
     #header-nav #barra-de-pesquisa:focus #botao-pesquisar{
       display: inline-block;
     }
