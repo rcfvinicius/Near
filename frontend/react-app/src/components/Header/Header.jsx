@@ -10,7 +10,7 @@ import lupa from '../../assets/lupa.png';
 
 export default function Header(props){
     const [to,setTo] = useState('/login');
-    const [usuario,setUsuario] = useState('Ola, vinicius');
+    const [usuario,setUsuario] = useState('Entrar');
     
     const logado = useAuth()[0];
     const tokenData = useAuth()[4];

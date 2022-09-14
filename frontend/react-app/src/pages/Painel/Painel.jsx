@@ -25,19 +25,24 @@ export default function Painel(){
     <>
         <Header/>
         <main id="Painel">
+            <div id='perfil'>
+               <h2>Seu perfil</h2>
+               <div id="perfil-esquerdo" className='card-painel'>
+
+               </div>
+               <div id="perfil-direito" className='card-painel'>
+                
+               </div>
+            </div>
             <div id="cursos-container">
                 <h2>Cursos adquiridos</h2>
-                <div id="cursos">
-                    <div className="card-curso">
-
-                    </div>
-                    <div className="card-curso">
-
-                    </div>
-                    <div className="card-curso"></div>
-                    <div className="card-curso"></div>
-                    <div className="card-curso"></div>
-                    <div className="card-curso"></div>
+                <div id="cards-cursos">
+                    <div className="card card-curso"></div>
+                    <div className="card card-curso"></div>
+                    <div className="card card-curso"></div>
+                    <div className="card card-curso"></div>
+                    <div className="card card-curso"></div>
+                    <div className="card card-curso"></div>
 
                 </div>
             </div>

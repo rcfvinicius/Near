@@ -22,7 +22,7 @@ try{
             nome:user.rows[0].nome,
             email:user.rows[0].email,
             role:user.rows[0].role,
-            exp:Math.floor(Date.now() / 1000) + 300
+            exp:Math.floor(Date.now() / 1000) + 900
         };
         let token = await jwt.criar(jwtData);
         res.status(200).send(token);
@@ -168,8 +168,8 @@ try{
         res.status(400).send('Usuário não encontrado');
         return;
     }
-    res.status(500).send('Internal Server Error'); */
-   
+    */
+    res.status(500).send('Internal Server Error');
 }
 }
 

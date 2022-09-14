@@ -11,17 +11,13 @@
     font-size: 30px;
 }
 
-#Painel #cursos-container,#exercicios-container,#cursos-criados-container{
+#Painel #cursos-container,#Painel #exercicios-container,#Painel #cursos-criados-container,#Painel #perfil{
     width: 100%;
     min-height: 100px;
 }
 
-#Painel #exercicios-container{
-    background-color: red;
-}
-
-
-#Painel #cursos{
+/* cursos */
+#Painel #cards-cursos{
     width: 100%;
     /*background-color: rgb(164, 50, 240);*/
     min-height: 200px;
@@ -33,12 +29,7 @@
     justify-content: center;
 }
 
-#Painel #exercicios{
-    width: 200px;
-    background-color: wheat;
-    min-height: 200px;
-    display: flex;
-}
+
 #Painel #cursos-criados{
     width: 100%;
     /*background-color: rgb(164, 50, 240);*/
@@ -50,10 +41,48 @@
     padding: 10px;
     justify-content: center;
 }
+/* exercicios */
+#Painel #exercicios-container{
+    background-color: red;
+}
+
+#Painel #exercicios{
+    width: 200px;
+    background-color: wheat;
+    min-height: 200px;
+    display: flex;
+}
+
+
+/* generico */
+#Painel .card{
+    transition: 200ms;
+}
+#Painel .card:hover{
+    transform: scale(1.2);
+}
+
 
 
 #Painel .card-curso{
     background-color: pink;
     width: 300px;
     height: 300px;
+
+}
+
+/* perfil */
+#Painel .card-painel{
+    background-color: purple;
+    width: 300px;
+    height: 300px;
+    display: inline-block;
+    margin-left: 20px;
+}
+#Painel #perfil-esquerdo{
+
+}
+#Painel #perfil-direito{
+    aqui o usuario vai poder editar suas informaçoes de perfil
+    tbm poderá alterar o tema e imagem
 }
