@@ -26,7 +26,7 @@
     row-gap: 20px;
     flex-wrap: wrap;
     padding: 10px;
-    justify-content: center;
+    justify-content: flex-start;
 }
 
 
@@ -71,18 +71,156 @@
 
 }
 
-/* perfil */
+/* perfil esquerdo*/
+#Painel #perfil section{
+    display: flex;
+    column-gap: 0px;
+    row-gap: 10px;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    margin-left: 20px;
+}
+
 #Painel .card-painel{
-    background-color: purple;
+    /* background-color: purple; */
     width: 300px;
     height: 300px;
     display: inline-block;
-    margin-left: 20px;
+    /* min-width: 300px; */
+    /* margin-left: 20px; */
+    border: 3px solid grey;
 }
 #Painel #perfil-esquerdo{
+   border-right: none;
+   overflow: hidden;
+}
+
+#Painel #perfil-esquerdo h4{
+    margin: 5px 0 0 10px;
+    display: block;
+}
+
+#Painel #perfil-esquerdo input[type='file']{
+    margin-left: 10px;
+}
+
+#Painel #perfil-esquerdo #img-placeholder{
+    /* background-color: red; */
+    width: 100%;
+    height: 230px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+}
+#Painel #perfil-esquerdo #img-placeholder img{
+    margin-top: 20px;
+    width: 85%;
+    height: auto;
+    position:absolute;
+}
+
+
+
+
+/* perfil direito */
+#Painel #perfil-direito{
+    padding: 10px;
+    overflow: hidden;
+}
+#Painel #perfil-direito form{
+    /* background-color:aquamarine; */
+    width: 100%;
+    height: 100%
+}
+#Painel #perfil-direito form input{
+    width: 235px;
+    height: 30px;
+    margin-right: 10px;
+    margin-bottom: 15px;
+}
+
+#Painel #perfil-direito input[type="email"]{
+    cursor:not-allowed;
 
 }
-#Painel #perfil-direito{
-    aqui o usuario vai poder editar suas informaçoes de perfil
-    tbm poderá alterar o tema e imagem
+
+#Painel #perfil-direito button[type="button"]{
+    appearance: none;
+    width: 30px;
+    height: 30px;
+    background-image: url(../../assets/reset.png);
+    background-repeat:no-repeat;
+    background-position: center;
+    background-size:cover;
+    transition:100ms;
+    position: absolute;
 }
+
+#Painel #perfil-direito button[type="button"]:hover{
+    transform: scale(1.2);
+}
+#Painel #perfil-direito button[type="button"]:active{
+    transform: scale(1);
+}
+#Painel #perfil-direito button[type="button"]:focus{
+    outline: 2px purple solid
+}
+
+#Painel #submit-e-load{
+    /* background-color: red; */
+    height: 30px;
+    display: flex;
+    column-gap: 10px;
+    margin-top:20px;
+}
+
+#Painel #perfil-direito button[type='submit']{
+    appearance: none;
+    width: 235px;
+    height: 30px;
+    background-color: purple;
+    /* margin-right: 10px; */
+    /* margin-top:20px; */
+    transition: 100ms;
+    color:white;
+    text-transform: uppercase;
+    font-size: 15px;
+    font-family: playfair;
+    display: inline-block;
+}
+#Painel #perfil-direito button[type='submit']:hover{
+    transform: scale(1.07);
+}
+
+#Painel #perfil-direito #load-perfil{
+    width: 30px;
+    height: 30px;
+    display: inline-block;
+}
+#Painel #perfil-direito #load-perfil #load{
+    position:absolute;
+    border-top:3px solid purple;
+    width: 27px;
+    height: 27px;
+    border-radius: 30px;
+    animation: animacaoload .5s infinite linear;
+    display: none;
+}
+#Painel #perfil-direito #load-perfil #erro{
+    width: 27px;
+    height: 27px;
+    background-image: url(../../assets/erro.png);
+    background-repeat:no-repeat;
+    background-position: center;
+    background-size:cover;
+    position: absolute;
+    display: none;
+}
+
+@keyframes animacaoload{
+    from{transform: rotate(0deg);}
+    to{transform: rotate(360deg);}
+}
+
+
