@@ -9,16 +9,25 @@ import Footer from '../../components/Footer/Footer.jsx';
 
 import quimica from "../../assets/exercicio-quimica.png";
 import funcoes from '../../assets/exercicio-funcoes.png';
-import reset from '../../assets/reset.png'
+
 
 export default function Painel(){
     const navigate = useNavigate();
-    const [logado,setLogado,returnTo,setReturnTo] = useAuth();
+    //const [logado,setLogado,returnTo,setReturnTo] = useAuth();
+    const setLogado = useAuth()[1];
+    const tokenData = useAuth()[4];
+
+    function sair(){
+        localStorage.removeItem("token");
+        setLogado(false);
+        navigate('/');
+    }
 
     async function editarPerfil(event){
         event.preventDefault();
         try{
             document.querySelector('#Painel #perfil-direito #load-perfil #erro').style = 'display:none';
+            document.querySelector('#Painel #perfil-direito #load-perfil #success').style = 'display:none';
             document.querySelector('#Painel #perfil-direito #load-perfil #load').style = 'display:inline-block;';
 
             const controller = new AbortController();
@@ -31,18 +40,17 @@ export default function Painel(){
                     'Content-Type': 'application/json;charset=UTF-8'
                 },
                 body: JSON.stringify({
-                    //email: document.querySelector('#Login #user').value,
-                    //senha: document.querySelector('#Login #pass').value
+                    nome: document.querySelector('#Painel #perfil form input[type="text"]').value,
+                    senha: document.querySelector('#Painel #perfil form input[type="password"]').value
                 })
             })
             
             let res = await resposta.text();
             document.querySelector('#Painel #perfil-direito #load-perfil #load').style = 'display:none';
-            
+            document.querySelector('#Painel #perfil-direito #load-perfil #success').style = 'display:inline-block';
         }catch(err){
             document.querySelector('#Painel #perfil-direito #load-perfil #load').style = 'display:none';
             document.querySelector('#Painel #perfil-direito #load-perfil #erro').style = 'display:inline-block';
-
             console.log(err);
         }
     }
@@ -61,7 +69,11 @@ export default function Painel(){
         <Header/>
         <main id="Painel">
             <div id='perfil'>
-               <h2>Seu perfil</h2>
+                <div id='nome-e-logout'>
+                <h2>{tokenData.nome}nome do usuario</h2>
+                <button type='button' onClick={sair}>Sair</button>
+                </div>
+
                <section>
                <div id="perfil-esquerdo" className='card-painel'>
                     <div id="img-placeholder">
@@ -89,6 +101,7 @@ export default function Painel(){
                     <div id='load-perfil'>
                         <div id='load'></div>
                         <div id='erro'></div>
+                        <div id='success'></div>
                     </div>
                     </div>
 

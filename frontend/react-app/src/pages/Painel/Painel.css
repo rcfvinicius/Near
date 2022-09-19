@@ -27,6 +27,8 @@
     flex-wrap: wrap;
     padding: 10px;
     justify-content: flex-start;
+    margin-left: 20px;
+    margin-right: 20px;
 }
 
 
@@ -186,8 +188,11 @@
     color:white;
     text-transform: uppercase;
     font-size: 15px;
-    font-family: playfair;
+    border:none;
     display: inline-block;
+}
+#Painel button{
+    font-family: roboto-slab, sans-serif;
 }
 #Painel #perfil-direito button[type='submit']:hover{
     transform: scale(1.07);
@@ -198,15 +203,18 @@
     height: 30px;
     display: inline-block;
 }
-#Painel #perfil-direito #load-perfil #load{
-    position:absolute;
-    border-top:3px solid purple;
+
+#Painel #perfil-direito #load-perfil #success{
     width: 27px;
     height: 27px;
-    border-radius: 30px;
-    animation: animacaoload .5s infinite linear;
+    background-image: url(../../assets/success.png);
+    background-repeat:no-repeat;
+    background-position: center;
+    background-size:cover;
+    position: absolute;
     display: none;
 }
+
 #Painel #perfil-direito #load-perfil #erro{
     width: 27px;
     height: 27px;
@@ -218,9 +226,45 @@
     display: none;
 }
 
+#Painel #perfil-direito #load-perfil #load{
+    position:absolute;
+    border-top:3px solid purple;
+    width: 27px;
+    height: 27px;
+    border-radius: 30px;
+    animation: animacaoload .5s infinite linear;
+    display: none;
+}
+
 @keyframes animacaoload{
     from{transform: rotate(0deg);}
     to{transform: rotate(360deg);}
 }
 
+#Painel #nome-e-logout{
+    display: block;
+    position:relative;
+}
 
+#Painel #nome-e-logout h2{
+    display: inline-block;
+    margin-right: 20px;
+}
+#Painel #nome-e-logout button{
+    position:relative;
+    top:-5px;
+    appearance: none;
+    width: 50px;
+    height: 30px;
+    background-color: purple;
+
+    transition: 100ms;
+    color:white;
+    text-transform: uppercase;
+    font-size: 15px;
+    display: inline-block;
+    border:none;
+}
+#Painel #nome-e-logout button:hover{
+    transform: scale(1.15);
+}
