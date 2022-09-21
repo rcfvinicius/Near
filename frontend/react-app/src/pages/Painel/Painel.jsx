@@ -29,7 +29,10 @@ export default function Painel(){
             document.querySelector('#Painel #perfil-direito #load-perfil #erro').style = 'display:none';
             document.querySelector('#Painel #perfil-direito #load-perfil #success').style = 'display:none';
             document.querySelector('#Painel #perfil-direito #load-perfil #load').style = 'display:inline-block;';
-
+            
+            if(document.querySelectorAll('#Painel #perfil form input[type="password"]')[0].value !== document.querySelectorAll('#Painel #perfil form input[type="password"]')[1].value){
+                throw new Error('SENHAS_DIFERENTES');
+            }
             const controller = new AbortController();
             setTimeout(() => {controller.abort()},5000);
 
@@ -51,6 +54,7 @@ export default function Painel(){
         }catch(err){
             document.querySelector('#Painel #perfil-direito #load-perfil #load').style = 'display:none';
             document.querySelector('#Painel #perfil-direito #load-perfil #erro').style = 'display:inline-block';
+
             console.log(err);
         }
     }

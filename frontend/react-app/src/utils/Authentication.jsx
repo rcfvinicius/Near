@@ -30,7 +30,7 @@ export default function Authentication({children}){
 
                 setLogado(true);
             }catch(err){
-                setLogado(true);//false
+                setLogado(false);//false
                 setTokenData(false);
             }
         }
@@ -45,7 +45,6 @@ export default function Authentication({children}){
 }
 
 export const useAuth = () => React.useContext(AuthContext);
-
 
 
 /* 

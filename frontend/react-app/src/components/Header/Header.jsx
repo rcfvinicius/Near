@@ -26,9 +26,11 @@ export default function Header(props){
             document.querySelector('#header-nav header > a').style = 'display:inline-block';
             document.querySelector('#header-nav #login-cadastro-link').style = 'display:flex';
         });
+    },[])
 
+    useEffect(()=>{
         if(logado && tokenData.nome !== undefined){
-            setUsuario(`Olá, ${tokenData.nome}`);
+            setUsuario(`Olá, ${tokenData.nome.split(' ')[0]}`);
             setTo('/painel');
         }
     },[tokenData])

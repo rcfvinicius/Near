@@ -18,6 +18,7 @@ export default function Login(){
         const controller = new AbortController();
         setTimeout(() => {controller.abort()},5000);
 
+        //fetch para autenticar usuario e buscar o token
         fetch(`${process.env.REACT_APP_API_HOSTNAME}/user/login`,{
             signal: controller.signal,
             method: 'POST',
@@ -34,10 +35,27 @@ export default function Login(){
             if(res.split('.').length < 3){
                 throw new Error('TOKEN_INVALIDO');
             }
-            setLogado(true);
-
             localStorage.setItem("token", res);
-            navigate(returnTo);
+
+            const controller = new AbortController();
+                setTimeout(() => {controller.abort()},6000);
+                
+                //fetch para verificar o conteudo do token
+                fetch(`${process.env.REACT_APP_API_HOSTNAME}/user/token`,{
+                    signal:controller.signal,
+                    method:'GET',
+                    headers:{
+                        'x-access-token': res
+                    }
+                }).then(r=>r.text())
+                .then(res2 => {
+                    setTokenData(JSON.parse(res2));
+                    setLogado(true);
+                    navigate(returnTo);
+                })
+   
+ 
+
             //window.location.href = "http://localhost:3000/";
         }).catch((err)=>{
             //colocar aqui a remoçao do load
