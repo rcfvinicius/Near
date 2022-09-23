@@ -9,7 +9,7 @@ import Footer from '../../components/Footer/Footer.jsx';
 
 import quimica from "../../assets/exercicio-quimica.png";
 import funcoes from '../../assets/exercicio-funcoes.png';
-
+import curso from '../../assets/imagens/cursos/morfologia.png'
 
 export default function Painel(){
     const navigate = useNavigate();
@@ -59,6 +59,90 @@ export default function Painel(){
         }
     }
 
+    async function getCursosAdquiridos(){
+        try{
+        let quantidade = await fetch(`${process.env.REACT_APP_API_HOSTNAME}/curso/cursosAdquiridosCount`,{
+            method:'GET',
+            mode:'cors',
+            headers:{
+                'Content-Type': 'application/json;charset=UTF-8',
+                'x-access-token': localStorage.getItem('token')
+            }
+        })
+        let count = parseInt(await quantidade.text());
+        console.log('passou 1 fetch')
+        //inicio do loop
+        for(let i=1;i<=count;i++){
+            
+            //consulta de dados do curso
+            let resposta = await fetch(`${process.env.REACT_APP_API_HOSTNAME}/curso/cursosAdquiridosDados`,{
+                method:'POST',
+                mode:'cors',
+                headers:{
+                    'Content-Type': 'application/json;charset=UTF-8',
+                    'x-access-token':localStorage.getItem('token')
+                },
+                body: JSON.stringify({
+                    curso: i-1
+                })
+            })
+            console.log(resposta)
+            let res = await resposta.json();
+  
+            
+            //consulta de imagem do curso
+            let resposta2 = await fetch(`${process.env.REACT_APP_API_HOSTNAME}/curso/cursosAdquiridosImg?id=${res.id}`,{
+                method:'POST',
+                mode:'cors'
+            })
+            let res2 = await resposta2.blob();
+
+            let imgSrc;
+            if(res2.type == 'text/html'){
+                imgSrc = quimica;
+            }else{
+                imgSrc = URL.createObjectURL(res2);
+            }
+
+
+            const container = document.querySelector('#Painel #cursos-container #cards-cursos');
+            container.innerHTML +=
+            `
+            <div class="card card-curso">
+                <div class='imgCurso-container'>
+                <img src=${imgSrc}></img>
+                </div>
+                <h3>${res.titulo}</h3>
+            </div>
+            `;
+        }
+        
+    }catch(err){
+        console.log(err);
+        if(err == 'Error: IMAGE_NOT_FOUND'){
+            //preencher a imgem do curso com uma imagem padrão
+        }
+    }
+    }
+
+    async function temp(){
+        try{
+            let resposta2 = await fetch(`${process.env.REACT_APP_API_HOSTNAME}/curso/cursosAdquiridosDados`,{
+                method:'POST',
+                mode:'cors',
+                headers:{
+                    'Content-Type': 'application/json;charset=UTF-8'
+                },
+                body: JSON.stringify({
+                    token: localStorage.getItem('token'),
+                    curso: 1
+                })
+            })
+            console.log('passou')
+        }catch(err){
+            console.log(err)
+        }
+    }
 
     useEffect(()=>{
         document.body.scrollTop = 0;
@@ -67,6 +151,8 @@ export default function Painel(){
             setReturnTo(window.location.pathname);
             navigate('/login');
         } */
+
+        getCursosAdquiridos();
     },[])
     return(
     <>
@@ -81,7 +167,7 @@ export default function Painel(){
                <section>
                <div id="perfil-esquerdo" className='card-painel'>
                     <div id="img-placeholder">
-                    <img src={quimica}></img>
+                    <img src={curso}></img>
                     </div>
                     <h4>Alterar imagem de perfil</h4>
                     <input type='file' accept="image/png, image/jpeg"></input>
@@ -116,11 +202,18 @@ export default function Painel(){
             <div id="cursos-container">
                 <h2>Cursos adquiridos</h2>
                 <div id="cards-cursos">
-                    <div className="card card-curso"></div>
-                    <div className="card card-curso"></div>
-                    <div className="card card-curso"></div>
-                    <div className="card card-curso"></div>
-                    <div className="card card-curso"></div>
+                    <div className="card card-curso">
+                        <div className='imgCurso-container'>
+                            <img src={curso}></img>
+                        </div>
+                        <h3>Nome do curso</h3>
+                    </div>
+                    <div className="card card-curso">
+                        <div className='imgCurso-container'>
+                            <img></img>
+                        </div>
+                        <h3>titulo</h3>
+                    </div>
                     <div className="card card-curso"></div>
 
                 </div>

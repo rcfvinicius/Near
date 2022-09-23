@@ -1,7 +1,8 @@
 require('dotenv').config();
 const sql = require('../connection.js');
 const jwt = require('../utils/jwt.js');
-const errorHandler = require('../utils/errorHandler.js')
+const errorHandler = require('../utils/errorHandler.js');
+const multer = require('multer');
 //const Curso = require('../models/cursoModel.js');
 //const User = require('../models/userModel.js');
 
@@ -81,7 +82,7 @@ try{
 }
 //terminar o resto
 //delete
-exports.delete = async function(req,res){
+/* exports.delete = async function(req,res){
 try{
     const token = await jwt.verificar(req.headers['x-access-token']);
     const user = await User.findOne({_id:token.sub});
@@ -109,12 +110,56 @@ try{
 }catch(err){
     errorHandler(err,req,res);
 }
+} */
+
+
+
+/* cursos adquiridos */
+exports.cursosAdquiridosImg = async function(req,res){
+try{
+    let caminhoBase = `D:\\SQL\\imagens\\cursos`;
+    const b = '\\';
+                                //req.query.id
+    res.sendFile(caminhoBase + b + '0' + b + 'default-icon.png');
+}catch(err){
+    res.status(404).send('not found');
+    console.log(err);
+    //errorHandler(err,req,res);
+}
+}
+/* dados do curso */
+exports.cursosAdquiridosDados = async function(req,res){
+try{
+    const token = await jwt.verificar(req.headers['x-access-token']);
+    const query = await sql.query(`
+    select c.id, c.titulo from usuario u
+    inner join adquire_curso adc
+    on u.id = adc.id_usuario
+    inner join curso c
+    on c.id = adc.id_curso
+    where u.id = $1
+    `,[token.sub]);//token.sub
+   
+    res.status(200).send(JSON.stringify(query.rows[req.body.curso]));
+}catch(err){
+    errorHandler(err,req,res);
+}
 }
 
-exports.all = async function(req,res){
+
+exports.cursosAdquiridosCount = async function(req,res){
 try{
-    let docs = await Curso.find({});
-    res.status(200).send(docs);
+    const token = await jwt.verificar(req.headers['x-access-token']);
+
+    const query = await sql.query(`
+    select u.nome from usuario u
+    inner join adquire_curso adc
+    on u.id = adc.id_usuario
+    inner join curso c
+    on c.id = adc.id_curso
+    where u.id = $1`,[token.sub]);
+
+    res.status(200).send(JSON.stringify(query.rowCount));
 }catch(err){
     errorHandler(err,req,res);
 }

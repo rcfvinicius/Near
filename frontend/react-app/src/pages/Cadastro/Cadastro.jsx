@@ -1,9 +1,11 @@
 import './Cadastro.css';
 import imagem from '../../assets/imagens/Students-pana.png';//https://storyset.com/illustration/students/pana
 import { useState } from 'react';
+import {useNavigate} from 'react-router-dom';
 
 export default function Cadastro(){
     const [mensagemErro, setMensagemErro] = useState('cadastro');
+    const navigate = useNavigate();
 
     function cadastrar(event){
         event.preventDefault();
@@ -27,7 +29,9 @@ export default function Cadastro(){
         .then(res => {
             console.log(res);
             if(res === 'criado'){
-                window.location.href = "http://localhost:3000/";
+                //colocar o token na memoria
+                navigate('/');
+                //window.location.href = "http://localhost:3000/";
             }else{
                 setMensagemErro('Este usuário já está cadastrado!');
                 document.querySelector('#Cadastro form h2').style = 'color:red;text-shadow:none;'
