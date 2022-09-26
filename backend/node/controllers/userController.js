@@ -22,7 +22,7 @@ try{
             nome:user.rows[0].nome,
             email:user.rows[0].email,
             role:user.rows[0].role,
-            exp:Math.floor(Date.now() / 1000) + 900
+            exp:Math.floor(Date.now() / 1000) + 9000
         };
         let token = await jwt.criar(jwtData);
         res.status(200).send(token);

@@ -3,6 +3,7 @@ const sql = require('../connection.js');
 const jwt = require('../utils/jwt.js');
 const errorHandler = require('../utils/errorHandler.js');
 const multer = require('multer');
+const fs = require('fs');
 //const Curso = require('../models/cursoModel.js');
 //const User = require('../models/userModel.js');
 
@@ -117,10 +118,18 @@ try{
 /* cursos adquiridos */
 exports.cursosAdquiridosImg = async function(req,res){
 try{
-    let caminhoBase = `D:\\SQL\\imagens\\cursos`;
+    const caminhoBase = `D:\\SQL\\imagens\\cursos`;
     const b = '\\';
-                                //req.query.id
-    res.sendFile(caminhoBase + b + '0' + b + 'default-icon.png');
+    fs.access(caminhoBase+b+req.query.id,(err)=>{
+        if(err){
+            res.sendFile(caminhoBase + b + '0' + b + 'default-icon.png');
+            fs.mkdir(caminhoBase+b+req.query.id,(erro)=>{
+                console.log(erro)
+            })
+            return;
+        }
+    })
+    res.sendFile(caminhoBase + b + req.query.id + b + 'default-icon.png');
 }catch(err){
     res.status(404).send('not found');
     console.log(err);

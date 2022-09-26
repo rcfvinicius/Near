@@ -30,7 +30,7 @@ export default function Authentication({children}){
 
                 setLogado(true);
             }catch(err){
-                setLogado(true);//false
+                setLogado(false);//false
                 setTokenData(false);
             }
         }
