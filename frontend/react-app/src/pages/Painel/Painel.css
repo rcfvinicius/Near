@@ -27,7 +27,7 @@
     flex-wrap: wrap;
     padding: 10px;
     justify-content: flex-start;
-    margin-left: 20px;
+    margin-left: 10px;
     margin-right: 20px;
 }
 
@@ -41,7 +41,7 @@
     row-gap: 20px;
     flex-wrap: wrap;
     padding: 10px;
-    justify-content: center;
+    justify-content: flex-start;
 }
 /* exercicios */
 #Painel #exercicios-container{
@@ -59,11 +59,16 @@
 /* generico */
 #Painel .card{
     transition: 200ms;
+    z-index: 1;
 }
 #Painel .card:hover{
-    transform: scale(1.2);
+    transform: scale(1.1);
+    animation-timing-function:ease-in;
 }
 
+#Painel .card:visited{
+    color:inherit;
+}
 
 
 #Painel .card-curso{
@@ -279,4 +284,69 @@
 }
 #Painel #nome-e-logout button:hover{
     transform: scale(1.15);
+}
+
+/* cursos criados */
+#Painel #cursos-criados{
+    margin-left: 10px;
+}
+
+
+#Painel #cursos-criados-container h2{
+    display: inline-block;
+}
+
+#Painel #btn-criar{
+    background:none;
+    appearance: none;
+    height: 42px;
+    width: 42px;
+    border-radius: 50px;
+    border:2px solid black;
+    font-size: 40px;
+    font-family: proxima-nova;
+    transition: 50ms;
+    animation-timing-function: linear;
+    position:relative;
+    left: 10px;
+    top:7px;
+    cursor: pointer;
+}
+
+#Painel #btn-criar:hover{
+    background-color: rgb(201, 199, 197);
+    transform: scale(1.2);
+}
+#Painel #btn-criar:active{
+    transform: scale(1);
+}
+
+/* criar curso */
+#Painel #criar-curso-area{
+    width: 90%;
+    height: 90%;
+    overflow: hidden;
+    background-color: palevioletred;
+    position:fixed;
+    top:5%;
+    left: 5%;
+    z-index: 2;
+    display: none;
+}
+
+#Painel #btn-fechar{
+    appearance: none;
+    background: none;
+    width: 50px;
+    height: 50;
+    overflow: hidden;
+    position: absolute;
+    border:none;
+    cursor: pointer;
+    right: 0px;
+    top:5px;
+    z-index: 3;
+}
+#Painel #btn-fechar img{
+    width: 100%;
 }

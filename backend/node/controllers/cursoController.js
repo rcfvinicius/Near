@@ -120,16 +120,17 @@ exports.cursosAdquiridosImg = async function(req,res){
 try{
     const caminhoBase = `D:\\SQL\\imagens\\cursos`;
     const b = '\\';
-    fs.access(caminhoBase+b+req.query.id,(err)=>{
+    fs.access(caminhoBase+b+req.query.id+b+'icone-curso.png',(err)=>{
         if(err){
             res.sendFile(caminhoBase + b + '0' + b + 'default-icon.png');
-            fs.mkdir(caminhoBase+b+req.query.id,(erro)=>{
-                console.log(erro)
-            })
+/*             fs.mkdir(caminhoBase+b+req.query.id,(erro)=>{
+                console.log(erro);
+            }) */
             return;
         }
+        res.sendFile(caminhoBase + b + req.query.id + b + 'default-icon.png');
     })
-    res.sendFile(caminhoBase + b + req.query.id + b + 'default-icon.png');
+    
 }catch(err){
     res.status(404).send('not found');
     console.log(err);
@@ -169,6 +170,43 @@ try{
     where u.id = $1`,[token.sub]);
 
     res.status(200).send(JSON.stringify(query.rowCount));
+}catch(err){
+    errorHandler(err,req,res);
+}
+}
+
+/* cursos criados */
+exports.cursosCriadosCount = async function(req,res){
+try{
+    const token = await jwt.verificar(req.headers['x-access-token']);
+
+    const query = await sql.query(`
+    select c.titulo from usuario u
+    inner join cria_curso cc
+    on u.id = cc.id_usuario
+    inner join curso c
+    on c.id = cc.id_curso
+    where u.id = $1;`,[token.sub]);
+
+    res.status(200).send(JSON.stringify(query.rowCount));
+}catch(err){
+    errorHandler(err,req,res);
+}
+}
+
+exports.cursosCriadosDados = async function(req,res){
+try{
+    const token = await jwt.verificar(req.headers['x-access-token']);
+    const query = await sql.query(`
+    select c.id, c.titulo from usuario u
+    inner join cria_curso cc
+    on u.id = cc.id_usuario
+    inner join curso c
+    on c.id = cc.id_curso
+    where u.id = $1;
+    `,[token.sub]);//token.sub
+    
+    res.status(200).send(JSON.stringify(query.rows[req.body.curso]));
 }catch(err){
     errorHandler(err,req,res);
 }

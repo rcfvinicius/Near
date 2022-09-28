@@ -10,6 +10,7 @@ import Footer from '../../components/Footer/Footer.jsx';
 import quimica from "../../assets/exercicio-quimica.png";
 import funcoes from '../../assets/exercicio-funcoes.png';
 import curso from '../../assets/imagens/cursos/morfologia.png'
+import fechar from '../../assets/x.png'
 
 export default function Painel(){
     const navigate = useNavigate();
@@ -60,7 +61,10 @@ export default function Painel(){
     }
 
     async function getCursosAdquiridos(){
-        try{
+    try{
+        const container = document.querySelector('#Painel #cursos-container #cards-cursos');
+        container.innerHTML = '';
+
         let quantidade = await fetch(`${process.env.REACT_APP_API_HOSTNAME}/curso/cursosAdquiridosCount`,{
             method:'GET',
             mode:'cors',
@@ -70,7 +74,6 @@ export default function Painel(){
             }
         })
         let count = parseInt(await quantidade.text());
-        console.log('passou 1 fetch')
         //inicio do loop
         for(let i=1;i<=count;i++){
             
@@ -86,7 +89,7 @@ export default function Painel(){
                     curso: i-1
                 })
             })
-            console.log(resposta)
+            //console.log(resposta)
             let res = await resposta.json();
   
             
@@ -105,7 +108,6 @@ export default function Painel(){
             }
 
 
-            const container = document.querySelector('#Painel #cursos-container #cards-cursos');
             container.innerHTML +=
             `
             <div class="card card-curso">
@@ -125,20 +127,66 @@ export default function Painel(){
     }
     }
 
-    async function temp(){
+
+
+    async function getCursosCriados(){
         try{
-            let resposta2 = await fetch(`${process.env.REACT_APP_API_HOSTNAME}/curso/cursosAdquiridosDados`,{
-                method:'POST',
+            const container = document.querySelector('#Painel #cursos-criados-container #cursos-criados');
+            container.innerHTML = '';
+            
+            let quantidade = await fetch(`${process.env.REACT_APP_API_HOSTNAME}/curso/cursosCriadosCount`,{
+                method:'GET',
                 mode:'cors',
                 headers:{
-                    'Content-Type': 'application/json;charset=UTF-8'
-                },
-                body: JSON.stringify({
-                    token: localStorage.getItem('token'),
-                    curso: 1
-                })
+                    'Content-Type': 'application/json;charset=UTF-8',
+                    'x-access-token': localStorage.getItem('token')
+                }
             })
-            console.log('passou')
+            let count = parseInt(await quantidade.text());
+
+            //inicio do loop
+            for(let i=1;i<=count;i++){
+            
+                //consulta de dados do curso
+                let resposta = await fetch(`${process.env.REACT_APP_API_HOSTNAME}/curso/cursosCriadosDados`,{
+                    method:'POST',
+                    mode:'cors',
+                    headers:{
+                        'Content-Type': 'application/json;charset=UTF-8',
+                        'x-access-token':localStorage.getItem('token')
+                    },
+                    body: JSON.stringify({
+                        curso: i-1
+                    })
+                })
+                //console.log(resposta)
+                let res = await resposta.json();
+      
+                
+                //consulta de imagem do curso
+                let resposta2 = await fetch(`${process.env.REACT_APP_API_HOSTNAME}/curso/cursosAdquiridosImg?id=${res.id}`,{
+                    method:'POST',
+                    mode:'cors'
+                })
+                let res2 = await resposta2.blob();
+    
+                let imgSrc;
+                if(res2.type == 'text/html'){
+                    imgSrc = quimica;//imagem padrao
+                }else{
+                    imgSrc = URL.createObjectURL(res2);
+                }
+    
+                const container = document.querySelector('#Painel #cursos-criados-container #cursos-criados');
+                container.innerHTML += `
+                <a href='/sobre' class="card card-curso">
+                    <div class='imgCurso-container'>
+                    <img src=${imgSrc}></img>
+                    </div>             
+                    <h3>${res.titulo}</h3>
+                </a>
+                `;
+            }
         }catch(err){
             console.log(err)
         }
@@ -151,8 +199,17 @@ export default function Painel(){
             setReturnTo(window.location.pathname);
             navigate('/login');
         } */
+        document.querySelector('#Painel #criar-curso-area #btn-fechar').addEventListener('click', ()=>{
+            document.querySelector('#Painel #criar-curso-area').style = 'display:none;';
+        });
+
+        document.querySelector('#Painel #cursos-criados-container #btn-criar').addEventListener('click', ()=>{
+            document.querySelector('#Painel #criar-curso-area').style = 'display:flex;';
+        });
+
 
         getCursosAdquiridos();
+        getCursosCriados();
     },[])
     return(
     <>
@@ -220,16 +277,26 @@ export default function Painel(){
             </div>
 
 
-            <div id="exercicios-container">
-                <h2>Exercicios</h2>
-                <div id="exercicios">
+
+            <div id="cursos-criados-container">
+                <h2>Cursos criados</h2>
+                <button id="btn-criar" type='button'>+</button>
+
+                <div id="cursos-criados">
+                    <div className="card card-curso">
+                        <div className='imgCurso-container'>
+                            <img src={curso}></img>
+                        </div>
+                        <h3>Nome do curso</h3>
+                    </div>
 
                 </div>
             </div>
 
-            <div id="cursos-criados-container">
-                <h2>Cursos criados</h2>
-                <div id="cursos-criados"></div>
+            <div id="criar-curso-area">
+                <button id="btn-fechar" type='button'>
+                <img src={fechar}></img>
+                </button>
             </div>
         </main>
         <Footer/>

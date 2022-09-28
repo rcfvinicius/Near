@@ -9,4 +9,7 @@ router.get('/cursosAdquiridosCount',cursoController.cursosAdquiridosCount);
 router.post('/cursosAdquiridosImg',cursoController.cursosAdquiridosImg);
 router.post('/cursosAdquiridosDados',cursoController.cursosAdquiridosDados);
 
+router.get('/cursosCriadosCount',cursoController.cursosCriadosCount);
+router.post('/cursosCriadosDados',cursoController.cursosCriadosDados);
+
 module.exports = router;
