@@ -332,6 +332,8 @@
     left: 5%;
     z-index: 2;
     display: none;
+    justify-content: center;
+    align-items: center;
 }
 
 #Painel #btn-fechar{
@@ -349,4 +351,14 @@
 }
 #Painel #btn-fechar img{
     width: 100%;
+}
+
+#Painel #criar-curso-area form{
+    background-color: aliceblue;
+    width: 90%;
+    height: 90%;
+}
+
+#Painel #criar-curso-area form input{
+    display: block;
 }

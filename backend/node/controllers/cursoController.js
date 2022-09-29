@@ -14,10 +14,10 @@ try{
     if(user.rows.length == 0){
         throw new Error('USER_NOT_FOUND');
     }
-    if(user.rows[0].role == 'aluno'){
+/*     if(user.rows[0].role == 'aluno'){
         res.status(401).send('Alunos não podem criar cursos');
         return;
-    }
+    } */
     //colocar um switch pra verificar o tamanho(length) das strings
     const dataAtual = Date.now();
     //23505     curso ja existe
@@ -26,24 +26,17 @@ try{
     const resposta = await sql.query(`SELECT * from curso where titulo = $1 and data_criacao = $2`,[req.body.titulo, dataAtual]);
     await sql.query(`INSERT INTO cria_curso values ($1, $2);`,[user.rows[0].id, resposta.rows[0].id]);
     await sql.query('COMMIT;');
-/*     const curso = new Curso({
-        criador:user._id,
-        titulo: req.body.titulo,
-        tituloLongo:req.body.tituloLongo??'',
-        descricao:req.body.descricao??'',
-        categoria:req.body.categoria??'',
-        preco:req.body.preco
-    });
-    const doc = await curso.save();
-    const cursos = user.cursos + curso._id + ';';
-    await User.updateOne({email:user.email},{cursos:cursos});
- */
+
     res.status(201).send(JSON.stringify(resposta.rows[0]));
 }catch(err){
     await sql.query('ROLLBACK;');
     errorHandler(err,req,res);
 }
 }
+exports.criarImg = function(req,res){
+    
+}
+
 
 //update
 exports.update = async function(req,res){
@@ -122,7 +115,7 @@ try{
     const b = '\\';
     fs.access(caminhoBase+b+req.query.id+b+'icone-curso.png',(err)=>{
         if(err){
-            res.sendFile(caminhoBase + b + '0' + b + 'default-icon.png');
+            res.sendFile(caminhoBase + b + '0' + b + 'default-course.png');
 /*             fs.mkdir(caminhoBase+b+req.query.id,(erro)=>{
                 console.log(erro);
             }) */

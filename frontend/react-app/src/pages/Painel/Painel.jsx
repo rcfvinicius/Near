@@ -46,7 +46,7 @@ export default function Painel(){
                 body: JSON.stringify({
                     nome: document.querySelector('#Painel #perfil form input[type="text"]').value,
                     senha: document.querySelector('#Painel #perfil form input[type="password"]').value
-                })
+                })//mudar esse 'nome' para 'email'
             })
             
             let res = await resposta.text();
@@ -188,7 +188,36 @@ export default function Painel(){
                 `;
             }
         }catch(err){
-            console.log(err)
+            console.log(err);
+        }
+    }
+
+    async function cadastrarCurso(event){
+        try{
+            event.preventDefault();
+            
+            const controller = new AbortController();
+            setTimeout(() => {controller.abort()},5000);
+            let resposta = await fetch(`${process.env.REACT_APP_API_HOSTNAME}/curso/criar`,{
+                signal: controller.signal,
+                method: 'POST',
+                headers:{
+                    'Content-Type': 'application/json;charset=UTF-8',
+                    'x-access-token':localStorage.getItem('token')
+                },
+                body: JSON.stringify({
+                    titulo: document.querySelector('#Painel #criar-curso-area form input[name="titulo"]').value,
+                    tituloLongo: document.querySelector('#Painel #criar-curso-area form input[name="tituloLongo"]').value,
+                    descricao: document.querySelector('#Painel #criar-curso-area form input[name="descricao"]').value,
+                    preco: Number(document.querySelector('#Painel #criar-curso-area form input[name="preco"]').value),
+                    categoria: document.querySelector('#Painel #criar-curso-area form input[name="categoria"]').value
+                })
+            })
+            let res = await resposta.text();
+            console.log(res);
+
+        }catch(err){
+            console.log(err);
         }
     }
 
@@ -297,6 +326,14 @@ export default function Painel(){
                 <button id="btn-fechar" type='button'>
                 <img src={fechar}></img>
                 </button>
+                <form onSubmit={cadastrarCurso}>
+                    <input name='titulo' type='text' placeholder='Titulo' maxLength='30'></input>
+                    <input name='tituloLongo' type='text' placeholder='Titulo completo' maxLength='80'></input>
+                    <input name='descricao' type='text' placeholder='Descrição' maxLength='800'></input>
+                    <input onClick={(e)=>{console.log(Number(e.target.value))}} name='preco' type='number' placeholder='Preço' step='0.01'></input>
+                    <input name='categoria' type='text' placeholder='Categoria' maxLength='20'></input>
+                    <button type='submit'>enviar</button>
+                </form>
             </div>
         </main>
         <Footer/>
