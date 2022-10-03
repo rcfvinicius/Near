@@ -326,7 +326,7 @@
     width: 90%;
     height: 90%;
     overflow: hidden;
-    background-color: palevioletred;
+    background-color: #180c24;
     position:fixed;
     top:5%;
     left: 5%;
@@ -334,6 +334,7 @@
     display: none;
     justify-content: center;
     align-items: center;
+    border-radius: 20px;
 }
 
 #Painel #btn-fechar{
@@ -354,11 +355,48 @@
 }
 
 #Painel #criar-curso-area form{
-    background-color: aliceblue;
+    background:none;
     width: 90%;
     height: 90%;
+    display: flex;
+    flex-direction: column;
 }
 
 #Painel #criar-curso-area form input{
-    display: block;
+    background-color: #58446c;
+    border:none;
+    border-radius:7px;
+    box-shadow: 0px 10px 10px 10px rgba(0, 0, 0, 0.199);
+    width: calc(100% - 10px);
+    height:45px;
+    padding: 5px;
+    margin-left: 50%;
+    transform:translateX(-50%);
+    color:white;
+    font-size: 16px;
+    margin-top: 10px;
 }
+
+#Painel #criar-curso-area input::placeholder{
+    color:rgba(243, 242, 242, 0.473);
+    padding-left: 5px;
+}
+
+#Painel #criar-curso-area input[type='file']{
+    appearance: none;
+    background:none;
+    cursor: pointer;
+}
+#Painel #criar-curso-area button[type='submit']{
+    color:#301c3c;
+    font-weight: 400;
+    font-size: 25px;
+    transition:.4s;
+    cursor: pointer;
+    width: 90%;
+    height: 50px;
+    background-color: rgb(209, 27, 255);;
+    margin-top: 10px;
+    terminar
+}
+

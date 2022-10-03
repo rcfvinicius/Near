@@ -345,7 +345,7 @@ export default function Painel(){
                     <input name='titulo' type='text' placeholder='Titulo' maxLength='30'></input>
                     <input name='tituloLongo' type='text' placeholder='Titulo completo' maxLength='80'></input>
                     <input name='descricao' type='text' placeholder='Descrição' maxLength='800'></input>
-                    <input onClick={(e)=>{console.log(Number(e.target.value))}} name='preco' type='number' placeholder='Preço' step='0.01'></input>
+                    <input name='preco' type='number' placeholder='Preço' step='0.01'></input>
                     <input name='categoria' type='text' placeholder='Categoria' maxLength='20'></input>
                     <input name="foto" type="file" accept="image/*" id="foto"/>
                     <button type='submit'>enviar</button>
