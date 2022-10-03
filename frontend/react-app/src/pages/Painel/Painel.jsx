@@ -162,7 +162,7 @@ export default function Painel(){
                 //console.log(resposta)
                 let res = await resposta.json();
       
-                
+                //console.log(res)
                 //consulta de imagem do curso
                 let resposta2 = await fetch(`${process.env.REACT_APP_API_HOSTNAME}/curso/cursosAdquiridosImg?id=${res.id}`,{
                     method:'POST',
@@ -195,7 +195,7 @@ export default function Painel(){
     async function cadastrarCurso(event){
         try{
             event.preventDefault();
-            
+            /* formData.append('foto', document.querySelector('#Painel #criar-curso-area form #foto').files[0]) mandar a foto na segunda requisicao */
             const controller = new AbortController();
             setTimeout(() => {controller.abort()},5000);
             let resposta = await fetch(`${process.env.REACT_APP_API_HOSTNAME}/curso/criar`,{
@@ -213,8 +213,23 @@ export default function Painel(){
                     categoria: document.querySelector('#Painel #criar-curso-area form input[name="categoria"]').value
                 })
             })
-            let res = await resposta.text();
-            console.log(res);
+            let res = await resposta.json();
+            //console.log(res)
+            if(res.id){
+                const formData = new FormData();
+                formData.append('foto', document.querySelector('#Painel #criar-curso-area form #foto').files[0]);
+
+                let resposta2 = await fetch(`${process.env.REACT_APP_API_HOSTNAME}/curso/criarImg?id=${res.id}&jwt=${localStorage.getItem('token')}`,{
+                    method:'POST',
+                    mode:'cors',
+                    body:formData
+                })
+                const res2 = await resposta2.text();
+                //console.log(res2)
+
+            }else{
+                throw new Error('ID_INVALIDO');
+            }
 
         }catch(err){
             console.log(err);
@@ -332,6 +347,7 @@ export default function Painel(){
                     <input name='descricao' type='text' placeholder='Descrição' maxLength='800'></input>
                     <input onClick={(e)=>{console.log(Number(e.target.value))}} name='preco' type='number' placeholder='Preço' step='0.01'></input>
                     <input name='categoria' type='text' placeholder='Categoria' maxLength='20'></input>
+                    <input name="foto" type="file" accept="image/*" id="foto"/>
                     <button type='submit'>enviar</button>
                 </form>
             </div>

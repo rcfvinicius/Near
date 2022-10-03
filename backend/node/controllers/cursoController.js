@@ -7,9 +7,44 @@ const fs = require('fs');
 //const Curso = require('../models/cursoModel.js');
 //const User = require('../models/userModel.js');
 
+const storage = multer.diskStorage({
+    destination: async function (req, file, cb) {
+        try{
+        await jwt.verificar(req.query.jwt);
+        console.log('multer: ')
+        console.log(req.query.id);
+        const caminho = 'D:\\SQL\\imagens\\cursos\\';
+
+        fs.access(caminho+req.query.id,(err)=>{
+            if(err){
+               fs.mkdir(caminho+req.query.id,(err)=>{
+                  if(err){
+                    throw new Error('MKDIR_ERROR');
+                  }
+                  cb(null, caminho+req.query.id+'\\');
+               })
+            }else{
+                cb(null, caminho+req.query.id+'\\');
+            }
+          })
+        }catch(err){
+            console.log(err)
+        }
+    },
+    filename: function (req, file, cb) {
+        cb(null, 'default-course.png');
+    }
+ });
+
+exports.upload = multer({ storage });
+
+
 exports.criar = async function(req,res){
 try{
+    console.log('criar: ')
+    console.log(req.body)
     const token = await jwt.verificar(req.headers['x-access-token']);
+    
     const user = await sql.query(`SELECT id,nome,email,senha,role FROM usuario WHERE id = $1;`,[token.sub]);
     if(user.rows.length == 0){
         throw new Error('USER_NOT_FOUND');
@@ -27,15 +62,26 @@ try{
     await sql.query(`INSERT INTO cria_curso values ($1, $2);`,[user.rows[0].id, resposta.rows[0].id]);
     await sql.query('COMMIT;');
 
+    req.curso = resposta.rows[0];
+    req.idCurso = resposta.rows[0].id;
     res.status(201).send(JSON.stringify(resposta.rows[0]));
+
+/*     req.curso = req.titulo;
+    req.idCurso = 99
+    res.status(201).send(JSON.stringify({id:'21'})) */
+    //next();
 }catch(err){
     await sql.query('ROLLBACK;');
     errorHandler(err,req,res);
 }
 }
-exports.criarImg = function(req,res){
-    
+
+exports.finalizarCadastro = function(req,res){
+    console.log(req.body)
+    res.status(201).send(JSON.stringify(req.curso));
 }
+
+
 
 
 //update
@@ -74,6 +120,8 @@ try{
     errorHandler(err,req,res);
 }
 }
+
+
 //terminar o resto
 //delete
 /* exports.delete = async function(req,res){
@@ -113,15 +161,13 @@ exports.cursosAdquiridosImg = async function(req,res){
 try{
     const caminhoBase = `D:\\SQL\\imagens\\cursos`;
     const b = '\\';
-    fs.access(caminhoBase+b+req.query.id+b+'icone-curso.png',(err)=>{
+    fs.access(caminhoBase+b+req.query.id+b+'default-course.png',(err)=>{
+        //console.log(req.query)
         if(err){
             res.sendFile(caminhoBase + b + '0' + b + 'default-course.png');
-/*             fs.mkdir(caminhoBase+b+req.query.id,(erro)=>{
-                console.log(erro);
-            }) */
             return;
         }
-        res.sendFile(caminhoBase + b + req.query.id + b + 'default-icon.png');
+        res.sendFile(caminhoBase + b + req.query.id + b + 'default-course.png');
     })
     
 }catch(err){

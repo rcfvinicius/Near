@@ -20,7 +20,8 @@ app.use(express.urlencoded({extended:true}));
 
 app.use('/user',userRoutes);
 app.use('/curso',cursoRoutes)
-
+//app.post('/curso/criar')
+//router.post('/criar',cursoController.criar,cursoController.upload.single('foto'));
 app.listen(8000,()=>{
     console.log('server:ok, port:8000');
     //const sql = require('./connection.js');
