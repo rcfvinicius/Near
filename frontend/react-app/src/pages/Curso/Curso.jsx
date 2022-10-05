@@ -29,10 +29,10 @@ a ;ordem; vai; ser ;decidida; clicando; nos ;cursos ;disponiveis; na ;ordem ;des
     <iframe width="560" height="315" src="https://www.youtube.com/embed/X0KOEd34Mb8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen"></iframe>
     `;
    }
-   cada botao vai ser criado por um fetch e vai ter um data-id contendo o codigo do video(colocar as classes nos botoes)
-   quando estiver selecionado, a cor do botao deve mudar(event.currentTarget.style). Precisa resetar os estilos dos outros botoes(fazer um for com todos os botoes pra remover os estilos
-    depois adicionar o estilo de selecionado ao event.currentTarget
-   )
+   //cada botao vai ser criado por um fetch e vai ter um data-id contendo o codigo do video(colocar as classes nos botoes)
+   //quando estiver selecionado, a cor do botao deve mudar(event.currentTarget.style). Precisa resetar os estilos dos outros botoes(fazer um for com todos os botoes pra remover os estilos
+  //  depois adicionar o estilo de selecionado ao event.currentTarget
+  // )
 
     return(
         <>
@@ -67,7 +67,13 @@ a ;ordem; vai; ser ;decidida; clicando; nos ;cursos ;disponiveis; na ;ordem ;des
                     <iframe width="560" height="315" src="https://www.youtube.com/embed/pEfrdAtAmqk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen"></iframe>
                 </div>
                 <div id='comentarios-container'>
-                    comentarios
+                    <h2>Comentários (0)</h2>
+                    <div id='comentarios'>
+
+                    </div>
+                    <form>
+                        <input type="text" name='comentario'/>
+                    </form>
                 </div>
             </div>
         </div>

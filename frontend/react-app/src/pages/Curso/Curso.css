@@ -30,3 +30,9 @@
     display: flex;
     justify-content: center;
 }
+
+#Curso #comentarios{
+    width: calc(100vw - 267px);
+    min-height: calc(100vh - 450px);
+    background-color: aquamarine;
+}

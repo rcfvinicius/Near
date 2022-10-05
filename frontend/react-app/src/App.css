@@ -9,10 +9,10 @@ body {
   margin: 0;
   width: calc(100vw - 17px);
   overflow-x: hidden;
-  cursor: url(C:/Windows/Cursors/cursors/c4_wii_cursors/wii-pointer-ccw.cur),default;
+  /*cursor: url(C:/Windows/Cursors/cursors/c4_wii_cursors/wii-pointer-ccw.cur),default;*/
 }
 button,a,input[type='file'],.manual-btn,#submit-btn,input[type='radio']{
-  cursor: url(C:/Windows/Cursors/cursors/c4_wii_cursors/wii-pointer-blue.cur),pointer !important;
+  /*cursor: url(C:/Windows/Cursors/cursors/c4_wii_cursors/wii-pointer-blue.cur),pointer !important;*/
 }
 p,h1,h2,h3,h4,h5,h6,li{
   cursor:text;
