@@ -9,9 +9,11 @@ router.post('/criarImg',cursoController.upload.single('foto'),(req,res)=>{res.se
 
 router.patch('/update/:curso',cursoController.update);
 //router.delete('/delete/:curso',cursoController.delete);
+
 router.get('/cursosAdquiridosCount',cursoController.cursosAdquiridosCount);
-router.post('/cursosAdquiridosImg',cursoController.cursosAdquiridosImg);
 router.post('/cursosAdquiridosDados',cursoController.cursosAdquiridosDados);
+
+router.post('/cursosAdquiridosImg',cursoController.cursosAdquiridosImg);
 
 router.get('/cursosCriadosCount',cursoController.cursosCriadosCount);
 router.post('/cursosCriadosDados',cursoController.cursosCriadosDados);

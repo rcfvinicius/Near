@@ -10,7 +10,7 @@ import Footer from '../../components/Footer/Footer.jsx';
 import quimica from "../../assets/exercicio-quimica.png";
 import funcoes from '../../assets/exercicio-funcoes.png';
 import curso from '../../assets/imagens/cursos/morfologia.png'
-import fechar from '../../assets/x.png'
+import fechar from '../../assets/x2.png'
 
 export default function Painel(){
     const navigate = useNavigate();
@@ -27,9 +27,9 @@ export default function Painel(){
     async function editarPerfil(event){
         event.preventDefault();
         try{
-            document.querySelector('#Painel #perfil-direito #load-perfil #erro').style = 'display:none';
-            document.querySelector('#Painel #perfil-direito #load-perfil #success').style = 'display:none';
-            document.querySelector('#Painel #perfil-direito #load-perfil #load').style = 'display:inline-block;';
+            document.querySelector('#Painel #perfil-direito #load-perfil .erro').style = 'display:none';
+            document.querySelector('#Painel #perfil-direito #load-perfil .success').style = 'display:none';
+            document.querySelector('#Painel #perfil-direito #load-perfil .load').style = 'display:inline-block;';
             
             if(document.querySelectorAll('#Painel #perfil form input[type="password"]')[0].value !== document.querySelectorAll('#Painel #perfil form input[type="password"]')[1].value){
                 throw new Error('SENHAS_DIFERENTES');
@@ -50,11 +50,14 @@ export default function Painel(){
             })
             
             let res = await resposta.text();
-            document.querySelector('#Painel #perfil-direito #load-perfil #load').style = 'display:none';
-            document.querySelector('#Painel #perfil-direito #load-perfil #success').style = 'display:inline-block';
+            if(res !== 'ok'){
+                throw new Error('RES != OK');
+            }
+            document.querySelector('#Painel #perfil-direito #load-perfil .load').style = 'display:none';
+            document.querySelector('#Painel #perfil-direito #load-perfil .success').style = 'display:inline-block';
         }catch(err){
-            document.querySelector('#Painel #perfil-direito #load-perfil #load').style = 'display:none';
-            document.querySelector('#Painel #perfil-direito #load-perfil #erro').style = 'display:inline-block';
+            document.querySelector('#Painel #perfil-direito #load-perfil .load').style = 'display:none';
+            document.querySelector('#Painel #perfil-direito #load-perfil .erro').style = 'display:inline-block';
 
             console.log(err);
         }
@@ -108,15 +111,15 @@ export default function Painel(){
             }
 
 
-            container.innerHTML +=
+            container.innerHTML =
             `
-            <div class="card card-curso">
+            <button type="button" class="card card-curso btn-curso" data-id=${res.id}>
                 <div class='imgCurso-container'>
                 <img src=${imgSrc}></img>
                 </div>
                 <h3>${res.titulo}</h3>
-            </div>
-            `;
+            </button>
+            ` + container.innerHTML;
         }
         
     }catch(err){
@@ -176,16 +179,25 @@ export default function Painel(){
                 }else{
                     imgSrc = URL.createObjectURL(res2);
                 }
-    
                 const container = document.querySelector('#Painel #cursos-criados-container #cursos-criados');
-                container.innerHTML += `
-                <a href='/sobre' class="card card-curso">
+                container.innerHTML = `
+                <button type="button" class="card card-curso btn-curso" data-id=${res.id}>
                     <div class='imgCurso-container'>
                     <img src=${imgSrc}></img>
-                    </div>             
+                    </div>
                     <h3>${res.titulo}</h3>
-                </a>
-                `;
+                </button>
+                ` + container.innerHTML;
+
+                //document.querySelector('#cursos-criados tag').dataset.id
+            }
+            //console.log(document.querySelectorAll('.btn-curso')[0])
+            const btn = document.querySelectorAll('#Painel .btn-curso');
+            for(let i=0;i<btn.length;i++){
+                btn[i].addEventListener('click',(event)=>{
+                    //console.log(event.currentTarget.dataset.id);
+                    navigate(`/curso/${event.currentTarget.dataset.id}`);
+                })
             }
         }catch(err){
             console.log(err);
@@ -226,15 +238,17 @@ export default function Painel(){
                 })
                 const res2 = await resposta2.text();
                 //console.log(res2)
-
+                getCursosCriados();
             }else{
                 throw new Error('ID_INVALIDO');
             }
+            
 
         }catch(err){
             console.log(err);
         }
     }
+
 
     useEffect(()=>{
         document.body.scrollTop = 0;
@@ -251,7 +265,6 @@ export default function Painel(){
             document.querySelector('#Painel #criar-curso-area').style = 'display:flex;';
         });
 
-
         getCursosAdquiridos();
         getCursosCriados();
     },[])
@@ -261,7 +274,7 @@ export default function Painel(){
         <main id="Painel">
             <div id='perfil'>
                 <div id='nome-e-logout'>
-                <h2>{tokenData.nome}nome do usuario</h2>
+                <h2>{tokenData.nome}</h2>
                 <button type='button' onClick={sair}>Sair</button>
                 </div>
 
@@ -275,7 +288,7 @@ export default function Painel(){
                </div>
                <div id="perfil-direito" className='card-painel'>
                 <form onSubmit={editarPerfil}>
-                    <input type='email' disabled value='email@gmail'></input>
+                    <input type='email' disabled value={tokenData.email}></input>
                     <button id='btn1' type="button"></button>
 
                     <input type='text' placeholder='Alterar nome'></input>
@@ -290,9 +303,9 @@ export default function Painel(){
                     <div id='submit-e-load'>
                     <button id='btn5' type="submit">alterar dados</button>
                     <div id='load-perfil'>
-                        <div id='load'></div>
-                        <div id='erro'></div>
-                        <div id='success'></div>
+                        <div className='load'></div>
+                        <div className='erro'></div>
+                        <div className='success'></div>
                     </div>
                     </div>
 

@@ -8,6 +8,7 @@ import Cadastro from './pages/Cadastro/Cadastro.jsx'
 import Sobre from './pages/Sobre/Sobre.jsx';
 import Painel from './pages/Painel/Painel.jsx'
 import Authentication from './utils/Authentication';
+import Curso from './pages/Curso/Curso.jsx';
 
 import PrivateRoute from './utils/PrivateRoute';
 
@@ -26,6 +27,11 @@ function App() {
         <Route path='/painel' exact element={
         <PrivateRoute>
           <Painel/>
+        </PrivateRoute>
+        }/>
+        <Route path='/curso/:id' exact element={
+        <PrivateRoute>
+          <Curso/>
         </PrivateRoute>
         }/>
         <Route path='/teste' exact element={<Teste/>}/>

@@ -221,7 +221,7 @@
     display: inline-block;
 }
 
-#Painel #perfil-direito #load-perfil #success{
+#Painel #perfil-direito #load-perfil .success{
     width: 27px;
     height: 27px;
     background-image: url(../../assets/success.png);
@@ -232,7 +232,7 @@
     display: none;
 }
 
-#Painel #perfil-direito #load-perfil #erro{
+#Painel #perfil-direito #load-perfil .erro{
     width: 27px;
     height: 27px;
     background-image: url(../../assets/erro.png);
@@ -243,7 +243,7 @@
     display: none;
 }
 
-#Painel #perfil-direito #load-perfil #load{
+#Painel #perfil-direito #load-perfil .load{
     position:absolute;
     border-top:3px solid purple;
     width: 27px;
@@ -393,10 +393,26 @@
     font-size: 25px;
     transition:.4s;
     cursor: pointer;
-    width: 90%;
+    width: 100%;
     height: 50px;
     background-color: rgb(209, 27, 255);;
     margin-top: 10px;
-    terminar
+    border-radius: 10px;
+    text-transform:uppercase;
+    border:none;
+}
+#Painel #criar-curso-area button[type='submit']:hover{
+    box-shadow: 0px 1px 40px 15px rgba(209, 27, 255, 0.342);
 }
 
+/* botao card curso */
+#Painel .btn-curso{
+    appearance: none;
+    font-family: Playfair,serif;
+    display: flex;
+    flex-direction: column;
+}
+
+#Painel .btn-curso h3{
+    font-size: 20px;
+}
