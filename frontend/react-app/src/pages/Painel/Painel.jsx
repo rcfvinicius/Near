@@ -68,7 +68,10 @@ export default function Painel(){
         const container = document.querySelector('#Painel #cursos-container #cards-cursos');
         container.innerHTML = '';
 
+        const controller = new AbortController();
+        setTimeout(() => {controller.abort()},5000);
         let quantidade = await fetch(`${process.env.REACT_APP_API_HOSTNAME}/curso/cursosAdquiridosCount`,{
+            signal:controller.signal,
             method:'GET',
             mode:'cors',
             headers:{
@@ -81,7 +84,10 @@ export default function Painel(){
         for(let i=1;i<=count;i++){
             
             //consulta de dados do curso
+            const controller = new AbortController();
+            setTimeout(() => {controller.abort()},5000);
             let resposta = await fetch(`${process.env.REACT_APP_API_HOSTNAME}/curso/cursosAdquiridosDados`,{
+                signal:controller.signal,
                 method:'POST',
                 mode:'cors',
                 headers:{
@@ -97,7 +103,10 @@ export default function Painel(){
   
             
             //consulta de imagem do curso
+            const controller2 = new AbortController();
+            setTimeout(() => {controller.abort()},5000);
             let resposta2 = await fetch(`${process.env.REACT_APP_API_HOSTNAME}/curso/cursosAdquiridosImg?id=${res.id}`,{
+                signal:controller2.signal,
                 method:'POST',
                 mode:'cors'
             })
@@ -113,9 +122,9 @@ export default function Painel(){
 
             container.innerHTML =
             `
-            <button type="button" class="card card-curso btn-curso" data-id=${res.id}>
+            <button type="button" class="card card-curso btn-curso" data-id="${res.id}">
                 <div class='imgCurso-container'>
-                <img src=${imgSrc}></img>
+                <img src="${imgSrc}"></img>
                 </div>
                 <h3>${res.titulo}</h3>
             </button>
@@ -136,8 +145,11 @@ export default function Painel(){
         try{
             const container = document.querySelector('#Painel #cursos-criados-container #cursos-criados');
             container.innerHTML = '';
-            
+
+            const controller = new AbortController();
+            setTimeout(() => {controller.abort()},5000);
             let quantidade = await fetch(`${process.env.REACT_APP_API_HOSTNAME}/curso/cursosCriadosCount`,{
+                signal:controller.signal,
                 method:'GET',
                 mode:'cors',
                 headers:{
@@ -151,7 +163,10 @@ export default function Painel(){
             for(let i=1;i<=count;i++){
             
                 //consulta de dados do curso
+                const controller = new AbortController();
+                setTimeout(() => {controller.abort()},5000);
                 let resposta = await fetch(`${process.env.REACT_APP_API_HOSTNAME}/curso/cursosCriadosDados`,{
+                    signal:controller.signal,
                     method:'POST',
                     mode:'cors',
                     headers:{
@@ -167,7 +182,10 @@ export default function Painel(){
       
                 //console.log(res)
                 //consulta de imagem do curso
+                const controller2 = new AbortController();
+                setTimeout(() => {controller.abort()},5000);
                 let resposta2 = await fetch(`${process.env.REACT_APP_API_HOSTNAME}/curso/cursosAdquiridosImg?id=${res.id}`,{
+                    signal:controller.signal,
                     method:'POST',
                     mode:'cors'
                 })
@@ -181,9 +199,9 @@ export default function Painel(){
                 }
                 const container = document.querySelector('#Painel #cursos-criados-container #cursos-criados');
                 container.innerHTML = `
-                <button type="button" class="card card-curso btn-curso" data-id=${res.id}>
+                <button type="button" class="card card-curso btn-curso" data-id="${res.id}">
                     <div class='imgCurso-container'>
-                    <img src=${imgSrc}></img>
+                    <img src="${imgSrc}"></img>
                     </div>
                     <h3>${res.titulo}</h3>
                 </button>

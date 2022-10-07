@@ -23,6 +23,9 @@
     margin-bottom: 2px;
     overflow: hidden;
 }
+#Curso #sidebar button[type='button']:hover{
+    background-color: #1d0f2c;
+}
 
 #Curso #iframe-container{
     background-color: #180c24;

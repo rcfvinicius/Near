@@ -252,3 +252,128 @@ try{
 }
 
 //
+
+exports.buscarVideoAulas = async function(req,res){
+try{//http://localhost:8000/curso/buscarVideoAulas?idCurso=37
+    const token = await jwt.verificar(req.headers['x-access-token']);
+    //verificar se o usuário possui ou criou o curso
+    const query1 = await sql.query(`
+    select id_usuario from adquire_curso
+    where id_usuario = $1
+    and id_curso = $2
+    `,[token.sub, req.query.idCurso]);
+
+    if(query1.rowCount == 0){
+        const query2 = await sql.query(`
+        select id_usuario from cria_curso
+        where id_usuario = $1
+        and id_curso = $2
+        `,[token.sub, req.query.idCurso]);
+        if(query2.rowCount == 0){
+            res.status(403).send('Usuário não possui este curso!')
+            return;
+        }
+/*         const resposta = await sql.query(`
+        select aula.cod from video_aula aula
+        inner join cria_aula ca
+        on aula.id = ca.id_aula
+        where ca.id_curso = $1
+        `,[req.query.idCurso])
+        res.status(200).send(JSON.stringify(resposta.rows));
+        return; */
+    }
+    const resposta = await sql.query(`
+        select aula.cod, aula.id, aula.nome from video_aula aula
+        inner join cria_aula ca
+        on aula.id = ca.id_aula
+        where ca.id_curso = $1
+        `,[req.query.idCurso]);
+
+    if(req.query.mode == 'all'){
+        res.status(200).json(resposta.rows);
+        return;
+    }
+    const ordem = await sql.query(`select ordem from curso where id = $1`,[req.query.idCurso]);
+    if(ordem.rows[0].ordem == null){
+        res.status(200).send(JSON.stringify(resposta.rows));
+        return;
+    }
+
+    let ordemAulas = ordem.rows[0].ordem.split(';');
+
+    const ordemFinal = [];
+    let i = 0;
+    let limit = 0;
+    while(i < ordemAulas.length && limit < 9999){
+        for(let e=0;e<resposta.rows.length;e++){
+            if(resposta.rows[e].id == parseInt(ordemAulas[i])){
+                ordemFinal.push(resposta.rows[e]);
+                i++;
+            }
+        }
+        limit++;
+    }
+
+    res.status(200).json(ordemFinal);
+}catch(err){
+    errorHandler(err,req,res);
+}
+}
+
+exports.criarVideoAula = async function criarVideoAula(req,res){
+try{
+    //idCurso, link, nome
+    const token = await jwt.verificar(req.headers['x-access-token']);
+    //verificar se o usuário criou o curso
+    const query = await sql.query(`
+    select id_usuario from cria_curso
+    where id_usuario = $1
+    and id_curso = $2
+    `,[token.sub, req.body.idCurso]);
+
+    if(query.rowCount == 0){
+        res.status(403).send('Usuário não é o criador deste curso!');
+        return;
+    }
+    const link = req.body.link;
+    let cod;
+    if(link.split('//')[1].split('/')[0] == 'youtu.be'){
+        cod = link.split('//')[1].split('/')[1];
+    }else{
+        cod = link.split('v=')[1].split('&')[0];
+    }
+
+    await sql.query('BEGIN;');
+    await sql.query(`INSERT INTO video_aula values(default, $1, $2);`,[req.body.nome, cod]);
+    const resposta = await sql.query(`select id from video_aula where nome = $1 and cod = $2 order by id desc limit 1;`,[req.body.nome, cod]);
+    await sql.query(`INSERT INTO cria_aula values($1, $2)`,[resposta.rows[0].id, req.body.idCurso]);
+    await sql.query('COMMIT;');
+
+    res.status(201).send('criado');
+
+}catch(err){
+    await sql.query('ROLLBACK;')
+    errorHandler(err,req,res);
+}
+}
+
+exports.ordenar = async function(req,res){
+try{
+    const token = await jwt.verificar(req.headers['x-access-token']);
+    //verificar se o usuário criou o curso
+    const query = await sql.query(`
+    select id_usuario from cria_curso
+    where id_usuario = $1
+    and id_curso = $2
+    `,[token.sub, req.body.idCurso]);
+    if(query.rowCount == 0){
+        res.status(403).send('Usuário não é o criador deste curso!');
+        return;
+    }
+
+    await sql.query(`update curso set ordem = $1 where id = $2`,[req.body.ordem, req.body.idCurso]);
+    res.status(200).send('ok');
+}catch(err){
+    errorHandler(err,req,res);
+}
+}

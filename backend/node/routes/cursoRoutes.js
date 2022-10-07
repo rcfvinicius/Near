@@ -17,5 +17,8 @@ router.post('/cursosAdquiridosImg',cursoController.cursosAdquiridosImg);
 
 router.get('/cursosCriadosCount',cursoController.cursosCriadosCount);
 router.post('/cursosCriadosDados',cursoController.cursosCriadosDados);
+router.get('/buscarVideoAulas',cursoController.buscarVideoAulas);
+router.post('/criarVideoAula',cursoController.criarVideoAula);
+router.patch('/ordenar',cursoController.ordenar);
 
 module.exports = router;
