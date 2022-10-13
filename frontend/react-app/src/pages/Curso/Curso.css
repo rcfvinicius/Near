@@ -22,9 +22,10 @@
     text-align: start;
     margin-bottom: 2px;
     overflow: hidden;
+    cursor: pointer;
 }
 #Curso #sidebar button[type='button']:hover{
-    background-color: #1d0f2c;
+    background-color: #1d0f2c !important;/* se nao tiver o important o botao perde o hover quando coloco o estilo no js */
 }
 
 #Curso #iframe-container{
@@ -38,4 +39,189 @@
     width: calc(100vw - 267px);
     min-height: calc(100vh - 450px);
     background-color: aquamarine;
+}
+
+#Curso #btn-editar{
+    position: absolute;
+    right:20px;
+    appearance: none;
+    width: 30px;
+    height: 30px;
+    background-image: url(../../assets/edit-icon.png);
+    background-repeat:no-repeat;
+    background-position: center;
+    background-size:cover;
+    transition:100ms;
+    position: absolute;
+    border:none;
+    cursor: pointer;
+    display: none;
+}
+
+#Curso #btn-editar:hover{
+    transform:scale(1.3);
+}
+
+#Curso #editar-curso-area{
+    width: 90%;
+    height: 90%;
+    overflow: hidden;
+    /* background-color: #180c24; */
+    background-color: #6205be;
+    position:fixed;
+    top:5%;
+    left: 5%;
+    z-index: 2;
+    display: none;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 20px;
+}
+
+#Curso #editar-curso-area #btn-fechar{
+    appearance: none;
+    background: none;
+    width: 50px;
+    height: 50px;
+    overflow: hidden;
+    position: absolute;
+    border:none;
+    cursor: pointer;
+    right: 0px;
+    top:5px;
+    z-index: 3;
+}
+#Curso #editar-curso-area #btn-fechar img{
+    width: 100%;
+}
+
+#Curso #editar-curso-area #form3{
+    width: 300px;
+    height: calc(100% - 50px);
+    margin-top:50px;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    padding-bottom:10px;
+
+}
+#Curso #editar-curso-area #form3 #todas-aulas{
+   /*  background-color: aquamarine; */
+    width: 300px;
+    height: calc(100% - 50px);
+    overflow-x: hidden;
+    overflow-y:auto;
+}
+
+#Curso #editar-curso-area #todas-aulas button[type='button']{
+    color:white;
+    appearance: none;
+    width: calc(100% - 50px);
+    height: 50px;
+    border:none;
+    background-color: #351c50;
+    text-align: start;
+    overflow: hidden;
+    cursor: pointer;
+}
+#Curso #editar-curso-area #todas-aulas button[type='button']:hover{
+    transform:scale(1.06);
+}
+
+#Curso #editar-curso-area #todas-aulas > div{
+    display: flex;
+    flex-direction: row-reverse;
+    height: 50px;
+    margin-bottom: 2px;
+}
+
+#Curso #editar-curso-area #todas-aulas div span{
+    /* background-color: red; */
+    width: 50px;
+    height: 50px;
+    color:white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family:proxima-nova, sans-serif;
+    font-size: 25px;
+}
+#Curso #editar-curso-area #form3 > div:first-child{
+    display: flex;
+    flex-direction: row-reverse;
+    height: 50px;
+}
+
+#Curso #editar-curso-area #form3 > div:first-child button[type='button']{
+    appearance: none;
+    width: 35px;
+    height: 35px;
+    background-image: url(../../assets/reset.png);
+    background-repeat:no-repeat;
+    background-position: center;
+    background-size:cover;
+    transition:100ms;
+    margin-right: 10px;
+    margin-top: 7px;
+}
+
+#Curso #editar-curso-area #form3 > div:first-child button:hover,#Curso #editar-curso-area #form2 > div:first-child button[type='submit']:hover{
+    transform:scale(1.2);
+}
+
+#Curso #editar-curso-area #form3 > div:first-child button[type='submit']{
+    appearance: none;
+    width: 65px;
+    height: 35px;
+    background-color: white;
+    transition:100ms;
+    margin-right: 10px;
+    margin-top: 7px;
+    text-transform:uppercase;
+    font-weight: 700;
+}
+
+#Curso #editar-curso-area #form2{
+    width: 300px;
+    height: calc(100% - 50px);
+    margin-top:50px;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    padding-bottom:10px;
+    overflow: hidden;
+    color:white;
+}
+
+#Curso #editar-curso-area #form2 > div:first-child{
+    height: 50px;
+    overflow: hidden;
+    display: flex;
+    justify-content: space-between;
+}
+
+#Curso #editar-curso-area #form2 > div:first-child button[type='submit']{
+    appearance: none;
+    width: 65px;
+    height: 35px;
+    background-color: white;
+    transition:100ms;
+    margin-right: 10px;
+    margin-top: 7px;
+    text-transform:uppercase;
+    font-weight: 700;
+}
+
+#Curso #editar-curso-area .criar-editar-aula{
+    background-color: #180c24;
+    width: 100%;
+    height: calc(100% - 50px);
+}
+
+#Curso #form2 #editar-aula-area label{
+    display: flex;
+    column-gap: 10px;
+}
+#Curso #form2 #editar-aula-area label h4{
+    margin: 5px 0 0 0 ;
 }

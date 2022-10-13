@@ -14,7 +14,7 @@ export default function Authentication({children}){
         async function fetchData(){
             try{
                 const controller = new AbortController();
-                setTimeout(() => {controller.abort()},6000);
+                setTimeout(() => {controller.abort()},4000);
                 let resposta = await fetch(`${process.env.REACT_APP_API_HOSTNAME}/user/token`,{
                     signal:controller.signal,
                     method:'GET',
@@ -30,7 +30,7 @@ export default function Authentication({children}){
 
                 setLogado(true);
             }catch(err){
-                setLogado(true);//false
+                setLogado(false);//false
                 setTokenData(false);
             }
         }
@@ -45,29 +45,3 @@ export default function Authentication({children}){
 }
 
 export const useAuth = () => React.useContext(AuthContext);
-
-
-/* 
-
-    async function fetchData(){
-        try{
-            const controller = new AbortController();
-            setTimeout(() => {controller.abort()},6000);
-            let resposta = await fetch(`${process.env.REACT_APP_API_HOSTNAME}/user/token`,{
-                signal:controller.signal,
-                method:'GET',
-                headers:{
-                    'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MmNiMTdiMGZmZTYxODc5OGQ0OTc1NDgiLCJub21lIjoibm9tZSBhcnRpZmljaWFsIiwiZW1haWwiOiJleGVtcGxvQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsInRva2VuSW5mbyI6InRva2VuIGFydGlmaWNpYWwiLCJleHAiOjE2NjI4MzcxNjAsImlhdCI6MTY2MjgzNjI2MH0.f_R2ux9Jbqodj1LYIeUzkbEnimbCaObJl6R8a9rPlCY'
-                }
-            })
-            let res = await resposta.text();
-            console.log(res)
-            console.log(localStorage.getItem("token"))
-            //JSON.parse(res)
-            setLogado(true)
-        }catch(err){
-            console.log('catch')
-            setLogado(false)
-        }
-    }
-*/

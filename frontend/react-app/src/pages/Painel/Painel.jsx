@@ -244,7 +244,7 @@ export default function Painel(){
                 })
             })
             let res = await resposta.json();
-            //console.log(res)
+            console.log(res)
             if(res.id){
                 const formData = new FormData();
                 formData.append('foto', document.querySelector('#Painel #criar-curso-area form #foto').files[0]);

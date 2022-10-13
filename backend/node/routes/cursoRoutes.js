@@ -20,5 +20,6 @@ router.post('/cursosCriadosDados',cursoController.cursosCriadosDados);
 router.get('/buscarVideoAulas',cursoController.buscarVideoAulas);
 router.post('/criarVideoAula',cursoController.criarVideoAula);
 router.patch('/ordenar',cursoController.ordenar);
+router.get('/verificarCriador',cursoController.verificarCriador)
 
 module.exports = router;

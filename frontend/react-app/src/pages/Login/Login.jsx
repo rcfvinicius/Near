@@ -53,8 +53,6 @@ export default function Login(){
                     setLogado(true);
                     navigate(returnTo);
                 })
-   
- 
 
             //window.location.href = "http://localhost:3000/";
         }).catch((err)=>{

@@ -49,29 +49,15 @@ try{
     if(user.rows.length == 0){
         throw new Error('USER_NOT_FOUND');
     }
-/*     if(user.rows[0].role == 'aluno'){
-        res.status(401).send('Alunos não podem criar cursos');
-        return;
-    } */
     //colocar um switch pra verificar o tamanho(length) das strings
     const dataAtual = Date.now();
     //23505     curso ja existe
-    await sql.query('BEGIN;');
-    await sql.query(`INSERT INTO curso values (default, $1, $2, $3, $4, $5, $6);`,[req.body.titulo, req.body.tituloLongo, req.body.descricao, parseInt(req.body.preco * 100), req.body.categoria, dataAtual]);
-    const resposta = await sql.query(`SELECT * from curso where titulo = $1 and data_criacao = $2`,[req.body.titulo, dataAtual]);
-    await sql.query(`INSERT INTO cria_curso values ($1, $2);`,[user.rows[0].id, resposta.rows[0].id]);
-    await sql.query('COMMIT;');
+    await sql.query(`INSERT INTO curso values (default, $1, $2, $3, $4, $5, $6, $7)`,[token.sub, req.body.titulo, req.body.tituloLongo, req.body.descricao, parseInt(req.body.preco * 100), req.body.categoria, dataAtual]);
+    const resposta = await sql.query(`select id from curso where data_criacao = $1`,[dataAtual]);
 
-    req.curso = resposta.rows[0];
-    req.idCurso = resposta.rows[0].id;
     res.status(201).send(JSON.stringify(resposta.rows[0]));
-
-/*     req.curso = req.titulo;
-    req.idCurso = 99
-    res.status(201).send(JSON.stringify({id:'21'})) */
-    //next();
 }catch(err){
-    await sql.query('ROLLBACK;');
+    //await sql.query('ROLLBACK;');
     errorHandler(err,req,res);
 }
 }
@@ -219,13 +205,18 @@ exports.cursosCriadosCount = async function(req,res){
 try{
     const token = await jwt.verificar(req.headers['x-access-token']);
 
-    const query = await sql.query(`
+/*     const query = await sql.query(`
     select c.titulo from usuario u
     inner join cria_curso cc
     on u.id = cc.id_usuario
     inner join curso c
     on c.id = cc.id_curso
-    where u.id = $1;`,[token.sub]);
+    where u.id = $1;`,[token.sub]); */
+
+    const query = await sql.query(`
+    select titulo from curso
+    where id_usuario = $1
+    `,[token.sub]);
 
     res.status(200).send(JSON.stringify(query.rowCount));
 }catch(err){
@@ -236,15 +227,20 @@ try{
 exports.cursosCriadosDados = async function(req,res){
 try{
     const token = await jwt.verificar(req.headers['x-access-token']);
-    const query = await sql.query(`
+/*     const query = await sql.query(`
     select c.id, c.titulo from usuario u
     inner join cria_curso cc
     on u.id = cc.id_usuario
     inner join curso c
     on c.id = cc.id_curso
     where u.id = $1;
-    `,[token.sub]);//token.sub
-    
+    `,[token.sub]);//token.sub */
+
+    const query = await sql.query(`
+    select id, titulo from curso
+    where id_usuario = $1
+    `,[token.sub]);
+
     res.status(200).send(JSON.stringify(query.rows[req.body.curso]));
 }catch(err){
     errorHandler(err,req,res);
@@ -265,35 +261,34 @@ try{//http://localhost:8000/curso/buscarVideoAulas?idCurso=37
 
     if(query1.rowCount == 0){
         const query2 = await sql.query(`
-        select id_usuario from cria_curso
+        select id_usuario from curso
         where id_usuario = $1
-        and id_curso = $2
+        and id = $2
         `,[token.sub, req.query.idCurso]);
         if(query2.rowCount == 0){
             res.status(403).send('Usuário não possui este curso!')
             return;
         }
-/*         const resposta = await sql.query(`
-        select aula.cod from video_aula aula
-        inner join cria_aula ca
-        on aula.id = ca.id_aula
-        where ca.id_curso = $1
-        `,[req.query.idCurso])
-        res.status(200).send(JSON.stringify(resposta.rows));
-        return; */
     }
-    const resposta = await sql.query(`
+/*     const resposta = await sql.query(`
         select aula.cod, aula.id, aula.nome from video_aula aula
         inner join cria_aula ca
         on aula.id = ca.id_aula
         where ca.id_curso = $1
-        `,[req.query.idCurso]);
+        `,[req.query.idCurso]); */
 
+    const resposta = await sql.query(`
+    select cod, id, nome from video_aula
+    where id_curso = $1
+    `,[req.query.idCurso])
+
+
+    const ordem = await sql.query(`select ordem from curso where id = $1`,[req.query.idCurso]);
     if(req.query.mode == 'all'){
-        res.status(200).json(resposta.rows);
+        res.status(200).send(JSON.stringify([ordem.rows[0].ordem,resposta.rows]));
         return;
     }
-    const ordem = await sql.query(`select ordem from curso where id = $1`,[req.query.idCurso]);
+    
     if(ordem.rows[0].ordem == null){
         res.status(200).send(JSON.stringify(resposta.rows));
         return;
@@ -304,7 +299,7 @@ try{//http://localhost:8000/curso/buscarVideoAulas?idCurso=37
     const ordemFinal = [];
     let i = 0;
     let limit = 0;
-    while(i < ordemAulas.length && limit < 9999){
+    while(i < ordemAulas.length-1 && limit < 9999){
         for(let e=0;e<resposta.rows.length;e++){
             if(resposta.rows[e].id == parseInt(ordemAulas[i])){
                 ordemFinal.push(resposta.rows[e]);
@@ -324,11 +319,17 @@ exports.criarVideoAula = async function criarVideoAula(req,res){
 try{
     //idCurso, link, nome
     const token = await jwt.verificar(req.headers['x-access-token']);
-    //verificar se o usuário criou o curso
-    const query = await sql.query(`
+    /*     const query = await sql.query(`
     select id_usuario from cria_curso
     where id_usuario = $1
     and id_curso = $2
+    `,[token.sub, req.body.idCurso]); */
+    
+    //verificar se o usuário criou o curso
+    const query = await sql.query(`
+    select id_usuario from curso
+    where id_usuario = $1
+    and id = $2
     `,[token.sub, req.body.idCurso]);
 
     if(query.rowCount == 0){
@@ -343,16 +344,18 @@ try{
         cod = link.split('v=')[1].split('&')[0];
     }
 
+    await sql.query(`INSERT INTO video_aula values (default, $1, $2, $3)`,[req.body.idCurso, req.body.nome, cod]);
+/* 
     await sql.query('BEGIN;');
     await sql.query(`INSERT INTO video_aula values(default, $1, $2);`,[req.body.nome, cod]);
     const resposta = await sql.query(`select id from video_aula where nome = $1 and cod = $2 order by id desc limit 1;`,[req.body.nome, cod]);
     await sql.query(`INSERT INTO cria_aula values($1, $2)`,[resposta.rows[0].id, req.body.idCurso]);
     await sql.query('COMMIT;');
-
+ */
     res.status(201).send('criado');
 
 }catch(err){
-    await sql.query('ROLLBACK;')
+    //await sql.query('ROLLBACK;')
     errorHandler(err,req,res);
 }
 }
@@ -362,9 +365,9 @@ try{
     const token = await jwt.verificar(req.headers['x-access-token']);
     //verificar se o usuário criou o curso
     const query = await sql.query(`
-    select id_usuario from cria_curso
+    select id_usuario from curso
     where id_usuario = $1
-    and id_curso = $2
+    and id = $2
     `,[token.sub, req.body.idCurso]);
     if(query.rowCount == 0){
         res.status(403).send('Usuário não é o criador deste curso!');
@@ -373,6 +376,35 @@ try{
 
     await sql.query(`update curso set ordem = $1 where id = $2`,[req.body.ordem, req.body.idCurso]);
     res.status(200).send('ok');
+}catch(err){
+    errorHandler(err,req,res);
+}
+}
+
+exports.verificarCriador = async function(req,res){
+try{
+    //idCurso
+    const token = await jwt.verificar(req.headers['x-access-token']);
+    /*     const query1 = await sql.query(`
+    select id_usuario from cria_curso
+    where id_usuario = $1
+    and id_curso = $2
+    `,[token.sub, req.query.idCurso]); */
+
+    //verificar se o usuário criou o curso
+    const query1 = await sql.query(`
+    select id_usuario from curso
+    where id_usuario = $1
+    and id = $2
+    `,[token.sub, req.query.idCurso]);
+
+    if(query1.rowCount == 0){
+        res.status(403).json({criador:false});
+        return;
+    }
+    res.status(200).json({criador:true});
+
+
 }catch(err){
     errorHandler(err,req,res);
 }
