@@ -2,10 +2,14 @@ import './Cadastro.css';
 import imagem from '../../assets/imagens/Students-pana.png';//https://storyset.com/illustration/students/pana
 import { useState } from 'react';
 import {useNavigate} from 'react-router-dom';
+import { useAuth } from '../../utils/Authentication.jsx';
 
 export default function Cadastro(){
     const [mensagemErro, setMensagemErro] = useState('cadastro');
     const navigate = useNavigate();
+
+    const setLogado = useAuth()[1];
+    const setTokenData = useAuth()[5];
 
     function cadastrar(event){
         event.preventDefault();
@@ -28,9 +32,23 @@ export default function Cadastro(){
         }).then(r=>r.text())
         .then(res => {
             console.log(res);
-            if(res === 'criado'){
-                //colocar o token na memoria
-                navigate('/');
+            if(res.split('.').length == 3){
+                localStorage.setItem("token", res);
+                const controller = new AbortController();
+                setTimeout(() => {controller.abort()},6000);
+                fetch(`${process.env.REACT_APP_API_HOSTNAME}/user/token`,{
+                    signal:controller.signal,
+                    method:'GET',
+                    headers:{
+                        'x-access-token': res
+                    }
+                }).then(r=>r.text())
+                .then(res2 => {
+                    setTokenData(JSON.parse(res2));
+                    setLogado(true);
+                    console.log(res2)
+                    navigate('/');
+                })
                 //window.location.href = "http://localhost:3000/";
             }else{
                 setMensagemErro('Este usuário já está cadastrado!');

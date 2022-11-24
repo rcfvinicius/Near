@@ -9,7 +9,7 @@ export default function Authentication({children}){
     const [logado,setLogado] = useState();
     const [returnTo,setReturnTo] = useState('/');
     const [tokenData,setTokenData] = useState();
-
+    
     useEffect(()=>{
         async function fetchData(){
             try{
@@ -34,8 +34,9 @@ export default function Authentication({children}){
                 setTokenData(false);
             }
         }
-        fetchData()
-        console.log(tokenData)
+        fetchData();
+        console.log(tokenData);
+
     },[logado])
     return(
         <AuthContext.Provider value={[logado,setLogado,returnTo,setReturnTo,tokenData,setTokenData]}>

@@ -1,4 +1,4 @@
-const Pool = require('pg').Pool
+const Pool = require('pg').Pool;
 
 const pool = new Pool({
     user: 'postgres',
@@ -6,7 +6,7 @@ const pool = new Pool({
     database: 'near',
     password: '0000',
     port: 5432,
-})
+});
 
 
 exports.query = (qry,params=undefined) => {
@@ -16,6 +16,6 @@ exports.query = (qry,params=undefined) => {
             reject(error);
           }
           resolve(results);
-       })
+       });
     })
  }

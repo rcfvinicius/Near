@@ -1,0 +1,9 @@
+#NotFound{
+    min-height: calc(100vh - 99px);
+}
+
+#NotFound img{
+    height: calc(100vh - 99px);
+    margin-left: 50%;
+    transform: translateX(-50%);
+} 

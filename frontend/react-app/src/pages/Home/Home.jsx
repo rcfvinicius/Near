@@ -2,19 +2,96 @@ import './Home.css';
 import Header from '../../components/Header/Header.jsx';
 import Footer from '../../components/Footer/Footer.jsx';
 import { useEffect } from 'react';
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
+import defaultCourse from '../../assets/imagens/cursos/default-course.png';
 import imagem1 from '../../assets/imagens/imagem1.jpeg';
 import imagem2 from '../../assets/imagens/imagem2.jpeg';
 import imagem3 from '../../assets/imagens/imagem3.jpeg';
 import imagem4 from '../../assets/imagens/imagem4.jpeg';
 
-import cursoJs from '../../assets/imagens/cursos/js.jpg';
-import mat from '../../assets/imagens/cursos/matematica-basica.jpg';
-import geo from '../../assets/imagens/cursos/geometria-espacial.jpg';
-import morfologia from '../../assets/imagens/cursos/morfologia.png';
-//../../assets/estrela.png
 export default function Home(){
+    const navigate = useNavigate();
+
+    async function fetchData(){
+        try{
+            //buscar info dos cursos poulares depois fazer um for pra buscar as imagens e gerar o gradient
+            const controller = new AbortController();
+            setTimeout(() => {controller.abort()},5000);
+            let resposta = await fetch(`${process.env.REACT_APP_API_HOSTNAME}/curso/cursosPopulares`,{
+                signal:controller.signal,
+                method:'GET',
+                mode:'cors',
+                headers:{
+                    'Content-Type': 'application/json;charset=UTF-8',
+                    'x-access-token':localStorage.getItem('token')
+                }
+            })
+            let res = await resposta.json();
+
+            const tamanho = document.querySelectorAll('#Home-container > div:not(:first-child)').length;
+            for(let i=0;i<tamanho;i++){
+                document.querySelectorAll('#Home-container > div:not(:first-child)')[0].remove();
+            }
+            
+            const container = document.querySelector('#Home-container');
+            for(let i=0;i<res.length;i++){
+                container.innerHTML += `
+                <div class="gradient">
+                    <div>
+                        <a><h2 data-id=${res[i].id}>${res[i].titulo}</h2></a>
+                        
+                        <p>
+                            ${res[i].descricao}
+                        </p>
+                    </div>
+                    
+                    <a class="img-focus"><img data-id=${res[i].id}/></a>
+                </div>
+                `;
+            }
+
+            for(let i=0;i<document.querySelectorAll('#Home-container > div:not(:first-child)').length;i++){
+                const controller2 = new AbortController();
+                setTimeout(() => {controller2.abort()},5000);
+                let resposta2 = await fetch(`${process.env.REACT_APP_API_HOSTNAME}/curso/cursosAdquiridosImg?id=${res[i].id}`,{
+                    signal:controller2.signal,
+                    method:'GET',
+                    mode:'cors',
+                    headers:{
+                        'Content-Type': 'application/json;charset=UTF-8',
+                        'x-access-token':localStorage.getItem('token')
+                    }
+                })
+                let res2 = await resposta2.blob();
+
+                let imgSrc;
+                if(res2.type == 'text/html'){
+                    imgSrc = defaultCourse;
+                }else{
+                    imgSrc = URL.createObjectURL(res2);
+                }
+
+                document.querySelectorAll('#Home-container > div:not(:first-child) a > img')[i].src = imgSrc;
+            }
+
+            document.querySelector('#Home-container > div:not(:first-child)').id = 'gradient1';
+
+            for(let i=0;i<document.querySelectorAll('#Home-container > div:not(:first-child)').length;i++){
+                document.querySelectorAll('#Home-container > div:not(:first-child) > div h2')[i].addEventListener('click', (event)=>{
+                    navigate(`/sobre/${event.target.dataset.id}`);
+                });
+                document.querySelectorAll('#Home-container > div:not(:first-child) img')[i].addEventListener('click', (event)=>{
+                    navigate(`/sobre/${event.target.dataset.id}`);
+                });
+            }
+
+        }catch(err){
+            console.log(err);
+        }
+    }
+
+
     useEffect(()=>{
 /*         document.body.scrollTop = 0;
         document.documentElement.scrollTop = 0; */
@@ -33,7 +110,7 @@ export default function Home(){
           document.getElementById(`radio${contador}`).checked = true;
         }
         
-        setInterval(() => {
+        const intervalo = setInterval(() => {
           slider();
         }, 10000);
         
@@ -56,6 +133,11 @@ export default function Home(){
         }
         
         addEstrela(2);
+        fetchData();
+
+        return(()=>{
+            clearInterval(intervalo);
+        })
     }
     },[]);
 
@@ -77,21 +159,21 @@ export default function Home(){
                         <h2>
                             Por uma educação mais próxima e por mais
                             <br/>
-                            <h2><mark>autonomia</mark> E <mark>liberdade!</mark></h2>
+                            <mark>autonomia</mark> E <mark>liberdade!</mark>
                         </h2>
                     </div>
-                    <img src={imagem1} alt="alunos estudando em uma sala"/>
+                    <img src={imagem1} alt="alunos estudando em uma sala" loading="lazy"/>
                 </div>
                 <div className="slide">
                     <div className="texto-slider">
                         <h2>
                             Lorem Ipsum is simply dummy text 
                             <br/>
-                            <h2><mark>lorem</mark> AND <mark>ipsum!</mark></h2>
+                            <mark>lorem</mark> AND <mark>ipsum!</mark>
                         </h2>
                     </div>
 
-                    <img src={imagem2} alt="jovens sorrindo e olhando a mesma coisa"/>
+                    <img src={imagem2} alt="jovens sorrindo e olhando a mesma coisa" loading="lazy"/>
                     
                 </div>
                 <div className="slide">
@@ -99,20 +181,20 @@ export default function Home(){
                         <h2>
                             Lorem Ipsum is simply dummy text 
                             <br/>
-                            <h2><mark>lorem</mark> AND <mark>ipsum!</mark></h2>
+                            <mark>lorem</mark> AND <mark>ipsum!</mark>
                         </h2>
                     </div>
-                    <img src={imagem3} alt="professor explicando algo para alunos em uma sala de aula"/>
+                    <img src={imagem3} alt="professor explicando algo para alunos em uma sala de aula" loading="lazy"/>
                 </div>
                 <div className="slide">
                     <div className="texto-slider">
                         <h2>
                             Lorem Ipsum is simply dummy text 
                             <br/>
-                            <h2><mark>lorem</mark> AND <mark>ipsum!</mark></h2>
+                            <mark>lorem</mark> AND <mark>ipsum!</mark>
                         </h2>
                     </div>
-                    <img src={imagem4} alt="professora olhando para a câmera e sorrindo"/>
+                    <img src={imagem4} alt="professora olhando para a câmera e sorrindo" loading="lazy"/>
                 </div>
              
                 <div className="navigation-auto">
@@ -131,59 +213,6 @@ export default function Home(){
 
     </div>
 
-
-    <div id="gradient1" className="gradient">
-        <div>
-            <Link to="/sobre"><h2>JavaScript (iniciante)</h2></Link>
-            <div className="avaliacao-after"><h3>Avaliação:</h3></div>
-            <p>
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-            </p>
-        </div>
-        
-        <Link to="/sobre" className="img-focus"><img src={cursoJs} alt="tela de computador preta com códigos"/></Link>
-    </div>
-
-
-    <div className="gradient">
-        <div>
-            <a href="/"><h2>Matemática básica</h2></a>
-            
-            <div className="avaliacao-after"><h3>Avaliação:</h3></div>
-            <p>
-                type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-            </p>
-        </div>
-        
-        <a href="/" className="img-focus"><img src={mat} alt="tela azul escrito matemática básica com simbolos de operações aritméticas acima da escrita"/></a>  
-    </div>
-
-    <div className="gradient">
-        <div>
-            <a href="/"><h2>Geometria Espacial</h2></a>
-            
-            <div className="avaliacao-after"><h3>Avaliação:</h3></div>
-            <p>
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-            </p>
-        </div>
-        <a href="/" className="img-focus"><img src={geo} alt="cubo com uma reta atravessando na diagonal"/></a>
-
-    </div>
-    
-
-    <div className="gradient">
-        <div>
-            <a href="/"><h2>Morfologia</h2></a>
-            
-            <div className="avaliacao-after"><h3>Avaliação:</h3></div>
-            <p>
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-            </p>
-        </div>
-        <a href="/" className="img-focus"><img src={morfologia} alt="tela escrito morfologia com uma explicaçao abaixo: parte da língua portuquesa que se dedica a analisar a estrutura, o formato e a classificação das palavras; Seguido de várias setas que apontam para: substantivo, adjetivo, advérbio, artigo, conjunção, interjeição, numeral, preposição, pronome e verbo"/></a>
-
-    </div>
 
     </main>
     <Footer/>

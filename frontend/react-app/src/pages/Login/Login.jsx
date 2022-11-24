@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import {useNavigate} from 'react-router-dom';
 import { useAuth } from '../../utils/Authentication.jsx';
 import './Login.css';
@@ -9,7 +9,11 @@ import gif from '../../assets/imagens/Mathematics.gif';
 
 export default function Login(){
     const [mensagemErro, setMensagemErro] = useState('login');
-    const [logado,setLogado,returnTo,setReturnTo,tokenData,setTokenData] = useAuth();
+    //const [logado,setLogado,returnTo,setReturnTo,tokenData,setTokenData] = useAuth();
+    const setLogado = useAuth()[1];
+    const returnTo = useAuth()[2];
+    const setTokenData = useAuth()[5];
+
     const navigate = useNavigate();
 
     function logar(event){

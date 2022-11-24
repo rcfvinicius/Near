@@ -100,7 +100,8 @@
   #header-nav #login-cadastro-link:hover,
   #header-nav #login-cadastro-link:focus,
   #header-nav header > a:first-child:focus,
-  #header-nav nav a:focus
+  #header-nav nav a:focus,
+  #header-nav #c-p > button:hover
   {
     outline: solid white 3px;
   }
@@ -158,6 +159,40 @@
     display: none;
   }
   
+  #header-nav header form button[type="submit"]{
+    appearance: none;
+    border:none;
+    background: none;
+    cursor: pointer;
+  }
+  #header-nav #c-p > button{
+    appearance: none;
+    width: 37px;
+    height: 37px;
+    background: none;
+    background-image: url(../../assets/carrinho2.png);
+    background-repeat:no-repeat;
+    background-position: center;
+    background-size:cover;
+    border: none;
+    margin-top: 7px;
+    margin-right: 10px;
+    position:relative;
+  }
+
+  #header-nav #c-p > button #bolinha{
+    width: 10px;
+    height: 10px;
+    background-color: red;
+    border-radius: 30px;
+    position: absolute;
+    top: 2px;
+    right:-1px;
+    display: none;
+  }
+
+
+
   /* smartphones */
   @media screen and (max-width:700px){
     #header-nav header > a img:last-child{

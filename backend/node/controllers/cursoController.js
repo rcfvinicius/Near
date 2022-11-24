@@ -4,6 +4,7 @@ const jwt = require('../utils/jwt.js');
 const errorHandler = require('../utils/errorHandler.js');
 const multer = require('multer');
 const fs = require('fs');
+const Carrinho = require('../models/carrinhoModel.js');
 //const Curso = require('../models/cursoModel.js');
 //const User = require('../models/userModel.js');
 
@@ -11,8 +12,8 @@ const storage = multer.diskStorage({
     destination: async function (req, file, cb) {
         try{
         await jwt.verificar(req.query.jwt);
-        console.log('multer: ')
-        console.log(req.query.id);
+        //console.log('multer: ')
+        //console.log(req.query.id);
         const caminho = 'D:\\SQL\\imagens\\cursos\\';
 
         fs.access(caminho+req.query.id,(err)=>{
@@ -28,7 +29,7 @@ const storage = multer.diskStorage({
             }
           })
         }catch(err){
-            console.log(err)
+            console.log(err);
         }
     },
     filename: function (req, file, cb) {
@@ -49,10 +50,13 @@ try{
     if(user.rows.length == 0){
         throw new Error('USER_NOT_FOUND');
     }
+    if(req.body.categoria == ''){
+        req.body.categoria = null;
+    }
     //colocar um switch pra verificar o tamanho(length) das strings
     const dataAtual = Date.now();
     //23505     curso ja existe
-    await sql.query(`INSERT INTO curso values (default, $1, $2, $3, $4, $5, $6, $7)`,[token.sub, req.body.titulo, req.body.tituloLongo, req.body.descricao, parseInt(req.body.preco * 100), req.body.categoria, dataAtual]);
+    await sql.query(`INSERT INTO curso values (default, $1, $2, $3, $4, $5, $6, $7, default, $8)`,[token.sub, req.body.titulo, req.body.tituloLongo, req.body.descricao, parseInt(req.body.preco * 100), req.body.categoria, dataAtual, req.body.aprendizado]);
     const resposta = await sql.query(`select id from curso where data_criacao = $1`,[dataAtual]);
 
     res.status(201).send(JSON.stringify(resposta.rows[0]));
@@ -74,20 +78,22 @@ exports.finalizarCadastro = function(req,res){
 exports.update = async function(req,res){
 try{
     const token = await jwt.verificar(req.headers['x-access-token']);
-    const user = await sql.query(`SELECT id,nome,email,senha,role FROM usuario WHERE id = $1;`,[token.sub]);
+/*     const user = await sql.query(`SELECT id,nome,email,senha,role FROM usuario WHERE id = $1;`,[token.sub]);
     if(user.rows.length == 0){
         throw new Error('USER_NOT_FOUND');
-    }
-    const curso = await sql.query(`SELECT * FROM curso WHERE id = $1;`,[parseInt(req.body.id)]);
+    } */
+    const curso = await sql.query(`SELECT * FROM curso WHERE id = $1;`,[parseInt(req.body.idCurso)]);
     if(curso.rows.length == 0){
         res.status(404).send(`Curso não encontrado`);
         return;
     }
  
-/*     if(!user._id.equals(curso.criador)){
-        res.status(401).send('Esse curso não pertence a esse usuário');
+    if(curso.rows[0].id_usuario != token.sub){
+        res.status(403).send(`Usuário não é dono deste curso!`);
         return;
-    } */
+    }
+
+    
     const updatedCurso = {
         titulo:req.body.titulo??curso.rows[0].titulo,
         tituloLongo:req.body.tituloLongo??curso.rows[0].titulo_longo,
@@ -108,43 +114,48 @@ try{
 }
 
 
-//terminar o resto
+
 //delete
-/* exports.delete = async function(req,res){
+exports.delete = async function(req,res){
 try{
     const token = await jwt.verificar(req.headers['x-access-token']);
-    const user = await User.findOne({_id:token.sub});
-    if(!user){
-        throw new Error('USER_NOT_FOUND');
-    }
-    if(user.role == 'aluno'){
-        res.status(401).send('Alunos não podem atualizar cursos');
-        return;
-    }
-    const curso = await Curso.findOne({titulo:req.params.curso});
-    if(!curso){
-        res.status(404).send(`Curso ${req.params.curso} não encontrado`);
-        return;
-    }
- 
-    if(!user._id.equals(curso.criador)){
-        res.status(401).send('Esse curso não pertence a esse usuário');
-        return;
+    
+    const query = await sql.query(`select * from adquire_curso where id_curso = $1 and id_usuario = $2`,[req.params.id, token.sub]);
+    if(query.rows.length > 0){
+        await sql.query(`delete from adquire_curso where id_curso = $1 and id_usuario = $2`,[req.params.id, token.sub]);
+        res.status(200).json({status:'ok', desc:'deletado_curso_adquirido'});
+    }else{
+        await sql.query('BEGIN;');
+        let query = await sql.query(`select ca.id from comentario_aula ca inner join video_aula va on va.id = ca.id_video_aula inner join curso c on c.id = va.id_curso where va.id_curso = $1 and c.id_usuario = $2`,[req.params.id, token.sub]);
+        for(let i=0;i<query.rows.length;i++){
+            await sql.query(`delete from comentario_aula where id = $1`,[query.rows[i].id]);
+        }
+        query = await sql.query(`select va.id from video_aula va inner join curso c on c.id = va.id_curso where c.id = $1`,[req.params.id]);
+        for(let i=0;i<query.rows.length;i++){
+            await sql.query(`delete from video_aula where id = $1`,[query.rows[i].id]);
+        }
+        query = await sql.query(`select id_usuario, id_exercicio from faz_exercicio fe inner join exercicio e on fe.id_exercicio = e.id where e.id_curso = $1`,[req.params.id]);
+        for(let i=0;i<query.rows.length;i++){
+            await sql.query(`delete from faz_exercicio where id_usuario = $1 and id_exercicio = $2`,[query.rows[i].id_usuario, query.rows[i].id_exercicio]);
+        }
+
+        await sql.query(`delete from exercicio where id_curso = $1`,[req.params.id]);
+        await sql.query(`delete from curso where id = $1 and id_usuario = $2`,[req.params.id, token.sub]);
+
+        await sql.query('COMMIT;');
+        res.status(200).json({status:'ok', desc:'deletado_curso_criado'});
     }
 
-    await Curso.deleteOne({titulo:req.params.curso});
-    res.status(200).send('Curso deletado'+curso);
-    
 }catch(err){
+    await sql.query('ROLLBACK;');
     errorHandler(err,req,res);
 }
-} */
-
+}
 
 
 /* cursos adquiridos */
 exports.cursosAdquiridosImg = async function(req,res){
-try{
+try{//query.id
     const caminhoBase = `D:\\SQL\\imagens\\cursos`;
     const b = '\\';
     fs.access(caminhoBase+b+req.query.id+b+'default-course.png',(err)=>{
@@ -345,13 +356,7 @@ try{
     }
 
     await sql.query(`INSERT INTO video_aula values (default, $1, $2, $3)`,[req.body.idCurso, req.body.nome, cod]);
-/* 
-    await sql.query('BEGIN;');
-    await sql.query(`INSERT INTO video_aula values(default, $1, $2);`,[req.body.nome, cod]);
-    const resposta = await sql.query(`select id from video_aula where nome = $1 and cod = $2 order by id desc limit 1;`,[req.body.nome, cod]);
-    await sql.query(`INSERT INTO cria_aula values($1, $2)`,[resposta.rows[0].id, req.body.idCurso]);
-    await sql.query('COMMIT;');
- */
+
     res.status(201).send('criado');
 
 }catch(err){
@@ -409,3 +414,422 @@ try{
     errorHandler(err,req,res);
 }
 }
+
+exports.verificarAquisicao = async function(req,res){
+try{
+    const token = await jwt.verificar(req.headers['x-access-token']);
+
+    let verificar = await sql.query(`
+    select * from adquire_curso
+    where id_usuario = $1
+    and id_curso = $2
+    `,[token.sub, req.query.idCurso]);
+
+    if(verificar.rows.length == 0){
+        verificar = await sql.query(`
+        select id from curso
+        where id_usuario = $1
+        and id = $2
+        `,[token.sub, req.query.idCurso]);
+        if(verificar.rows.length == 0){
+            throw new Error('Usuário não possui ou é dono deste curso!');
+        } 
+    }
+
+    res.status(200).json({adquirido:true});
+
+}catch(err){
+    errorHandler(err,req,res);
+}
+}
+
+exports.buscarComentarios = async function(req, res){
+try{
+    const token = await jwt.verificar(req.headers['x-access-token']);
+    let verificar = await sql.query(`
+    select * from adquire_curso
+    where id_usuario = $1
+    and id_curso = $2
+    `,[token.sub, req.query.idCurso]);
+
+    if(verificar.rows.length == 0){
+        verificar = await sql.query(`
+        select id from curso
+        where id_usuario = $1
+        and id = $2
+        `,[token.sub, req.query.idCurso]);
+        if(verificar.rows.length == 0){
+            throw new Error('Usuário não possui ou é dono deste curso!');
+        }
+    }
+    let verificar2 = await sql.query(`
+    select id from video_aula 
+    where id_curso = $1
+    `,[req.query.idCurso]);
+
+    let encontrado = false;
+    //console.log(verificar2)
+
+    for(let i=0;i<verificar2.rows.length;i++){
+        if(verificar2.rows[i].id == req.query.id_video_aula){
+            encontrado = true;
+            break;
+        }
+    }
+    if(!encontrado){
+        throw new Error(`Nenhuma video aula com id ${req.query.id_video_aula} encontrada para este curso!`);
+    }
+
+    const query = await sql.query(`
+    select ca.id, u.nome, ca.comentario, ca.data_comentario from comentario_aula ca
+    inner join usuario u
+    on ca.id_usuario = u.id
+    where id_video_aula = $1 
+    order by data_comentario desc
+    `,[req.query.id_video_aula]);
+    //query.rows[0].count
+    res.status(200).send(JSON.stringify([query.rowCount, query.rows]));
+}catch(err){
+    errorHandler(err,req,res);
+}
+}
+
+
+
+
+
+exports.comentar = async function(req, res){
+try{
+    const token = await jwt.verificar(req.headers['x-access-token']);
+    let verificar = await sql.query(`
+    select * from adquire_curso
+    where id_usuario = $1
+    and id_curso = $2
+    `,[token.sub, req.body.idCurso]);
+
+    if(verificar.rows.length == 0){
+        verificar = await sql.query(`
+        select id from curso
+        where id_usuario = $1
+        and id = $2
+        `,[token.sub, req.body.idCurso]);
+        if(verificar.rows.length == 0){
+            throw new Error('Usuário não possui ou é dono deste curso!');
+        }
+    }
+    let verificar2 = await sql.query(`
+    select id from video_aula 
+    where id_curso = $1
+    `,[req.body.idCurso]);
+
+    let encontrado = false;
+    for(let i=0;i<verificar2.rows.length;i++){
+        if(verificar2.rows[i].id == req.body.id_video_aula){
+            encontrado = true;
+            break;
+        }
+    }
+    if(!encontrado){
+        throw new Error(`Nenhuma video aula com id ${req.body.id_video_aula} encontrada para este curso!`);
+    }
+
+    await sql.query(`INSERT INTO comentario_aula values(default, $1, $2, $3, $4)`,[req.body.id_video_aula, token.sub, req.body.comentario, Date.now()])
+
+    res.status(201).send('criado');
+
+}catch(err){
+    errorHandler(err,req,res);
+}
+}
+
+exports.updateVideoAula = async function(req, res){
+try{
+    const token = await jwt.verificar(req.headers['x-access-token']);
+    console.log(req.body)
+    let query = await sql.query(`
+    select id from curso
+    where id_usuario = $1
+    and id = $2
+    `,[token.sub, req.body.idCurso])
+
+    if(query.rows.length == 0){
+        res.status(404).send('Nenhum curso encontrado');
+        return;
+    }
+
+    query = await sql.query(`
+    select * from video_aula
+    where id_curso = $1
+    and id = $2
+    `,[req.body.idCurso, req.body.id_video_aula]);
+
+    if(req.body.nome == ''){
+        req.body.nome = query.rows[0].nome
+    }
+
+    const link = req.body.link;
+    let cod;
+    if(link == ''){
+        cod = query.rows[0].cod;
+    }else{
+        if(link.split('//')[1].split('/')[0] == 'youtu.be'){
+            cod = link.split('//')[1].split('/')[1];
+        }else{
+            cod = link.split('v=')[1].split('&')[0];
+        }
+    }
+
+    query = await sql.query(`
+    update video_aula
+    set nome = $1,
+    cod = $2
+    where id_curso = $3
+    and id = $4
+    `,[req.body.nome, cod, req.body.idCurso, req.body.id_video_aula]);
+
+
+    res.status(200).send('modificado');
+}catch(err){
+    errorHandler(err,req,res);
+}
+}
+
+
+exports.cursoInfo = async function(req, res){
+try{
+    const query = await sql.query(`
+    select titulo_longo, descricao, preco, categoria, aprendizado from curso
+    where id = $1;
+    `,[req.query.id]);
+
+    const query2 = await sql.query(`
+    select count(id) from video_aula where id_curso = $1;
+    `,[req.query.id]);
+
+    res.status(200).json([query.rows[0], query2.rows[0].count]);
+}catch(err){
+    errorHandler(err,req,res);
+}
+}
+
+exports.cursosPopulares = async function(req, res){
+try{
+    const query = await sql.query(`
+    select id, titulo, descricao from curso
+    order by data_criacao asc limit(5);
+    `);
+
+    res.status(200).json(query.rows);
+}catch(err){
+    errorHandler(err,req,res);
+}
+}
+
+exports.adquirir = async function(req,res){
+try{
+    const token = await jwt.verificar(req.headers['x-access-token']);
+    const verificar = await sql.query(`select * from adquire_curso where id_usuario = $1 and id_curso = $2`,[token.sub, req.body.idCurso]);
+    if(verificar.rows.length != 0){
+        res.status(200).send('Usuário já possui este curso');
+        return;
+    }
+
+    if(!req.body.idCurso || req.body.idCurso == ''){
+        throw new Error('IDCURSO_IS_NOT_DEFINED');
+    }
+    const query = await sql.query(`INSERT INTO adquire_curso values($1, $2, $3)`,[token.sub, req.body.idCurso, Date.now()]);
+    console.log(query);
+    res.status(201).send('adquirido');
+}catch(err){
+    errorHandler(err,req,res);
+}
+}
+
+
+exports.pesquisarTudo = async function(req, res){
+try{
+    if(req.query.q == '' || !req.query.q){
+        res.status(400).json({cursos:[], usuarios:[], aulas:[]});
+        return;
+    }
+    req.query.q = decodeURIComponent(req.query.q);
+    req.query.q = '%' + req.query.q + '%';
+    const cursos = await sql.query(`select id, titulo, descricao, categoria from curso where titulo_longo ilike $1`,[req.query.q]);
+    const usuarios = await sql.query(`select id, nome from usuario where nome ilike $1`,[req.query.q]);
+    const aulas = await sql.query(`select va.id, va.id_curso, va.nome, c.titulo from video_aula va inner join curso c on c.id = va.id_curso where va.nome ILIKE $1`,[req.query.q]);
+    console.log(req.query)
+    
+    res.status(200).json({cursos:cursos.rows, usuarios:usuarios.rows, aulas:aulas.rows});
+}catch(err){
+    errorHandler(err,req,res);
+}
+}
+
+exports.categorias = async function(req,res){
+try{
+    const query = await sql.query(`select id, titulo, categoria, preco from curso`);
+    res.status(200).json(query.rows);
+}catch(err){
+    errorHandler(err,req,res);
+}
+}
+
+/* carrinho */
+exports.carrinhoSalvar = async function(req, res){
+try{//item:'1'
+    const token = await jwt.verificar(req.headers['x-access-token']);
+    const user = await Carrinho.findOne({id_usuario:token.sub});
+    if(!user){
+        const carrinho = new Carrinho({
+            id_usuario:token.sub,
+            itens:req.body.item + ';'
+        });
+        await carrinho.save();
+        return res.status(201).json({status:'ok', desc:'criado'});
+    }
+    //fazer um for pra verificar se tem o item no carrinho
+    const novosItens = user.itens + req.body.item + ';';
+    await Carrinho.updateOne({id_usuario:token.sub},{itens:novosItens});
+
+    return res.status(200).json({status:'ok', desc:'atualizado'});
+
+}catch(err){
+    errorHandler(err,req,res);
+}
+}
+
+exports.carrinhoLer = async function(req, res){
+try{
+    const token = await jwt.verificar(req.headers['x-access-token']);
+    const carrinho = await Carrinho.findOne({id_usuario:token.sub});
+    if(!carrinho){
+        return res.status(404).json({status:'err', desc:'nao encontrado'});
+    }
+
+    const itens = carrinho.itens.split(';');
+    const itensAdquiridos = await sql.query(`select id_curso from adquire_curso where id_usuario = $1`,[token.sub]);
+
+    for(let i=0;i<itensAdquiridos.rows.length;i++){
+        for(let e=0;e<itens.length;e++){
+            if(itensAdquiridos.rows[i].id_curso == itens[e]){
+                const index = itens.indexOf(itens[e]);
+                itens.splice(index, 1);
+            }
+        }
+    }
+
+    const dadosItens = new Array();
+    for(let i=0;i<itens.length-1;i++){
+        const query = await sql.query(`select id, titulo_longo, preco, categoria from curso where id = $1`,[parseInt(itens[i])]);
+        dadosItens.push(query.rows[0]);
+    }
+  
+    return res.status(200).json(dadosItens);
+}catch(err){
+    errorHandler(err,req,res);
+}
+}
+
+exports.carrinhoDelete = async function(req, res){
+try{
+    const token = await jwt.verificar(req.headers['x-access-token']);
+    const carrinho = await Carrinho.findOne({id_usuario:token.sub});
+    if(!carrinho){
+        return res.status(404).json({status:'err', desc:'nao encontrado'});
+    }
+    //await Carrinho.deleteOne({id_usuario:token.sub});
+    await Carrinho.updateOne({id_usuario:token.sub},{itens:''});
+
+    return res.status(200).json({status:'ok', desc:'deletado'});
+}catch(err){
+errorHandler(err,req,res);
+}
+}
+
+
+exports.carrinhoDeleteItem = async function(req, res){
+try{//item:'1'
+    const token = await jwt.verificar(req.headers['x-access-token']);
+    const carrinho = await Carrinho.findOne({id_usuario:token.sub});
+    if(!carrinho){
+        return res.status(404).json({status:'err', desc:'nao encontrado'});
+    }
+    const itens = carrinho.itens.split(';');
+    for(let i=0;i<itens.length-1;i++){
+        if(req.body.item == itens[i]){
+            const index = itens.indexOf(itens[i]);
+            itens.splice(index, 1);
+        }
+    }
+
+    let novosItens = '';
+    for(let i=0;i<itens.length-1;i++){
+        const item = itens[i] + ';';
+        novosItens += item;
+    }
+
+    await Carrinho.updateOne({id_usuario:token.sub},{itens:novosItens});
+    return res.status(200).json({status:'ok', desc:'deletado'});
+}catch(err){
+errorHandler(err,req,res);
+}
+}
+
+
+
+exports.finalizarCompra = async function(req, res){
+try{
+    const token = await jwt.verificar(req.headers['x-access-token']);
+    const carrinho = await Carrinho.findOne({id_usuario:token.sub});
+    if(!carrinho){
+        return res.status(404).json({status:'err', desc:'nao encontrado'});
+    }
+
+    const itens = carrinho.itens.split(';');
+    const itensAdquiridos = await sql.query(`select id_curso from adquire_curso where id_usuario = $1`,[token.sub]);
+
+    for(let i=0;i<itensAdquiridos.rows.length;i++){
+        for(let e=0;e<itens.length;e++){
+            if(itensAdquiridos.rows[i].id_curso == itens[e]){
+                const index = itens.indexOf(itens[e]);
+                itens.splice(index, 1);
+            }
+        }
+    }
+
+    for(let i=0;i<itens.length-1;i++){
+        await sql.query(`INSERT INTO adquire_curso values($1, $2, $3)`,[token.sub, parseInt(itens[i]), Date.now()]);
+    }
+    await Carrinho.updateOne({id_usuario:token.sub},{itens:''});
+    res.status(201).json({status:'ok', desc:'adquirido'});
+
+}catch(err){
+    errorHandler(err,req,res);
+}
+}
+
+
+/* exports.carrinhoLer = async function(req, res){
+    try{
+        const token = await jwt.verificar(req.headers['x-access-token']);
+        const carrinho = await Carrinho.findOne({id_usuario:token.sub});
+        if(!carrinho){
+            return res.status(404).json({status:'err', desc:'nao encontrado'});
+        }
+        return res.status(200).json(carrinho.itens);
+    
+    }catch(err){
+        errorHandler(err,req,res);
+    }
+    }
+ */
+
+/* 
+exports. = async function(req, res){
+try{
+
+}catch(err){
+    errorHandler(err,req,res);
+}
+}
+ */

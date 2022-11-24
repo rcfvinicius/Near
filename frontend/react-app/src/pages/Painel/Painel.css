@@ -11,7 +11,7 @@
     font-size: 30px;
 }
 
-#Painel #cursos-container,#Painel #exercicios-container,#Painel #cursos-criados-container,#Painel #perfil{
+#Painel #cursos-container,#Painel #exercicios-container,#Painel #cursos-criados-container,#Painel #perfil, #Painel .cursos-container-delete{
     width: 100%;
     min-height: 100px;
 }
@@ -60,6 +60,8 @@
 #Painel .card{
     transition: 200ms;
     z-index: 1;
+    border-radius: 15px;
+    position: relative;
 }
 #Painel .card:hover{
     transform: scale(1.1);
@@ -88,6 +90,7 @@
 }
 #Painel .card-curso .imgCurso-container img{
     width: 100%;
+    border-radius: 15px;
 }
 
 /* perfil esquerdo*/
@@ -137,6 +140,7 @@
     width: 85%;
     height: auto;
     position:absolute;
+    border-radius: 15px;
 }
 
 
@@ -323,13 +327,14 @@
 
 /* criar curso */
 #Painel #criar-curso-area{
-    width: 90%;
-    height: 90%;
+    width: 850px;
+    min-height: 500px;
     overflow: hidden;
     background-color: #180c24;
     position:fixed;
     top:5%;
-    left: 5%;
+    left: 50%;
+    transform: translateX(-50%);
     z-index: 2;
     display: none;
     justify-content: center;
@@ -376,6 +381,12 @@
     font-size: 16px;
     margin-top: 10px;
 }
+#Painel #criar-curso-area form input[type="file"]{
+    background: none;
+    border-radius: 0;
+    box-shadow: 0px 10px 10px 10px rgba(0, 0, 0, 0);
+    margin-top: 20px;
+}
 
 #Painel #criar-curso-area input::placeholder{
     color:rgba(243, 242, 242, 0.473);
@@ -388,7 +399,8 @@
     cursor: pointer;
 }
 #Painel #criar-curso-area button[type='submit']{
-    color:#301c3c;
+    /* color:#301c3c; */
+    color:white;
     font-weight: 400;
     font-size: 25px;
     transition:.4s;
@@ -416,3 +428,136 @@
 #Painel .btn-curso h3{
     font-size: 20px;
 }
+
+#Painel select[name="categoria"]{
+    background-color: #58446c;
+    border:none;
+    border-radius:7px;
+    padding: 13px;
+    padding-left: 5px;
+    margin-left: 5px;
+    margin-top:10px;
+    width: calc(100% - 12px);
+    color:white;
+}
+
+
+
+#Painel #cursos-container h2{
+    display: inline-block;
+}
+
+#Painel #btn-deletar{
+    background:none;
+    appearance: none;
+    height: 42px;
+    width: 42px;
+    border-radius: 50px;
+    border:2px solid black;
+    font-size: 40px;
+    font-family: proxima-nova;
+    transition: 50ms;
+    animation-timing-function: linear;
+    position:relative;
+    left: 10px;
+    top:7px;
+    cursor: pointer;
+    background-image: url(../../assets/lixeira.png);
+    background-size:70%;
+    background-repeat:no-repeat;
+    background-position: center;
+}
+
+#Painel #btn-deletar:hover{
+    /* background-color: rgb(201, 199, 197); */
+    transform: scale(1.2);
+    background-image: url(../../assets/lixeira-hover.png);
+}
+#Painel #btn-deletar:active{
+    transform: scale(1);
+}
+
+#Painel .pelicula{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #00000054;
+    margin-top: -10px;
+    margin-left: -10px;
+    z-index: 2;
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+#Painel .pelicula > div{
+    width: 40%;
+    height: 40%;
+    background-image: url(../../assets/lixeira.png);
+    background-repeat:no-repeat;
+    background-position: center;
+    background-size: cover;
+    transition: 50ms;
+}
+#Painel .pelicula:hover > div{
+    background-image: url(../../assets/lixeira-hover.png);
+}
+
+#Painel .pelicula:hover ~ div{
+    filter:blur(7px);
+}
+
+
+#Painel #deletar-curso-area{
+    position: fixed;
+    width: 80%;
+    height: 80%;
+    top:30px;
+    margin-left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+    overflow-x: hidden;
+    background-color: #1e0f2e;
+    border-radius: 20px;
+    padding-top: 20px;
+    display: none;
+}
+
+#Painel .cursos-container-delete > div{
+    width: 100%;
+    /*background-color: rgb(164, 50, 240);*/
+    min-height: 200px;
+    display: flex;
+    column-gap: 20px;
+    row-gap: 20px;
+    flex-wrap: wrap;
+    padding: 10px;
+    justify-content: flex-start;
+    margin-left: 10px;
+    margin-right: 20px;
+}
+#Painel #btn-fechar-delete{
+    appearance: none;
+    background: none;
+    width: 50px;
+    height: 50px;
+    overflow: hidden;
+    position: absolute;
+    border:none;
+    cursor: pointer;
+    right: 0px;
+    top:5px;
+    z-index: 3;
+}
+#Painel #btn-fechar-delete img{
+    width: 100%;
+}
+
+/* firefox */
+.card h3{
+    text-align: start;
+}
+.cursos-container-delete{
+    background-color: palegoldenrod;
+}
+

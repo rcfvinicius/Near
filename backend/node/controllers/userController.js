@@ -1,9 +1,11 @@
 require('dotenv').config();
+const fs = require('fs');
 //const User = require('../models/userModel.js');
 const sql = require('../connection.js');
 const bc = require('bcrypt');
 const jwt = require('../utils/jwt.js');
 const errorHandler = require('../utils/errorHandler.js');
+const multer = require('multer');
 
 exports.login = async function(req,res){
 try{
@@ -58,14 +60,25 @@ try{
     }
     req.body.senha = bc.hashSync(req.body.senha, 10);
 
-    const resposta = await sql.query(`INSERT INTO usuario (nome, email, senha, role) VALUES ($1, $2, $3, $4);`,[req.body.nome, req.body.email, req.body.senha, req.body.role]);
+    const resposta = await sql.query(`INSERT INTO usuario (nome, email, senha, role, data_criacao) VALUES ($1, $2, $3, $4, $5);`,[req.body.nome, req.body.email, req.body.senha, req.body.role, Date.now()]);
     
     if(resposta.code == '23505'){
         res.status(400).send('email ja existe');
         return;
     }
     //const doc = await user.save();
-    res.status(201).send('criado');
+    const user = await sql.query(`select * from usuario where nome = $1 and email = $2`,[req.body.nome, req.body.email]);
+
+    const jwtData ={
+        sub:user.rows[0].id,
+        nome:user.rows[0].nome,
+        email:user.rows[0].email,
+        role:user.rows[0].role,
+        exp:Math.floor(Date.now() / 1000) + 9000
+    };
+    let token = await jwt.criar(jwtData);
+    res.status(201).send(token);
+    //res.status(201).send('criado');
     
 }catch(err){
 /*     console.log(err);
@@ -129,38 +142,45 @@ try{
 
 exports.update = async function(req,res){
 try{
-    const user = await sql.query(`SELECT id,nome,email,senha,role FROM usuario WHERE email = $1;`,[req.body.email]);
-    if(user.rows.length == 0){
-        throw new Error('USER_NOT_FOUND');
-    }
-    let userId = await jwt.verificar(req.headers['x-access-token']);
-    if(userId.sub == user.rows[0].id){
-        req.body.senha = bc.hashSync(req.body.senha??user.rows[0].senha, 10);
-        const updatedUser = {
-            nome:req.body.nome??user.rows[0].nome,
-            email:req.body.email??user.rows[0].email,
-            senha:req.body.senha??user.rows[0].senha,//
-            role:req.body.role??user.rows[0].role
-        }
-        const resposta = await sql.query(`UPDATE usuario SET nome = $1, email = $2, senha = $3, role = $4 WHERE id = $5`,[updatedUser.nome, updatedUser.email, updatedUser.senha, updatedUser.role, user.rows[0].id])
-        console.log(resposta)
-/*         
-        let newUser = await User.findOne({email:req.body.email??req.params.userEmail})
-        const jwtData = {
-            sub:newUser._id,
-            nome:newUser.nome,
-            sobrenome:newUser.sobrenome,
-            email:newUser.email,
-            role:newUser.role,
-            exp:Math.floor(Date.now() / 1000) + 300
-        }
-        let token = await jwt.criar(jwtData);
-        res.send(newUser+'Novo token: '+token);
- */
-        res.status(200).send('Usuario atualizado!')
+    const user = await sql.query(`SELECT nome,senha FROM usuario WHERE email = $1;`,[req.body.email]);
+    const token = await jwt.verificar(req.headers['x-access-token']);
+    if(req.body.nome == '' && req.body.senha == ''){
+        res.status(400).json({status:'Nenhum campo para atualizar'});
         return;
     }
-    res.status(401).send('Token para o usuário errado');
+    if(req.body.senha == ''){
+        req.body.senha = user.rows[0].senha;
+    }else{
+        req.body.senha = bc.hashSync(req.body.senha, 10);
+    }
+    await sql.query(`UPDATE usuario SET nome = $1, senha = $2 WHERE id = $3`,[req.body.nome, req.body.senha, token.sub]);
+/*         
+    let newUser = await User.findOne({email:req.body.email??req.params.userEmail})
+    const jwtData = {
+        sub:newUser._id,
+        nome:newUser.nome,
+        sobrenome:newUser.sobrenome,
+        email:newUser.email,
+        role:newUser.role,
+        exp:Math.floor(Date.now() / 1000) + 300
+    }
+    let token = await jwt.criar(jwtData);
+    res.send(newUser+'Novo token: '+token);
+*/
+
+    const query = await sql.query(`SELECT * from usuario where id = $1`,[token.sub]);
+
+    const jwtData = {
+        sub:query.rows[0].id,
+        nome:query.rows[0].nome,
+        email:query.rows[0].email,
+        role:query.rows[0].role,
+        exp:Math.floor(Date.now() / 1000) + 9000
+    }
+
+    const novoToken = await jwt.criar(jwtData);
+    jwtData.token = novoToken;
+    res.status(200).send(jwtData);
 
 }catch(err){
 /*     console.log(err);
@@ -169,6 +189,7 @@ try{
         return;
     }
     */
+    console.log(err);
     res.status(500).send('Internal Server Error');
 }
 }
@@ -176,16 +197,63 @@ try{
 //verificar token e devolver o objeto
 exports.token = async function(req,res){
 try{
-    console.log('/token')
+    console.log('/token');
     const token = await jwt.verificar(req.headers['x-access-token']);
     res.status(200).json(token);
-
-    //setTimeout(()=>{},4000)
 }catch(err){
     errorHandler(err,req,res);
 }
 }
 
+exports.img = async function(req,res){
+try{//query.id
+    const caminhoBase = `D:\\SQL\\imagens\\usuarios`;
+    const b = '\\';
+    fs.access(caminhoBase+b+req.query.id+b+'default-icon.png',(err)=>{
+        if(err){
+            res.sendFile(caminhoBase + b + '0' + b + 'default-icon.png');
+            return;
+        }
+        res.sendFile(caminhoBase + b + req.query.id + b + 'default-icon.png');
+    })
+    
+}catch(err){
+    res.status(404).send('not found');
+    console.log(err);
+    //errorHandler(err,req,res);
+}
+}
+
+const storage = multer.diskStorage({
+    destination: async function (req, file, cb) {
+        try{
+        await jwt.verificar(req.query.jwt);
+        //console.log('multer: ')
+        //console.log(req.query.id);
+        const caminho = 'D:\\SQL\\imagens\\usuarios\\';
+
+        fs.access(caminho+req.query.id,(err)=>{
+            if(err){
+               fs.mkdir(caminho+req.query.id,(err)=>{
+                  if(err){
+                    throw new Error('MKDIR_ERROR');
+                  }
+                  cb(null, caminho+req.query.id+'\\');
+               })
+            }else{
+                cb(null, caminho+req.query.id+'\\');
+            }
+          })
+        }catch(err){
+            console.log(err);
+        }
+    },
+    filename: function (req, file, cb) {
+        cb(null, 'default-icon.png');
+    }
+ });
+
+exports.upload = multer({ storage });
 
 
 
@@ -193,13 +261,8 @@ try{
 //get all
 exports.all = async function(req,res){
 try{
-/*     let docs = await User.find({});
-    res.status(200).send(docs); */
-    res.send('ok')
-    
-    setTimeout(()=>{
-        console.log('r')
-    },5000)
+    console.log(req.body.email)
+    res.json(req.body.email)
 }catch(err){
     errorHandler(err,req,res);
 }
@@ -222,24 +285,3 @@ exports.tokenValido = async function(req,res){
 }
 
 //
-exports.redirect = async function(req,res){
-
-    console.log(req.body)
-
-
-    res.send('n')
-    
-    
-    /*
-    const user = await User.findOne({email:req.query.email});
-    if(!user){
-        res.status(301).redirect('http://localhost:3000/')
-        return;
-    }
-    const passMatch = await bc.compare(req.query.senha, user.senha);
-    if(passMatch){
-        return res.status(301).send(user.nome)
-    }
-    res.status(301).redirect('http://localhost:3000/')
-    */
-}

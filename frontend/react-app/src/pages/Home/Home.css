@@ -186,6 +186,7 @@ display: none;
 /* imagem do gradient*/
 #Home-container .gradient a > img{
     height: 330px;
+    cursor: pointer;
 }
 
 #Home-container .gradient > div{
@@ -210,13 +211,15 @@ display: none;
     display: inline-block;
 }
 #Home-container .gradient p{
-    margin-top:0;
+    margin-top:15px;
     margin-left: 10px;
     font-weight: 500;
 }
 
 #Home-container .gradient h2{
     display: inline;
+    text-decoration: underline;
+    cursor: pointer;
 }
 #Home-container .gradient .img-focus:focus{
     outline: solid white 3px;
@@ -299,7 +302,6 @@ display: none;
   font-size: 40px;
   margin-top:0;
   margin-bottom: 12px;
-  
 }
 
 #Home-container h3{

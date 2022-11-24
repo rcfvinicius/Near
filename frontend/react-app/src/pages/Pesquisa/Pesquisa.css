@@ -1,0 +1,132 @@
+#Pesquisa{
+    font-family: Playfair, serif;
+    min-height: calc(100vh - 400px);
+}
+
+#Pesquisa #cursos-container{
+    width: 100%;
+    min-height: 50px;
+}
+#Pesquisa .card{
+    transition: 200ms;
+    z-index: 1;
+    /* font-family: roboto-slab, sans-serif; */
+    appearance: none;
+    font-family: Playfair,serif;
+    display: flex;
+    flex-direction: column;
+
+    background-color: rgb(241, 240, 240);
+    border: 3px solid grey;
+    width: 300px;
+    height: 300px;
+    padding: 10px;
+    overflow: hidden;
+    cursor: pointer;
+    text-decoration: underline;
+    border-radius: 15px;
+}
+
+#Pesquisa .card:hover,#Pesquisa #cards-aulas .card-menor:hover{
+    transform: scale(1.1);
+    animation-timing-function:ease-in;
+}
+
+#Pesquisa .cards{
+    width: 100%;
+    /*background-color: rgb(164, 50, 240);*/
+    /* min-height: 200px; */
+    display: flex;
+    column-gap: 20px;
+    row-gap: 20px;
+    flex-wrap: wrap;
+    padding: 10px;
+    justify-content: flex-start;
+    margin-left: 10px;
+    margin-right: 20px;
+}
+
+#Pesquisa .imgCurso-container img{
+    width: 100%;
+    border-radius: 15px;
+}
+#Pesquisa .card h3{
+    font-size: 20px;
+}
+
+#Pesquisa h2{
+    margin-left: 15px;
+}
+
+#Pesquisa #cards-usuarios, 
+#Pesquisa #cards-aulas{
+    margin-left: 10px;
+    padding: 10px;
+}
+
+#Pesquisa #cards-aulas{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#Pesquisa .card-menor{
+    appearance: none;
+    transition: 200ms;
+    z-index: 1;
+    font-family: Playfair,serif;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    background-color: rgb(241, 240, 240);
+    border: 2px solid grey;
+    width: 300px;
+    height: 100px;
+    padding: 5px;
+    overflow: hidden;
+    cursor: default;
+    text-decoration: underline;
+    color: black;
+    margin:5px;
+    border-radius: 15px;
+}
+#Pesquisa .card-menor:visited{
+    color:inherit;
+}
+#Pesquisa #cards-usuarios .card-menor .imgUser-container{
+    height: 86px;
+    display: flex;
+    max-width: 100px;
+    overflow: hidden;
+}
+#Pesquisa #cards-usuarios .card-menor h3{
+    margin:0;
+    margin-left: 10px;
+    max-height: 86px;
+    overflow: hidden;
+}
+#Pesquisa #cards-usuarios .card-menor img{
+    height: 100%;
+    border-radius: 15px;
+}
+
+#Pesquisa #cards-usuarios{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#Pesquisa #cards-aulas .card-menor{
+    width: 250px;
+    height: 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    cursor: pointer;
+}
+#Pesquisa #cards-aulas .card-menor h6, #Pesquisa #cards-aulas .card-menor h3{
+    margin:0;
+}
+#Pesquisa #cards-aulas .card-menor h6{
+    font-size: 12px;
+    margin-bottom: 5px;
+    text-decoration: none !important;/* nao funciona nao sei pq */
+}

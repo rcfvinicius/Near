@@ -1,6 +1,6 @@
 require('dotenv').config();
 const jwt = require('jsonwebtoken');
-const userController = require('../controllers/userController.js');
+//const userController = require('../controllers/userController.js');
 
 exports.criar = function(jwtData){//passar o objeto    await jwt.criar(jwtData)
     return new Promise((resolve,reject)=>{
