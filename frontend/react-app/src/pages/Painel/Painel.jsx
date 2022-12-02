@@ -352,8 +352,13 @@ export default function Painel(){
                     mode:'cors',
                     body:formData
                 })
-                const res2 = await resposta2.text();
-                //console.log(res2)
+                const res2 = await resposta2.json();
+                document.querySelector('#Painel #criar-curso-area form input[name="titulo"]').value = '';
+                document.querySelector('#Painel #criar-curso-area form input[name="tituloLongo"]').value = '';
+                document.querySelector('#Painel #criar-curso-area form input[name="descricao"]').value = '';
+                document.querySelector('#Painel #criar-curso-area form input[name="preco"]').value = '';
+                document.querySelector('#Painel #criar-curso-area form select[name="categoria"]').value = '';
+                document.querySelector('#Painel #criar-curso-area form input[name="aprendizado"]').value = '';
                 getCursosCriados();
             }else{
                 throw new Error('ID_INVALIDO');

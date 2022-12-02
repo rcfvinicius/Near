@@ -135,6 +135,18 @@ export default function Home(){
         addEstrela(2);
         fetchData();
 
+        const controller = new AbortController();
+        setTimeout(() => {controller.abort()},4000);
+        fetch(`${process.env.REACT_APP_API_HOSTNAME}/user/token`,{
+            signal:controller.signal,
+            method:'GET',
+            headers:{
+                'x-access-token': localStorage.getItem('token')
+            }
+        }).catch((err)=>{
+            window.alert('Api offline!');
+        })
+
         return(()=>{
             clearInterval(intervalo);
         })

@@ -126,6 +126,7 @@ try{
         res.status(200).json({status:'ok', desc:'deletado_curso_adquirido'});
     }else{
         await sql.query('BEGIN;');
+        await sql.query(`delete from adquire_curso where id_curso = $1`,[req.params.id]);
         let query = await sql.query(`select ca.id from comentario_aula ca inner join video_aula va on va.id = ca.id_video_aula inner join curso c on c.id = va.id_curso where va.id_curso = $1 and c.id_usuario = $2`,[req.params.id, token.sub]);
         for(let i=0;i<query.rows.length;i++){
             await sql.query(`delete from comentario_aula where id = $1`,[query.rows[i].id]);
