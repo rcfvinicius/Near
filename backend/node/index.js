@@ -16,6 +16,11 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    next();
+});
+
 app.use('/user',(req,res,next)=>{console.log(req.socket.remoteAddress);next()},userRoutes);
 app.use('/curso',(req,res,next)=>{console.log(req.socket.remoteAddress);next()},cursoRoutes);
 app.use('/exercicio',(req,res,next)=>{console.log(req.socket.remoteAddress);next()},exercicioRoutes);
