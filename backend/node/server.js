@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 const mongoose = require('mongoose');
+require('dotenv').config();
 
 const userRoutes = require('./routes/userRoutes.js');
 const cursoRoutes = require('./routes/cursoRoutes.js');
@@ -22,7 +23,7 @@ app.use('/atendimento',(req,res,next)=>{console.log(req.socket.remoteAddress);ne
 
 
 console.log('Iniciando banco de dados...');
-mongoose.connect('mongodb+srv://root:0000@cluster0.padywxe.mongodb.net/?retryWrites=true&w=majority', {useNewUrlParser:true, useUnifiedTopology:true})
+mongoose.connect(process.env.MONGODB_URI, {useNewUrlParser:true, useUnifiedTopology:true})
 .then(()=>{
     console.log('Atlas Conectado');
     app.listen(8000,()=>{

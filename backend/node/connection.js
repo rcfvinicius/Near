@@ -1,7 +1,8 @@
 const Pool = require('pg').Pool;
+require('dotenv').config();
 
 const pool = new Pool({
-   connectionString:'postgres://iqudlhms:WvoICcZ48ZMFonOIbyvx6mlU5JVUudHu@babar.db.elephantsql.com/iqudlhms'
+   connectionString: process.env.PG_URI
 });
 
 
