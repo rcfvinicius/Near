@@ -19,7 +19,7 @@ export default function Exercicios(){
             let resposta = await fetch(`${process.env.REACT_APP_API_HOSTNAME}/exercicio/buscarExercicios?id_curso=${params.id}`,{
                 signal:controller.signal,
                 method:'GET',
-                mode:'cors',
+                mode:'no-cors',
                 headers:{
                     'Content-Type': 'application/json;charset=UTF-8',
                     'x-access-token': localStorage.getItem('token')
@@ -63,7 +63,7 @@ export default function Exercicios(){
                 let resposta = await fetch(`${process.env.REACT_APP_API_HOSTNAME}/exercicio/img?id=${arr[i].id}`,{
                     signal:controller.signal,
                     method:'GET',
-                    mode:'cors'
+                    mode:'no-cors'
                 })
                 let res = await resposta.blob();
 
@@ -135,7 +135,7 @@ export default function Exercicios(){
                 let resposta = await fetch(`${process.env.REACT_APP_API_HOSTNAME}/exercicio/buscarRespostas?id_curso=${params.id}`,{
                     signal:controller.signal,
                     method:'GET',
-                    mode:'cors',
+                    mode:'no-cors',
                     headers:{
                         'Content-Type': 'application/json;charset=UTF-8',
                         'x-access-token': localStorage.getItem('token')
@@ -199,7 +199,7 @@ export default function Exercicios(){
             let resposta = await fetch(`${process.env.REACT_APP_API_HOSTNAME}/exercicio/responder`,{
                 signal:controller.signal,
                 method:'POST',
-                mode:'cors',
+                mode:'no-cors',
                 headers:{
                     'Content-Type': 'application/json;charset=UTF-8',
                     'x-access-token': localStorage.getItem('token')

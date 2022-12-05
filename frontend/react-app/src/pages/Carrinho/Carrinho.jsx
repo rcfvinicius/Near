@@ -41,7 +41,7 @@ export default function Carrinho(){
             const resposta1 = await fetch(`${process.env.REACT_APP_API_HOSTNAME}/curso/carrinho/ler`,{
                 signal:controller1.signal,
                 method:'GET',
-                mode:'cors',
+                mode:'no-cors',
                 headers:{
                     'Content-Type': 'application/json;charset=UTF-8',
                     'x-access-token': localStorage.getItem('token')
@@ -66,7 +66,7 @@ export default function Carrinho(){
                 const resposta2 = await fetch(`${process.env.REACT_APP_API_HOSTNAME}/curso/cursosAdquiridosImg?id=${itens[i].id}`,{
                     signal:controller2.signal,
                     method:'GET',
-                    mode:'cors',
+                    mode:'no-cors',
                     headers:{
                         'Content-Type': 'application/json;charset=UTF-8',
                         'x-access-token': localStorage.getItem('token')
@@ -107,7 +107,7 @@ export default function Carrinho(){
                         }
                         fetch(`${process.env.REACT_APP_API_HOSTNAME}/curso/carrinho/deleteItem`,{
                             method:'DELETE',
-                            mode:'cors',
+                            mode:'no-cors',
                             headers:{
                                 'Content-Type': 'application/json;charset=UTF-8',
                                 'x-access-token': localStorage.getItem('token')
@@ -140,7 +140,7 @@ export default function Carrinho(){
             reset();
             await fetch(`${process.env.REACT_APP_API_HOSTNAME}/curso/carrinho/delete`,{
                 method:'DELETE',
-                mode:'cors',
+                mode:'no-cors',
                 headers:{
                     'Content-Type': 'application/json;charset=UTF-8',
                     'x-access-token': localStorage.getItem('token')
@@ -157,7 +157,7 @@ export default function Carrinho(){
         try{
             const resposta = await fetch(`${process.env.REACT_APP_API_HOSTNAME}/curso/carrinho/finalizarCompra`,{
                 method:'POST',
-                mode:'cors',
+                mode:'no-cors',
                 headers:{
                     'Content-Type': 'application/json;charset=UTF-8',
                     'x-access-token': localStorage.getItem('token')

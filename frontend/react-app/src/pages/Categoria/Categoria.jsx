@@ -15,7 +15,7 @@ export default function Categoria(){
             const resposta1 = await fetch(`${process.env.REACT_APP_API_HOSTNAME}/curso/categorias`,{
                 signal:controller1.signal,
                 method:'GET',
-                mode:'cors'
+                mode:'no-cors'
             });
         
             const res1 = await resposta1.json();
@@ -51,7 +51,7 @@ export default function Categoria(){
                 const resposta2 = await fetch(`${process.env.REACT_APP_API_HOSTNAME}/curso/cursosAdquiridosImg?id=${res1[i].id}`,{
                     signal:controller2.signal,
                     method:'GET',
-                    mode:'cors',
+                    mode:'no-cors',
                     headers:{
                         'Content-Type': 'application/json;charset=UTF-8',
                         'x-access-token': localStorage.getItem('token')

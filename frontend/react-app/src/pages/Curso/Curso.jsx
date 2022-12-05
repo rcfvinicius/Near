@@ -44,7 +44,7 @@ export default function Curso(){
     let resposta = await fetch(`${process.env.REACT_APP_API_HOSTNAME}/curso/buscarVideoAulas?idCurso=${params.id}`,{
         signal:controller.signal,
         method:'GET',
-        mode:'cors',
+        mode:'no-cors',
         headers:{
             'Content-Type': 'application/json;charset=UTF-8',
             'x-access-token': localStorage.getItem('token')
@@ -96,7 +96,7 @@ try{
     let resposta = await fetch(`${process.env.REACT_APP_API_HOSTNAME}/curso/buscarComentarios?id_video_aula=${id}&idCurso=${params.id}`,{
         signal:controller.signal,
         method:'GET',
-        mode:'cors',
+        mode:'no-cors',
         headers:{
             'Content-Type': 'application/json;charset=UTF-8',
             'x-access-token': localStorage.getItem('token')
@@ -193,7 +193,7 @@ try{
     let resposta = await fetch(`${process.env.REACT_APP_API_HOSTNAME}/curso/comentar`,{
         signal:controller.signal,
         method:'POST',
-        mode:'cors',
+        mode:'no-cors',
         headers:{
             'Content-Type': 'application/json;charset=UTF-8',
             'x-access-token': localStorage.getItem('token')
@@ -244,7 +244,7 @@ try{
     let resposta = await fetch(`${process.env.REACT_APP_API_HOSTNAME}/curso/buscarVideoAulas?idCurso=${params.id}&mode=all`,{
         signal:controller.signal,
         method:'GET',
-        mode:'cors',
+        mode:'no-cors',
         headers:{
             'Content-Type': 'application/json;charset=UTF-8',
             'x-access-token': localStorage.getItem('token')
@@ -368,7 +368,7 @@ try{
     let resposta = await fetch(`${process.env.REACT_APP_API_HOSTNAME}/curso/verificarCriador?idCurso=${params.id}`,{
         signal:controller.signal,
         method:'GET',
-        mode:'cors',
+        mode:'no-cors',
         headers:{
             'Content-Type': 'application/json;charset=UTF-8',
             'x-access-token': localStorage.getItem('token')
@@ -413,7 +413,7 @@ try{
     let resposta = await fetch(`${process.env.REACT_APP_API_HOSTNAME}/curso/ordenar`,{
         signal:controller.signal,
         method:'PATCH',
-        mode:'cors',
+        mode:'no-cors',
         headers:{
             'Content-Type': 'application/json;charset=UTF-8',
             'x-access-token': localStorage.getItem('token')
@@ -443,7 +443,7 @@ try{
         let resposta = await fetch(`${process.env.REACT_APP_API_HOSTNAME}/curso/criarVideoAula`,{
             signal:controller.signal,
             method:'POST',
-            mode:'cors',
+            mode:'no-cors',
             headers:{
                 'Content-Type': 'application/json;charset=UTF-8',
                 'x-access-token': localStorage.getItem('token')
@@ -470,7 +470,7 @@ try{
         let resposta = await fetch(`${process.env.REACT_APP_API_HOSTNAME}/curso/updateVideoAula`,{
             signal:controller.signal,
             method:'PATCH',
-            mode:'cors',
+            mode:'no-cors',
             headers:{
                 'Content-Type': 'application/json;charset=UTF-8',
                 'x-access-token': localStorage.getItem('token')
@@ -519,7 +519,7 @@ try{
     const resposta = await fetch(`${process.env.REACT_APP_API_HOSTNAME}/exercicio/criar`,{
         signal:controller.signal,
         method:'POST',
-        mode:'cors',
+        mode:'no-cors',
         headers:{
             'Content-Type': 'application/json;charset=UTF-8',
             'x-access-token': localStorage.getItem('token')
@@ -545,7 +545,7 @@ try{
     const resposta2 = await fetch(`${process.env.REACT_APP_API_HOSTNAME}/exercicio/criarImg?jwt=${localStorage.getItem('token')}&id=${res.id}`,{
         signal:controller2.signal,
         method:'POST',
-        mode:'cors',
+        mode:'no-cors',
         body:formData
     })
 

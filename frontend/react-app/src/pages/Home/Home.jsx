@@ -21,7 +21,7 @@ export default function Home(){
             let resposta = await fetch(`${process.env.REACT_APP_API_HOSTNAME}/curso/cursosPopulares`,{
                 signal:controller.signal,
                 method:'GET',
-                mode:'cors',
+                mode:'no-cors',
                 headers:{
                     'Content-Type': 'application/json;charset=UTF-8',
                     'x-access-token':localStorage.getItem('token')
@@ -57,7 +57,7 @@ export default function Home(){
                 let resposta2 = await fetch(`${process.env.REACT_APP_API_HOSTNAME}/curso/cursosAdquiridosImg?id=${res[i].id}`,{
                     signal:controller2.signal,
                     method:'GET',
-                    mode:'cors',
+                    mode:'no-cors',
                     headers:{
                         'Content-Type': 'application/json;charset=UTF-8',
                         'x-access-token':localStorage.getItem('token')

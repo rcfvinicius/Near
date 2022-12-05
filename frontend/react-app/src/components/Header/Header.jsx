@@ -37,7 +37,7 @@ export default function Header(){
             let resposta = await fetch(`${process.env.REACT_APP_API_HOSTNAME}/curso/carrinho/ler`, {
                 signal:controller.signal,
                 method:'GET',
-                mode:'cors',
+                mode:'no-cors',
                 headers:{
                     'Content-Type': 'application/json;charset=UTF-8',
                     'x-access-token':localStorage.getItem('token')
