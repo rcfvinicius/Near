@@ -9,6 +9,8 @@
   <img src="https://user-images.githubusercontent.com/67292388/204532789-8bef10c4-0e03-4309-a1c0-8893e08870ab.gif" width="360px" /> 
 </p>
 
+<a href="https://near-three.vercel.app/"> >> LINK FUNCIONAL << </a>
+
 ## Principais tecnologias usadas:
 > HTML, CSS, JS<br>
 React.js<br>

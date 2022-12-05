@@ -4,15 +4,14 @@ const jwt = require('../utils/jwt.js');
 const errorHandler = require('../utils/errorHandler.js');
 const multer = require('multer');
 const fs = require('fs');
+const path = require('path');
 
 const storage = multer.diskStorage({
     destination: async function (req, file, cb) {
         try{
         await jwt.verificar(req.query.jwt);
-        //console.log('multer: ')
-        //console.log(req.query.id);
-        const caminho = 'D:\\SQL\\imagens\\exercicios\\';
-
+        //const caminho = 'D:\\SQL\\imagens\\exercicios\\';
+        const caminho = path.join(__dirname, 'imagens', 'exercicios') + '\\';
         fs.access(caminho+req.query.id,(err)=>{
             if(err){
                fs.mkdir(caminho+req.query.id,(err)=>{
@@ -66,7 +65,8 @@ try{
 
 exports.img = async function(req,res){
 try{
-    const caminhoBase = `D:\\SQL\\imagens\\exercicios`;
+    //const caminhoBase = `D:\\SQL\\imagens\\exercicios`;
+    const caminhoBase = path.join(__dirname, 'imagens', 'exercicios');
     const b = '\\';
     fs.access(caminhoBase+b+req.query.id+b+'default-exerc.png',(err)=>{
         if(err){

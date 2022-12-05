@@ -4,6 +4,7 @@ const jwt = require('../utils/jwt.js');
 const errorHandler = require('../utils/errorHandler.js');
 const multer = require('multer');
 const fs = require('fs');
+const path = require('path');
 const Carrinho = require('../models/carrinhoModel.js');
 //const Curso = require('../models/cursoModel.js');
 //const User = require('../models/userModel.js');
@@ -12,9 +13,8 @@ const storage = multer.diskStorage({
     destination: async function (req, file, cb) {
         try{
         await jwt.verificar(req.query.jwt);
-        //console.log('multer: ')
-        //console.log(req.query.id);
-        const caminho = 'D:\\SQL\\imagens\\cursos\\';
+        //const caminho = 'D:\\SQL\\imagens\\cursos\\';
+        const caminho = path.join(__dirname, 'imagens', 'cursos') + '\\';
 
         fs.access(caminho+req.query.id,(err)=>{
             if(err){
@@ -42,8 +42,6 @@ exports.upload = multer({ storage });
 
 exports.criar = async function(req,res){
 try{
-    console.log('criar: ')
-    console.log(req.body)
     const token = await jwt.verificar(req.headers['x-access-token']);
     
     const user = await sql.query(`SELECT id,nome,email,senha,role FROM usuario WHERE id = $1;`,[token.sub]);
@@ -157,7 +155,8 @@ try{
 /* cursos adquiridos */
 exports.cursosAdquiridosImg = async function(req,res){
 try{//query.id
-    const caminhoBase = `D:\\SQL\\imagens\\cursos`;
+    //const caminhoBase = `D:\\SQL\\imagens\\cursos`;
+    const caminhoBase = path.join(__dirname, 'imagens', 'cursos');
     const b = '\\';
     fs.access(caminhoBase+b+req.query.id+b+'default-course.png',(err)=>{
         //console.log(req.query)

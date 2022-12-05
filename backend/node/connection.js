@@ -1,11 +1,7 @@
 const Pool = require('pg').Pool;
 
 const pool = new Pool({
-    user: 'postgres',
-    host: 'localhost',
-    database: 'near',
-    password: '0000',
-    port: 5432,
+   connectionString:'postgres://iqudlhms:WvoICcZ48ZMFonOIbyvx6mlU5JVUudHu@babar.db.elephantsql.com/iqudlhms'
 });
 
 

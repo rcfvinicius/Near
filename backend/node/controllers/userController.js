@@ -1,5 +1,6 @@
 require('dotenv').config();
 const fs = require('fs');
+const path = require('path');
 //const User = require('../models/userModel.js');
 const sql = require('../connection.js');
 const bc = require('bcrypt');
@@ -207,7 +208,8 @@ try{
 
 exports.img = async function(req,res){
 try{//query.id
-    const caminhoBase = `D:\\SQL\\imagens\\usuarios`;
+    //const caminhoBase = `D:\\SQL\\imagens\\usuarios`;
+    const caminhoBase = path.join(__dirname, 'imagens', 'usuarios');
     const b = '\\';
     fs.access(caminhoBase+b+req.query.id+b+'default-icon.png',(err)=>{
         if(err){
@@ -230,7 +232,8 @@ const storage = multer.diskStorage({
         await jwt.verificar(req.query.jwt);
         //console.log('multer: ')
         //console.log(req.query.id);
-        const caminho = 'D:\\SQL\\imagens\\usuarios\\';
+        //const caminho = 'D:\\SQL\\imagens\\usuarios\\';
+        const caminho = path.join(__dirname, 'imagens', 'usuarios') + '\\';
 
         fs.access(caminho+req.query.id,(err)=>{
             if(err){
