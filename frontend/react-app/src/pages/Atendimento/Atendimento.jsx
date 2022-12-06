@@ -33,7 +33,7 @@ export default function Atendimento(){
                 const resposta = await fetch(`${process.env.REACT_APP_API_HOSTNAME}/atendimento/buscarChats`,{
                     signal:controller.signal,
                     method:'GET',
-                    mode:'no-cors',
+                    mode:'cors',
                     headers:{
                         'Content-Type': 'application/json;charset=UTF-8',
                         'x-access-token': localStorage.getItem('token')
@@ -82,7 +82,7 @@ export default function Atendimento(){
                 const resposta = await fetch(`${process.env.REACT_APP_API_HOSTNAME}/atendimento/buscarMensagens?id_chat=${id_chat}`,{
                     signal:controller.signal,
                     method:'GET',
-                    mode:'no-cors',
+                    mode:'cors',
                     headers:{
                         'Content-Type': 'application/json;charset=UTF-8',
                         'x-access-token': localStorage.getItem('token')
@@ -135,7 +135,7 @@ export default function Atendimento(){
                 const resposta = await fetch(`${process.env.REACT_APP_API_HOSTNAME}/atendimento/enviarMensagem`,{
                     signal:controller.signal,
                     method:'POST',
-                    mode:'no-cors',
+                    mode:'cors',
                     headers:{
                         'Content-Type': 'application/json;charset=UTF-8',
                         'x-access-token': localStorage.getItem('token')

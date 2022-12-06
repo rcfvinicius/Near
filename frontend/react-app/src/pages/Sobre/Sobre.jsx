@@ -47,7 +47,7 @@ export default function Sobre(){
             let resposta = await fetch(`${process.env.REACT_APP_API_HOSTNAME}/curso/cursoInfo?id=${params.id}`,{
                 signal:controller.signal,
                 method:'GET',
-                mode:'no-cors',
+                mode:'cors',
                 headers:{
                     'Content-Type': 'application/json;charset=UTF-8',
                     'x-access-token':localStorage.getItem('token')
@@ -96,7 +96,7 @@ export default function Sobre(){
             let resposta2 = await fetch(`${process.env.REACT_APP_API_HOSTNAME}/curso/cursosAdquiridosImg?id=${params.id}`,{
                 signal:controller2.signal,
                 method:'GET',
-                mode:'no-cors'
+                mode:'cors'
             })
             let res2 = await resposta2.blob();
             document.querySelector('#Sobre-container aside > div:first-child img').src =  URL.createObjectURL(res2);
@@ -120,7 +120,7 @@ export default function Sobre(){
             let resposta = await fetch(`${process.env.REACT_APP_API_HOSTNAME}/curso/adquirir`, {
                 signal:controller.signal,
                 method:'POST',
-                mode:'no-cors',
+                mode:'cors',
                 headers:{
                     'Content-Type': 'application/json;charset=UTF-8',
                     'x-access-token':localStorage.getItem('token')
@@ -150,7 +150,7 @@ export default function Sobre(){
             let resposta = await fetch(`${process.env.REACT_APP_API_HOSTNAME}/curso/verificarAquisicao?idCurso=${params.id}`, {
                 signal:controller.signal,
                 method:'GET',
-                mode:'no-cors',
+                mode:'cors',
                 headers:{
                     'Content-Type': 'application/json;charset=UTF-8',
                     'x-access-token':localStorage.getItem('token')
@@ -193,7 +193,7 @@ export default function Sobre(){
             let resposta = await fetch(`${process.env.REACT_APP_API_HOSTNAME}/curso/carrinho/salvar`, {
                 signal:controller.signal,
                 method:'POST',
-                mode:'no-cors',
+                mode:'cors',
                 headers:{
                     'Content-Type': 'application/json;charset=UTF-8',
                     'x-access-token':localStorage.getItem('token')
@@ -218,7 +218,7 @@ export default function Sobre(){
             let resposta = await fetch(`${process.env.REACT_APP_API_HOSTNAME}/curso/carrinho/ler`, {
                 signal:controller.signal,
                 method:'GET',
-                mode:'no-cors',
+                mode:'cors',
                 headers:{
                     'Content-Type': 'application/json;charset=UTF-8',
                     'x-access-token':localStorage.getItem('token')

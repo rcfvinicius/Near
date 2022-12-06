@@ -112,7 +112,7 @@ export default function Painel(){
             formData.append('foto', document.querySelector('#Painel #perfil-esquerdo input[type="file"]').files[0]);
             let resposta2 = await fetch(`${process.env.REACT_APP_API_HOSTNAME}/user/criarImg?id=${tokenData.sub}&jwt=${localStorage.getItem('token')}`,{
                 method:'POST',
-                mode:'no-cors',
+                mode:'cors',
                 body:formData
             });
 
@@ -163,7 +163,7 @@ export default function Painel(){
         let quantidade = await fetch(`${process.env.REACT_APP_API_HOSTNAME}/curso/cursosAdquiridosCount`,{
             signal:controller.signal,
             method:'GET',
-            mode:'no-cors',
+            mode:'cors',
             headers:{
                 'Content-Type': 'application/json;charset=UTF-8',
                 'x-access-token': localStorage.getItem('token')
@@ -179,7 +179,7 @@ export default function Painel(){
             let resposta = await fetch(`${process.env.REACT_APP_API_HOSTNAME}/curso/cursosAdquiridosDados`,{
                 signal:controller.signal,
                 method:'POST',
-                mode:'no-cors',
+                mode:'cors',
                 headers:{
                     'Content-Type': 'application/json;charset=UTF-8',
                     'x-access-token':localStorage.getItem('token')
@@ -198,7 +198,7 @@ export default function Painel(){
             let resposta2 = await fetch(`${process.env.REACT_APP_API_HOSTNAME}/curso/cursosAdquiridosImg?id=${res.id}`,{
                 signal:controller2.signal,
                 method:'GET',
-                mode:'no-cors'
+                mode:'cors'
             })
             let res2 = await resposta2.blob();
 
@@ -248,7 +248,7 @@ export default function Painel(){
             let quantidade = await fetch(`${process.env.REACT_APP_API_HOSTNAME}/curso/cursosCriadosCount`,{
                 signal:controller.signal,
                 method:'GET',
-                mode:'no-cors',
+                mode:'cors',
                 headers:{
                     'Content-Type': 'application/json;charset=UTF-8',
                     'x-access-token': localStorage.getItem('token')
@@ -265,7 +265,7 @@ export default function Painel(){
                 let resposta = await fetch(`${process.env.REACT_APP_API_HOSTNAME}/curso/cursosCriadosDados`,{
                     signal:controller.signal,
                     method:'POST',
-                    mode:'no-cors',
+                    mode:'cors',
                     headers:{
                         'Content-Type': 'application/json;charset=UTF-8',
                         'x-access-token':localStorage.getItem('token')
@@ -284,7 +284,7 @@ export default function Painel(){
                 let resposta2 = await fetch(`${process.env.REACT_APP_API_HOSTNAME}/curso/cursosAdquiridosImg?id=${res.id}`,{
                     signal:controller2.signal,
                     method:'GET',
-                    mode:'no-cors'
+                    mode:'cors'
                 })
                 let res2 = await resposta2.blob();
     
@@ -349,7 +349,7 @@ export default function Painel(){
 
                 let resposta2 = await fetch(`${process.env.REACT_APP_API_HOSTNAME}/curso/criarImg?id=${res.id}&jwt=${localStorage.getItem('token')}`,{
                     method:'POST',
-                    mode:'no-cors',
+                    mode:'cors',
                     body:formData
                 })
                 const res2 = await resposta2.json();

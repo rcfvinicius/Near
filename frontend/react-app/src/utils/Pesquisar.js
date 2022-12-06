@@ -33,7 +33,7 @@ export default async function(){
                 let resposta2 = await fetch(`${process.env.REACT_APP_API_HOSTNAME}/curso/cursosAdquiridosImg?id=${res.cursos[i].id}`,{
                     signal:controller2.signal,
                     method:'GET',
-                    mode:'no-cors'
+                    mode:'cors'
                 })
                 let res2 = await resposta2.blob();
     
