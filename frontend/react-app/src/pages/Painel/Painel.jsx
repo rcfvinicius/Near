@@ -8,9 +8,9 @@ import Footer from '../../components/Footer/Footer.jsx';
 
 import defaultIcon from '../../assets/default-icon.png';
 import quimica from "../../assets/exercicio-quimica.png";
-import curso from '../../assets/imagens/cursos/morfologia.png'
-import fechar from '../../assets/x2.png'
-
+import curso from '../../assets/imagens/cursos/morfologia.png';
+import fechar from '../../assets/x2.png';
+import defaultCourse from '../../assets/default-course.png';
 
 export default function Painel(){
     const navigate = useNavigate();
@@ -204,7 +204,7 @@ export default function Painel(){
 
             let imgSrc;
             if(res2.type == 'text/html'){
-                //imgSrc = quimica;
+                imgSrc = defaultCourse;
             }else{
                 imgSrc = URL.createObjectURL(res2);
             }
@@ -290,7 +290,7 @@ export default function Painel(){
     
                 let imgSrc;
                 if(res2.type == 'text/html'){
-                    imgSrc = quimica;//imagem padrao
+                    imgSrc = defaultCourse;
                 }else{
                     imgSrc = URL.createObjectURL(res2);
                 }

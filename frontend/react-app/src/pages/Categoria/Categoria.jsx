@@ -3,7 +3,7 @@ import Header from '../../components/Header/Header.jsx';
 import Footer from '../../components/Footer/Footer.jsx';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-
+import defaultCourse from '../../assets/default-course.png';
 
 export default function Categoria(){
     const navigate = useNavigate();
@@ -62,7 +62,7 @@ export default function Categoria(){
 
                 let imgSrc;
                 if(res2.type == 'text/html'){
-                    //imgSrc = curso;
+                    imgSrc = defaultCourse;
                 }else{
                     imgSrc = URL.createObjectURL(res2);
                 }

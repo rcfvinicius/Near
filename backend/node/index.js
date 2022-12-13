@@ -10,7 +10,11 @@ const exercicioRoutes = require('./routes/exercicioRoutes.js');
 const atendimentoRoutes = require('./routes/atendimentoRoutes.js');
 
 
-//mongoose.connect('mongodb://localhost:27017/near');
+
+mongoose.connect('mongodb://localhost:27017/near');
+const db = mongoose.connection;
+db.on('error',(e)=>{throw new Error('MONGODB_ERR')});
+db.once('open',()=>{})
 
 app.use(cors());
 app.use(express.json());
@@ -30,7 +34,7 @@ app.use('/exercicio',(req,res,next)=>{console.log(req.socket.remoteAddress);next
 app.use('/atendimento',(req,res,next)=>{console.log(req.socket.remoteAddress);next()},atendimentoRoutes);
 
 
-console.log('Iniciando banco de dados...');
+/* console.log('Iniciando banco de dados...');
 mongoose.connect(process.env.MONGODB_URI, {useNewUrlParser:true, useUnifiedTopology:true})
 .then(()=>{
     console.log('Atlas Conectado');
@@ -41,5 +45,8 @@ mongoose.connect(process.env.MONGODB_URI, {useNewUrlParser:true, useUnifiedTopol
 .catch(()=>{throw new Error('MONGODB_ATLAS_ERR')});
 
 const db = mongoose.connection;
-db.on('error',()=>{throw new Error('MONGODB_ERR')});
+db.on('error',()=>{throw new Error('MONGODB_ERR')}); */
 
+app.listen(8000,()=>{
+    console.log('server:ok');
+});

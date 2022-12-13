@@ -654,10 +654,10 @@ try{
     }
     req.query.q = decodeURIComponent(req.query.q);
     req.query.q = '%' + req.query.q + '%';
-    const cursos = await sql.query(`select id, titulo, descricao, categoria from curso where titulo_longo ilike $1`,[req.query.q]);
+    const cursos = await sql.query(`select id, titulo, descricao, categoria from curso where titulo ilike $1`,[req.query.q]);
     const usuarios = await sql.query(`select id, nome from usuario where nome ilike $1`,[req.query.q]);
     const aulas = await sql.query(`select va.id, va.id_curso, va.nome, c.titulo from video_aula va inner join curso c on c.id = va.id_curso where va.nome ILIKE $1`,[req.query.q]);
-    console.log(req.query)
+    console.log(req.query);
     
     res.status(200).json({cursos:cursos.rows, usuarios:usuarios.rows, aulas:aulas.rows});
 }catch(err){

@@ -1,7 +1,8 @@
 import './Pesquisa.css';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-
+import defaultCourse from '../../assets/default-course.png';
+import defaultUser from '../../assets/default-icon.png'
 //import pesquisar from '../../utils/Pesquisar.js';
 import Header from '../../components/Header/Header.jsx';
 import Footer from '../../components/Footer/Footer.jsx';
@@ -51,7 +52,7 @@ export default function Pesquisa(){
         
                     let imgSrc;
                     if(res2.type == 'text/html'){
-                        //imgSrc = //imagem padrao
+                        imgSrc = defaultCourse;
                     }else{
                         imgSrc = URL.createObjectURL(res2);
                     }
@@ -119,7 +120,7 @@ export default function Pesquisa(){
     
                     let imgSrc = '';
                     if(res2.type == 'text/html'){
-                        //imgSrc = //imagem padrao
+                        imgSrc = defaultUser;
                     }else{
                         imgSrc = URL.createObjectURL(res2);
                     }
